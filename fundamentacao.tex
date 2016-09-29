@@ -16,40 +16,49 @@ Dentre as diversas definições de Iot pode-se citar duas, a primeira define de 
 \item IoT é parte integrante da futura Internet e pode ser definida como uma infraestrutura de rede global dinâmica com capacidades de autoconfiguração baseada nos padrões e interoperabilidade dos protocolos de comunicação onde coisas físicas e virtuais têm identidade, atributos físicos, personalidade virtual, usam interfaces inteligentes e, são integradas dentro da rede de informações \cite{Sundmaeker:2010}.
 \end{enumerate}
 
-Diante deste cenário da IoT, pode-se citar exemplos de aplicações em diversos domínios, tais como, logística e transporte; cuidados com a saúde; ambiente inteligente (casa (seção \ref{sec:hns}), escritório); dentre outros\cite{Atzori:2010}.
+Diante deste cenário da IoT, pode-se citar exemplos de aplicações em diversos domínios, tais como, logística e transporte; cuidados com a saúde; ambiente inteligente (casa (seção \ref{sec:hns}), escritório);\cite{Atzori:2010} verificação de procendência alimentícia; dentre outros. Abaixo se tem uma breve descrição de duas aplicações, uma na área de cuidados com a saúde e outra na verificação de procedência de alimentos, respectivamente.
 
-Apesar da grande potencialidade da Internet das Coisas, ainda existem muitos desafios a serem vencidos, como por exemplo a disponibilidade de uma interface de comunicação (acesso aos serviços e informações dos dispositivos) e programação comum aos objetos. A falta desta padronização faz com que se torne oneroso o desenvolvimento de aplicações para o objeto, pois cada coisa possui suas próprias interfaces, logo para cada dispositivo um desenvolvimento a parte. Mais difícil ainda é prover uma única funcionalidade ou serviço com a composição dos diversos objetos. Para diminuir a dificuldade deste cenário, pode-se disponibilizar os dispositivos como serviços WEB (seção \ref{subsec:dispositivosweb}), desta forma pode-se utilizar os protocolos WEB como linguagem comum de integração dos dispositivos a Internet.\cite{Franca:2011}
+\begin{itemize}
+\item Dispositivos implantáveis com capacidade de comunicação sem fio podem ser utilizados para armazenar registros sobre a saúde de um paciente em situações de risco e podem ser decisivos para salvar a vida do paciente. A capacidade de ter acesso a essas informações nessas circunstâncias fazem com que hospitais possam saber de imediato como tratar um paciente que esta a caminho. Esta possibilidade é especialmente útil para pessoas com diabetes, cancer, problemas de coração na arteria coronária, doenças do pulmão, assim como a pessoas com implantes médicos complexos, tais como, marcapassos, tubos, transplantes de orgãos e aqueles que podem ficar inconscientes e incapazes de comunicar-se durante uma operação. \cite{Weber:2010}
+\item Rastreabilidade de produtos alimentícios ajudam os usuários a verificar a origem de um produto, assim como informações de composição química, dentre outros. Mas também previne de doenças não desejadas. Por exemplo, avisos atuais sobre a mercadoria em questão podem ser disponibilizados à medida que o produto sai da origem e vai passando para os outros níveis de consumo, desta forma os consumidores podem evitar o contágio de doenças como gripe aviária e,  encefalopatia espongiforme bovina (EEB), mais conhecida como doença da vaca louca.\cite{Weber:2010}
+\end{itemize}
+
+Apesar da grande potencialidade da visão da Internet das Coisas, a qual gerou em 2015 um faturamento em torno de 130,33 bilhões de dolares americanos e tem prospeção de chegar até 883.55 bilhões em 2020\footnotemark \footnotetext{http://www.marketsandmarkets.com/Market-Reports/iot-application-technology-market-258239167.html}, ainda existem muitos desafios a serem vencidos, tais como segurança da informação, armazenamento e processamento de grande quantidade de dados, dentre outros. Adentrando um pouco em um dos desafios da IoT, o da disponibilidade de uma interface de comunicação (acesso aos serviços e informações dos dispositivos) e programação comum aos objetos, pode-se dizer que a falta desta padronização faz com que se torne oneroso o desenvolvimento de aplicações para o objeto, pois cada coisa possui suas próprias interfaces, logo para cada dispositivo um desenvolvimento a parte. Mais difícil ainda é prover uma única funcionalidade ou serviço com a composição dos diversos objetos. Para diminuir a dificuldade deste cenário, pode-se disponibilizar os dispositivos como serviços WEB (seção \ref{subsec:dispositivosweb}), assim sendo pode-se utilizar os protocolos WEB como linguagem comum de integração dos dispositivos a Internet.\cite{Franca:2011}
 
 \subsection{Serviços web}
 Segundo\cite{Dustdar:2005}, um serviço web é um sistema identificado por uma URL\footnotemark \footnotetext{Acrônimo para Uniform Resource Locator e é uma referência (um endereço) para um recurso na Internet.\cite{oracle:url}}, no qual suas interfaces públicas são definidas e descritas usando XML\footnotemark \footnotetext{Extensible Markup Language (XML) é uma simples e flexível linguagem de marcação utilizada para codificar documentos através de regras produzidas por humanos, as quais podem ser manipulados (compreendidas) por máquinas \cite{w3c:xml}\cite{w3c:xmlschema}} e, suas definições podem ser descobertas por outros sistemas. Sistemas então podem interagir com os serviços web utilizando suas definições e descrições. Através destas utiliza-se mensagens XML que são trasmitidas seguindo os protocolos padrão (definidos por W3C\footnotemark \footnotetext{\url{https://www.w3.org/}}) da Internet para que haja tal interação.
 
-Um dos modelos (Figura \ref{fig:wsmodelwsdl}) utilizados por esses sistemas consiste em 3 camadas:
+Serviços web possuem baixo nível de acoplamento e utilizam padrões para oferecer suas funcionalidades, pois tais serviços tem a intenção de prover comunicação a diferentes tipos de aplicações, que possivelmente são executadas em diferentes plataformas. A \textit{Web Service Description Language}(WSDL) usa o formato XML para descrever os métodos oferecidos por um serviço web, incluindo parâmetros de entrada e saída, tipos de dados e, protocolo de transporte utilizado (normalmente o HTTP). O \textit{Simple Object Access Protocol}(SOAP, seção \ref{subsec:soap}) é utilizado para as trocas de mensagens (formatadas em XML) entre as entidades envolvidas no modelo de serviço web citado\cite{Dustdar:2005}, como pode ser visto na Figura \ref{fig:wsmodelsoap}. Esse tipo de serviço web descrito anteriormente é chamado de serviço web baseado em SOAP\cite{Belqasmi:2011}.
+
 \begin{itemize}
-\item Provedor (Provider) - cria ou oferece o serviço web, este precisa descrever o serviço em um formato padrão, neste caso XML e, publica-o no Registro de serviço.
-\item Registro de serviço (Registry) - além da descrição do serviço, contém informações adicionais à respeito do provedor, como endereço e contato da empresa desenvolvedora do serviço e, detalhes técnicos. 
-\item Consumidor (Consumer) - obtem informação do registro e utiliza a descrição do serviço capturada para invocar o serviço web.
+\item Provedor (Service Provider) - cria ou oferece o serviço web, este precisa descrever o serviço em um formato padrão, neste caso XML e, publica-o no Registro de serviço.
+\item Registro de serviço (Service Registry) - além da descrição do serviço, contém informações adicionais à respeito do provedor, como endereço e contato da empresa desenvolvedora do serviço e, detalhes técnicos. O registro de serviço mais utilizado é o \textit{Universal Description, Discovery and Integration} (UDDI), este em suas especificações define um conjunto de \textit{Application Program Interfaces}(APIs) tanto para publicação, quanto para descoberta\cite{Belqasmi:2011}.
+\item Consumidor (Service Requestor) - obtem informação do registro e utiliza a descrição do serviço capturada para invocar o serviço web.
 \end{itemize}
 
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_model_wsdl} 
-  \caption{Modelo de serviços web em 3 camadas.\cite{Dustdar:2005}} 
-  \label{fig:wsmodelwsdl}
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_model} 
+  \caption{Modelo de serviço web baseado em SOAP.\cite{Belqasmi:2011}} 
+  \label{fig:wsmodelsoap}
 \end{figure}
 
-Serviços web possuem baixo nível de acoplamento e utilizam padrões para oferecer suas funcionalidades, pois tais serviços tem a intenção de prover comunicação a diferentes tipos de aplicações, que possivelmente são executadas em diferentes plataformas. A \textit{Web Service Description Language}(WSDL) usa o formato XML para descrever os métodos oferecidos por um serviço web, incluindo parâmetros de entrada e saída, tipos de dados e, protocolo de transporte utilizado (normalmente o HTTP). O \textit{Simple Object Access Protocol}(SOAP, seção \ref{subsec:soap}) é utilizado para as trocas de mensagens (formatadas em XML) entre as entidades envolvidas no modelo de serviço web citado.\cite{Dustdar:2005}
+//TODO falar no geral agora de serviços web baseado em REST e depois citar para o capitulo de REST, é bom ver \cite{Franca:2011} e \cite{Belqasmi:2011}
 
 \subsection{SOAP}
 \label{subsec:soap}
-...
+...todo baseado de \cite{w3c:soap}
 
 \subsection{Princípios arquiteturais REST}
-...
-\subsection{Dispositivos como serviços web}
+...ver \cite{Belqasmi:2011}
+\subsection{Composição de serviços web}
+//TODO ver \cite{Dustdar:2005}
+\subsection{Dispositivos como serviços web} 
 \label{subsec:dispositivosweb}
+//TODO ver resumo tcc odt
 Como abordado em \ref{sec:iot} um dos desafios referente a visão da IoT é sua interoperabilidade e, como possível solução se pode utilizar dos existentes protocolos web. Desta maneira os dispositivos podem interagir entre si e com outros sistemas na web.
 
-Adotando esse padrão, os dispositivos podem ter suas propriedades disponíveis através de qualquer navegador, sem a necessidade de instalação de nenhum programa ou driver adicional, como pode ser exemplificado na Figura \ref{fig:dispnavegador}. Além disto, mashups físicos** podem ser construídos com muito menos esforço do que as existentes abordagens, quebrando drasticamente a barreira para o desenvolvimento de aplicações com dispositivos, assim então promovendo a visão da Internet das Coisas.\cite{Guinard:2009}
+Adotando esse padrão, os dispositivos podem ter suas propriedades disponíveis através de qualquer navegador, sem a necessidade de instalação de nenhum programa ou driver adicional, como pode ser exemplificado na Figura \ref{fig:dispnavegador}. Além disto, mashups físicos\footnotemark \footnotetext{Aplicativos criados a partir da composição de dados e serviços de dispositivos físicos com outros recursos Web.} podem ser construídos com muito menos esforço do que as existentes abordagens, quebrando drasticamente a barreira para o desenvolvimento de aplicações com dispositivos, assim então promovendo a visão da Internet das Coisas.\cite{Guinard:2009}
 
 \begin{figure}[!htb] \centering 
   \centering
@@ -61,6 +70,12 @@ Adotando esse padrão, os dispositivos podem ter suas propriedades disponíveis 
 
 Nem todos os dispositivos (coisas ou objetos) possuem... TODO RESTxSOAP...
 
+\subsection{Home network system}
+\label{sec:hns}
+TODO....
+
+\section{Redes Neurais}
+TODO...Explicar o que é e depois explicar de multilayerperceptron na proposta
 \section{Interação de características}
 TODO....origem...causas...etc...
 \subsection{Efeitos colaterais desejáveis}
@@ -69,8 +84,3 @@ TODO....
 Segundo \cite{Weiss:2007}o problema de efeitos colaterais indesejáveis vem sendo tratado como \textit{the feature interaction problem}.
 
 Em \cite{Weiss}???talvez seja bom mudar esta referencia??? \textit{feature interaction} é definido como a interação entre independentes características***, as quais podem ser intencionais ou não intencionais, podendo levar a efeitos colaterais indesejáveis. Segundo \cite{Weiss:2007 } tais efeitos colaterais indesejáveis podem ser um estado inconsistente do sistema ou inconsistência de dados, tais como, um comportamento não esperado (não desejado), uma quebra de requisito de segurança, dentre outros.
-
-\section{Home network system}
-\label{sec:hns}
-TODO....
-
