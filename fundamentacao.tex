@@ -28,13 +28,35 @@ Apesar da grande potencialidade da visão da Internet das Coisas, a qual gerou e
 \subsection{Serviços web}
 Segundo\cite{Dustdar:2005}, um serviço web é um sistema identificado por uma URL\footnotemark \footnotetext{Acrônimo para Uniform Resource Locator e é uma referência (um endereço) para um recurso na Internet.\cite{oracle:url}}, no qual suas interfaces públicas são definidas e descritas usando XML\footnotemark \footnotetext{Extensible Markup Language (XML) é uma simples e flexível linguagem de marcação utilizada para codificar documentos através de regras produzidas por humanos, as quais podem ser manipulados (compreendidas) por máquinas \cite{w3c:xml}\cite{w3c:xmlschema}} e, suas definições podem ser descobertas por outros sistemas. Sistemas então podem interagir com os serviços web utilizando suas definições e descrições. Através destas utiliza-se mensagens XML que são trasmitidas seguindo os protocolos padrão (definidos por W3C\footnotemark \footnotetext{\url{https://www.w3.org/}}) da Internet para que haja tal interação.
 
-Serviços web possuem baixo nível de acoplamento e utilizam padrões para oferecer suas funcionalidades, pois tais serviços tem a intenção de prover comunicação a diferentes tipos de aplicações, que possivelmente são executadas em diferentes plataformas. A \textit{Web Service Description Language}(WSDL) usa o formato XML para descrever os métodos oferecidos por um serviço web, incluindo parâmetros de entrada e saída, tipos de dados e, protocolo de transporte utilizado (normalmente o HTTP). O \textit{Simple Object Access Protocol}(SOAP, seção \ref{subsec:soap}) é utilizado para as trocas de mensagens (formatadas em XML) entre as entidades envolvidas no modelo de serviço web citado\cite{Dustdar:2005}, como pode ser visto na Figura \ref{fig:wsmodelsoap}. Esse tipo de serviço web descrito anteriormente é chamado de serviço web baseado em SOAP\cite{Belqasmi:2011}.
+Serviços web surgiram tendo como principal foco o reuso de aplicações existentes (dentre as quais incluiam código fonte legado) para que pudessem se integrar de forma leve com outras aplicações, geralmente essa integração tinha como referência o desejo de  novas formas de compartilhamento dos serviços ao longo das diversas linhas do negócio ou entre parceiros. Para melhor enteder o proposito dos serviços web, considere, como exemplo, uma companhia de seguros que decidiu oferecer um serviço de cotação on-line. Então ao invés de desenvolver toda a aplicação do inicio, a empresa utiliza-se do serviço web de outra empresa(epecializada em cálculos de seguro). Este serviço pode, por exemplo, oferecer um formulário de cotação e, após o cliente informar os dados necessários, o serviço web apresentará uma cotação baseado nos dados informados. Além disso, caso o cliente escolher comprar tal seguro, pode-se ainda utilizar de outro serviço web, oferecido por uma outra empresa, o qual irá processar o pagamento de acordo com os dados passados para ele e então retorna o resultado do processamento para o cliente e para a empresa original(que desejou construir o serviço de cotação on-line)\cite{Papazoglou:2008}. O cenário da Figura \ref{fig:ws_purchase_order} demonstra um outro exemplo de uso de diferentes serviços para prover um único serviço, o de um pedido de uma ou mais mercadorias, ambiente comum do E-Commerce. 
 
-\begin{itemize}
-\item Provedor (Service Provider) - cria ou oferece o serviço web, este precisa descrever o serviço em um formato padrão, neste caso XML e, publica-o no Registro de serviço.
-\item Registro de serviço (Service Registry) - além da descrição do serviço, contém informações adicionais à respeito do provedor, como endereço e contato da empresa desenvolvedora do serviço e, detalhes técnicos. O registro de serviço mais utilizado é o \textit{Universal Description, Discovery and Integration} (UDDI), este em suas especificações define um conjunto de \textit{Application Program Interfaces}(APIs) tanto para publicação, quanto para descoberta\cite{Belqasmi:2011}.
-\item Consumidor (Service Requestor) - obtem informação do registro e utiliza a descrição do serviço capturada para invocar o serviço web.
-\end{itemize}
+\begin{figure}[!htb] \centering 
+  \centering
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_purchase_order} 
+  \caption{Utilização de diferentes serviços web para prover o serviço de pedido de um E-Commerce.\cite{Papazoglou:2008}} 
+  \label{fig:ws_purchase_order}
+\end{figure}
+
+O cenário do serviço(Figura \ref{fig:ws_purchase_order}) pode ser descrito da seguinte forma:
+\begin{enumerate}
+\item \textit{Consumer}(Consumidor) escolhe seu(s) produto(s), informa dados do cartão de crédito e outras informações necessárias e, clica no botão comprar. Requisição é enviada ao \textit{Purchase order management}(Gerenciador de pedidos de compra).
+\item O gerenciador então verifica se o cartão do cliente tem crédito suficiente através da funcionalidade \textit{Credit check} do serviço \textit{Credit Service} e, o serviço da uma resposta.
+\item Gerenciador capta a resposta e, caso cliente tenha crédito suficiente, inicia o processo de reserva do pedido através da funcionalidade textit{Reserve inventory} do serviço \textit{Invetory service}.
+\item Gerenciador capta resposta \textit{Inventory response}, caso o pedido tenha sido reservado com êxito, o gerenciador utiliza o \textit{Billing service} para processar o pagamento.
+\item \textit{Billing service} retorna o estado do pagamento, se pagamento foi processado com êxito o gerenciador utiliza agora a funcionalidade \textit{Shipping notification} do serviço \textit{Shipment service} para prover o serviço de entrega.
+\item Gerenciador recebe a resposta \textit{Shipment acknowledgement} e informa ao cliente (\textit{Invoice}) a data prevista para entrega do(s) produto(s) do cliente.
+\end{enumerate}
+
+No cenário apresentado anteriormente há uma ressalva que deve ser feita, a qual dita uma das características de um serviço web (serviço assícrono ou sícrono, descrito logo a seguir), no item 5, por exemplo, o pagamento pode demorar mais de um dia para concluir seu processamento, então o cliente poderia receber um retorno do sistema do tipo, pagamento aguardando processamento, ou seja, a resposta do processamento do pagamento(realizado ou não realizado), poderia vir através de um envio de email ou SMS, por exemplo, somente depois de muito tempo.
+
+Serviços web possuem algumas características que se fazem importantes saber:
+\begin{enumerate}
+\item 1.4.3 State properties**
+\item 1.4.4 Loose coupling**
+\item 1.4.6 Synchronicity**
+\end{enumerate}
+
+Serviços web possuem baixo nível de acoplamento e utilizam padrões para oferecer suas funcionalidades, pois tais serviços tem a intenção de prover comunicação a diferentes tipos de aplicações, que possivelmente são executadas em diferentes plataformas. A \textit{Web Service Description Language}(WSDL) usa o formato XML para descrever os métodos oferecidos por um serviço web, incluindo parâmetros de entrada e saída, tipos de dados e, protocolo de transporte utilizado (normalmente o HTTP). O \textit{Simple Object Access Protocol}(SOAP, seção \ref{subsec:soap}) é utilizado para as trocas de mensagens (formatadas em XML) entre as entidades envolvidas no modelo de serviço web citado\cite{Dustdar:2005}, como pode ser visto na Figura \ref{fig:wsmodelsoap} e explicado logo abaixo. Esse tipo de serviço web é chamado de serviço web baseado em SOAP\cite{Belqasmi:2011}.
 
 \begin{figure}[!htb] \centering 
   \centering
@@ -43,16 +65,37 @@ Serviços web possuem baixo nível de acoplamento e utilizam padrões para ofere
   \label{fig:wsmodelsoap}
 \end{figure}
 
-//TODO falar no geral agora de serviços web baseado em REST e depois citar para o capitulo de REST, é bom ver \cite{Franca:2011} e \cite{Belqasmi:2011}
+\begin{itemize}
+\item Provedor (Service Provider) - cria e oferece o serviço web, este precisa descrever o serviço em um formato padrão, neste caso XML e, publica-o (\textit{Publish}) no Registro de serviço.
+\item Registro de serviço (Service Registry) - além da descrição do serviço, contém informações adicionais à respeito do provedor, como endereço e contato da empresa desenvolvedora do serviço e, detalhes técnicos. O registro de serviço mais utilizado é o \textit{Universal Description, Discovery and Integration} (UDDI), este em suas especificações define um conjunto de \textit{Application Program Interfaces}(APIs) tanto para publicação, quanto para descoberta\cite{Belqasmi:2011}.
+\item Consumidor (Service Requestor) - obtem informações do registro, \textit{Find}, e utiliza a descrição do serviço capturada para invocar (\textit{Bind}) o serviço web.
+\end{itemize}
+
+A descrição realizada da Figura \ref{fig:wsmodelsoap} foi na verdade a descrição das 3 regras fundamentais do Service Oriented Architecture (SOA), que é um caminho lógico para projetar sistemas de software, os quais podem prover serviços tanto para o usuário final de aplicações quanto para outros serviços distribuídos na rede, através de interfaces que possam ser publicadas e descobertas. Das três regras citadas, existem 3 operações que ainda não foram descritas, \textit{Publish, Find e Bind}.
+
+1.6.2.1  The publish operation**
+1.6.2.2 The find operation**
+1.6.2.3 The bind operation**
+
+Existe também outro tipo de abordagem de serviços web, baseada nos princípios arquiteturais REST (ver seção \ref{subsec:restful}), esta é a abordagem de serviço web que é adotada neste trabalho.
 
 \subsection{SOAP}
 \label{subsec:soap}
-...todo baseado de \cite{w3c:soap}
+SOAP é um protocolo leve que foi desenvolvido com a intenção de prover troca de mensagens estruturadas em um ambiente descentralizado e distribuído. Este usa a tecnologia XML para definir um framework extensível de mensagens, o qual permite a construção de mensagens que podem ser trocadas através de uma variedade de protocolos subjacentes. O framework foi desenvolvido para ser independente de modelo de linguagem de programação ou qualquer outra implementação semântica\cite{w3c:soap}. Diz-se que é um protocolo leve pelo fato de somente receber e enviar pacotes de protocolos de transportes (por exemplo, HTTP) e, processar as mensagens XML\cite{Papazoglou_slides:2008}. A figura \ref{fig:wsmodelsoap_expanded} seguinte mostra como o SOAP atua no modelo Modelo de serviço web baseado em SOAP (ver Figura \ref{fig:wsmodelsoap}). Nesta, o \textit{SOAP-based middleware} converte as chamadas de procedimento de/para mensagens XML que são enviadas através do HTTP ou outro protocolo.
 
-\subsection{Princípios arquiteturais REST}
+**ver livro e slides do livro
+
+\begin{figure}[!htb] \centering 
+  \centering
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_model_expanded} 
+  \caption{SOAP no modelo Modelo de serviço web baseado em SOAP.\cite{Papazoglou_slides:2008}} 
+  \label{fig:wsmodelsoap_expanded}
+\end{figure}
+
+\subsection{Serviços web RESTFul}
+\label{subsec:restful}
 ...ver \cite{Belqasmi:2011}
-\subsection{Composição de serviços web}
-//TODO ver \cite{Dustdar:2005}
+
 \subsection{Dispositivos como serviços web} 
 \label{subsec:dispositivosweb}
 //TODO ver resumo tcc odt
