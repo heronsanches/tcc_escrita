@@ -47,16 +47,16 @@ O cenário do serviço(Figura \ref{fig:ws_purchase_order}) pode ser descrito da 
 \item Gerenciador recebe a resposta \textit{Shipment acknowledgement} e informa ao cliente (\textit{Invoice}) a data prevista para entrega do(s) produto(s) do cliente.
 \end{enumerate}
 
-No cenário apresentado anteriormente há uma ressalva que deve ser feita, a qual dita uma das características de um serviço web (serviço assícrono ou sícrono, descrito logo a seguir), no item 5, por exemplo, o pagamento pode demorar mais de um dia para concluir seu processamento, então o cliente poderia receber um retorno do sistema do tipo, pagamento aguardando processamento, ou seja, a resposta do processamento do pagamento(realizado ou não realizado), poderia vir através de um envio de email ou SMS, por exemplo, somente depois de muito tempo.
+No cenário apresentado anteriormente há uma ressalva que deve ser feita, a qual dita uma das características de um serviço web (serviço assícrono ou sícrono, descrito logo a seguir), no item 5, por exemplo, o pagamento pode demorar mais de um dia para concluir seu processamento, então o cliente poderia receber um retorno do sistema do tipo, pagamento aguardando processamento, ou seja, a resposta do processamento do pagamento(realizado ou não realizado), poderia vir através de um envio de email ou SMS, somente depois de muito tempo.
 
 Serviços web possuem algumas características que se fazem importantes saber:
 \begin{enumerate}
-\item 1.4.3 State properties**
-\item 1.4.4 Loose coupling**
-\item 1.4.6 Synchronicity**
+\item Podem ser ditos \textit{stateless} (sem estado) ou \textit{stateful} (com estado). Se um serviço pode ser invocado repetidamente sem ter que manter um contexto ou estado este é denominado textit{stateless}. Como exemplo de serviço textit{stateless} pode-se citar a recuperação de informação de um sensor de temperatura, pois não precisa de nenhum tipo de memória para manter o que aconteceu durante as requisições ao serviço. Já os serviços que precisam manter seus contextos preservados de uma invocação para a próxima requisição, estes são \textit{stateful}. Por exemplo, um usuário quando chama um serviço (Levar compras) de um textit{Home Network Service} (ver seção \ref{sec:hns}), este então começa sua execução: um veículo( um serviço) leva a carga até uma determinada área próxima ao elevador(um serviço) e, uma garra mecânica (um serviço) pega a carga e coloca dentro do elevador. Observe que o serviço Levar compras é a composição de diferentes serviços e não pode ser chamado e executado diversas vezes continuamente sem a necessidade de manter seu contexto entre os diferentes serviços envolvidos, pois o ambiente não tem mais de um carro, mais de uma garra e elevador. Então a menos que este já tenha terminado toda a sua execução, poderia ser chamado e executado novamente. Por tal motivo este serviço mantêm um estado (em execução ou sem trabalho) o qual depende dos estados dos serviços envolvidos.\cite{Papazoglou:2008}
+\item Podem ser ditos com baixo nível de acoplamento (textit{loose coupling}) quando os serviços interagem uns com os outros e utilizam-se as tecnologias padrões da Internet, permitindo dessa forma construir pontes entre sistemas que de outra forma exigiriam grandes esforços de desenvolvimento de software. O termo acoplamento indica o nível de dependência entre serviços.\cite{Papazoglou:2008}
+\item Podem ser ditos síncronos e assícronos. Quando síncrono, clientes realizam suas requisições e ficam sempre aguardando uma resposta. O cliente é dependente de tal resposta para continuar sua computação. Se uma operação for incapaz de ser completada, todo o resto da computação é impedida de continuar. Enquanto que nos assícronos o cliente não necessita aguardar uma resposta para continuar a execução de sua aplicação. Quando um cliente invoca um serviço assíncrono, o cliente normalmente envia um documento inteiro, como uma ordem de pagamento ou, uma lista de itens de um carrinho de compra juntamente com o tipo de pagamento e endereço de entrega. O serviço aceita o documento inteiro e processa-o, podendo retornar ou não uma mensagem de resultado. A respota do serviço, se existir alguma, pode acontecer horas ou talvez dias depois.\cite{Papazoglou:2008}
 \end{enumerate}
 
-Serviços web possuem baixo nível de acoplamento e utilizam padrões para oferecer suas funcionalidades, pois tais serviços tem a intenção de prover comunicação a diferentes tipos de aplicações, que possivelmente são executadas em diferentes plataformas. A \textit{Web Service Description Language}(WSDL) usa o formato XML para descrever os métodos oferecidos por um serviço web, incluindo parâmetros de entrada e saída, tipos de dados e, protocolo de transporte utilizado (normalmente o HTTP). O \textit{Simple Object Access Protocol}(SOAP, seção \ref{subsec:soap}) é utilizado para as trocas de mensagens (formatadas em XML) entre as entidades envolvidas no modelo de serviço web citado\cite{Dustdar:2005}, como pode ser visto na Figura \ref{fig:wsmodelsoap} e explicado logo abaixo. Esse tipo de serviço web é chamado de serviço web baseado em SOAP\cite{Belqasmi:2011}.
+Serviços web possuem baixo nível de acoplamento e utilizam padrões para oferecer suas funcionalidades, pois tais serviços tem a intenção de prover comunicação a diferentes tipos de aplicações, que possivelmente são executadas em diferentes plataformas. A \textit{Web Service Description Language}(WSDL) usa o formato XML para descrever os métodos oferecidos por um serviço web, incluindo parâmetros de entrada e saída, tipos de dados e, protocolo de transporte utilizado (normalmente o HTTP). Além de informações referente ao provedor do serviço, tais como, endereço e contato da empresa desenvolvedora do serviço. O \textit{Simple Object Access Protocol}(SOAP, seção \ref{subsec:soap}) é utilizado para as trocas de mensagens (formatadas em XML) entre as entidades envolvidas no modelo de serviço web citado\cite{Dustdar:2005}, como pode ser visto na Figura \ref{fig:wsmodelsoap} e explicado logo abaixo. Esse tipo de serviço web é chamado de serviço web baseado em SOAP\cite{Belqasmi:2011}.
 
 \begin{figure}[!htb] \centering 
   \centering
@@ -66,16 +66,12 @@ Serviços web possuem baixo nível de acoplamento e utilizam padrões para ofere
 \end{figure}
 
 \begin{itemize}
-\item Provedor (Service Provider) - cria e oferece o serviço web, este precisa descrever o serviço em um formato padrão, neste caso XML e, publica-o (\textit{Publish}) no Registro de serviço.
-\item Registro de serviço (Service Registry) - além da descrição do serviço, contém informações adicionais à respeito do provedor, como endereço e contato da empresa desenvolvedora do serviço e, detalhes técnicos. O registro de serviço mais utilizado é o \textit{Universal Description, Discovery and Integration} (UDDI), este em suas especificações define um conjunto de \textit{Application Program Interfaces}(APIs) tanto para publicação, quanto para descoberta\cite{Belqasmi:2011}.
+\item Provedor (Service Provider) - cria e oferece o serviço web, este precisa descrever o serviço em um formato padrão, neste caso WSDL e, publica-o (\textit{Publish}) no Registro de serviço.
+\item Registro de serviço (Service Registry) - contém a descrição publicada pelo Provedor. O registro de serviço mais utilizado é o \textit{Universal Description, Discovery and Integration} (UDDI), este em suas especificações define um conjunto de \textit{Application Program Interfaces}(APIs) tanto para publicação, quanto para descoberta\cite{Belqasmi:2011}.
 \item Consumidor (Service Requestor) - obtem informações do registro, \textit{Find}, e utiliza a descrição do serviço capturada para invocar (\textit{Bind}) o serviço web.
 \end{itemize}
 
-A descrição realizada da Figura \ref{fig:wsmodelsoap} foi na verdade a descrição das 3 regras fundamentais do Service Oriented Architecture (SOA), que é um caminho lógico para projetar sistemas de software, os quais podem prover serviços tanto para o usuário final de aplicações quanto para outros serviços distribuídos na rede, através de interfaces que possam ser publicadas e descobertas. Das três regras citadas, existem 3 operações que ainda não foram descritas, \textit{Publish, Find e Bind}.
-
-1.6.2.1  The publish operation**
-1.6.2.2 The find operation**
-1.6.2.3 The bind operation**
+A descrição realizada da Figura \ref{fig:wsmodelsoap} foi na verdade a descrição das 3 regras fundamentais do Service Oriented Architecture (SOA), que é um caminho lógico para projetar sistemas de software, os quais podem prover serviços tanto para o usuário final de aplicações quanto para outros serviços distribuídos na rede, através de interfaces que possam ser publicadas e descobertas.\cite{Papazoglou:2008}
 
 Existe também outro tipo de abordagem de serviços web, baseada nos princípios arquiteturais REST (ver seção \ref{subsec:restful}), esta é a abordagem de serviço web que é adotada neste trabalho.
 
@@ -94,11 +90,11 @@ SOAP é um protocolo leve que foi desenvolvido com a intenção de prover troca 
 
 \subsection{Serviços web RESTFul}
 \label{subsec:restful}
-...ver \cite{Belqasmi:2011}
+...ver \cite{Belqasmi:2011}**
 
 \subsection{Dispositivos como serviços web} 
 \label{subsec:dispositivosweb}
-//TODO ver resumo tcc odt
+//TODO ver resumo tcc odt**
 Como abordado em \ref{sec:iot} um dos desafios referente a visão da IoT é sua interoperabilidade e, como possível solução se pode utilizar dos existentes protocolos web. Desta maneira os dispositivos podem interagir entre si e com outros sistemas na web.
 
 Adotando esse padrão, os dispositivos podem ter suas propriedades disponíveis através de qualquer navegador, sem a necessidade de instalação de nenhum programa ou driver adicional, como pode ser exemplificado na Figura \ref{fig:dispnavegador}. Além disto, mashups físicos\footnotemark \footnotetext{Aplicativos criados a partir da composição de dados e serviços de dispositivos físicos com outros recursos Web.} podem ser construídos com muito menos esforço do que as existentes abordagens, quebrando drasticamente a barreira para o desenvolvimento de aplicações com dispositivos, assim então promovendo a visão da Internet das Coisas.\cite{Guinard:2009}
@@ -117,8 +113,13 @@ Nem todos os dispositivos (coisas ou objetos) possuem... TODO RESTxSOAP...
 \label{sec:hns}
 TODO....
 
-\section{Redes Neurais}
-TODO...Explicar o que é e depois explicar de multilayerperceptron na proposta
+\section{Aprendizado supervisionado}
+
+\subsection{Redes neurais}
+
+\subsection{Métodos avaliativos}
+pag 183 - livro data mining - parte escrita - 
+
 \section{Interação de características}
 TODO....origem...causas...etc...
 \subsection{Efeitos colaterais desejáveis}
