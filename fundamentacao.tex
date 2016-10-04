@@ -97,7 +97,7 @@ Um documento XML SOAP é chamado de SOAP mensagem (ou SOAP envelope) e é usualm
   \label{fig:wsmodelsoap_communication_msg}
 \end{figure}
 
-Uma mensagem SOAP (ver Figura \ref{fig:wssoap_msg}) é composta de um elemento \textless Envelope\textgreater (elemento raiz), o qual contém um \textless Header\textgreater (opcional) e um obrigatório \textless Body\textgreater. Caso um \textless Header\textgreater seja utilizado, este deve ser um filho imediato de \textless Envelope\textgreater, e preceder o \textless Body\textgreater. \textless Body\textgreater contém os dados principais da aplicação. Uma mensagem SOAP pode ter uma declaração XML, \textless ?xml version=``1.0'' encoding=``UTF-8''?\textgreater, a qual inidica a versão do XML usado e o formato da codificação. Para que a tag \textless env:Header ou Body ou Envelope\textgreater seja identificada como pertencente ao SOAP \textit{namespace}, esta deve ser referenciada ao SOAP \textit{namespace} URI, xmlns:env=``http://www.w3.org/2003/05/soap-envelope''. Se uma aplicação SOAP recebe uma mensagem que é baseada em outro \textit{namespace}, isto gerará um erro.\cite{Papazoglou:2008}
+Uma mensagem SOAP (ver Figura \ref{fig:wssoap_msg}) é composta de um elemento \textless Envelope\textgreater (elemento raiz), o qual contém um \textless Header\textgreater (opcional) e um obrigatório \textless Body\textgreater. Caso um \textless Header\textgreater seja utilizado, este deve ser um filho imediato de \textless Envelope\textgreater, e preceder o \textless Body\textgreater. \textless Body\textgreater contém os dados principais da aplicação (dados arbitrários em um XML ou parametros para uma chamada de método). Uma mensagem SOAP pode ter uma declaração XML, \textless ?xml version=``1.0'' encoding=``UTF-8''?\textgreater, a qual inidica a versão do XML usado e o formato da codificação. Para que a tag \textless env:Header ou Body ou Envelope\textgreater seja identificada como pertencente ao SOAP \textit{namespace}, esta deve ser referenciada ao SOAP \textit{namespace} URI, xmlns:env=``http://www.w3.org/2003/05/soap-envelope''. Se uma aplicação SOAP recebe uma mensagem que é baseada em outro \textit{namespace}, isto gerará um erro.\cite{Papazoglou:2008}
 
 \begin{figure}[!htb] \centering
   \centering
@@ -115,7 +115,7 @@ O envelope SOAP pode especificar um conjunto de regras que serelializam os dados
   \label{fig:wssoap_msg_ecodingStyle}
 \end{figure}
 
-O envelope SOAP pode conter no máximo um \textless Header\textgreater elemento, o qual contém todas as dicas que são relevantes para seus destinatários finais ou pontos de transporte intermediários. Também pode conter informação de onde o documento deve ser encaminhado, origem, e pode conter assinaturas digitais. O propósito do \textless Header\textgreater é encapsular extensões ao formato da mensagem sem combiná-las aos dados principais de carga da aplicação ou modificar a estrutura fundamental SOAP. Isto permite adição de especificações de características e funcionalidades, tais como segurança, transporte, referências a objetos, atributos QoS**, dentre outros, sem quebra das especificações da mensagem SOAP. Cada bloco dentro do \textless Header\textgreater deve ter seu próprio \textit{namespace}, assim como já explanado anteriormente, o \textit{namespace} permite que as aplicações SOAP identifiquem o bloco e os processe (ver Figura \ref{fig:wssoap_msg_header}).\cite{Papazoglou:2008}
+O envelope SOAP pode conter no máximo um elemento \textless Header\textgreater, o qual contém todas as dicas que são relevantes para seus destinatários finais ou pontos de transporte intermediários. Também pode conter informação de onde o documento deve ser encaminhado, origem, e pode conter assinaturas digitais. O propósito do \textless Header\textgreater é encapsular extensões ao formato da mensagem sem combiná-las aos dados principais de carga da aplicação ou modificar a estrutura fundamental SOAP. Isto permite adição de especificações de características e funcionalidades, tais como segurança, transporte, referências a objetos, atributos QoS**, dentre outros, sem quebra das especificações da mensagem SOAP. Cada bloco dentro do \textless Header\textgreater deve ter seu próprio \textit{namespace}, assim como já explanado anteriormente, o \textit{namespace} permite que as aplicações SOAP identifiquem o bloco e os processe de acordo com as regras definidas no \textit{namespace} em questão(ver Figura \ref{fig:wssoap_msg_header}).\cite{Papazoglou:2008}
 
 \begin{figure}[!htb] \centering
   \centering
@@ -124,7 +124,32 @@ O envelope SOAP pode conter no máximo um \textless Header\textgreater elemento,
   \label{fig:wssoap_msg_header}
 \end{figure}
 
-4.3.2.1**
+O \textless Body\textgreater pode ter um número arbitrário de filhos (chamados de entradas do \textless Body\textgreater), como também pode conter nenhum. Todas as entradas do \textless Body\textgreater que são filhos imediatos devem ter o \textit{namespace}. Por padrão, o conteúdo do \textless Body\textgreater pode ser um XML qualquer sem especificação de regras. \textless Body\textgreater ou contém os dados principais da aplicação ou uma mensagem de erro, mas não os dois. Ou ainda pode ser vazio.\cite{Papazoglou:2008}
+
+SOAP suporta dois tipos de estilo de comunicação, RPC (Remote Procedure Call) e documento (ou mensagem). Numa comunicação no estilo RPC/Literal, o cliente expressa sua requisição como uma chamada de método passando um conjunto de parâmetros. O método então retorna uma resposta. Algumas regras devem ser seguidas e são exemplificadas na Figura \ref{fig:wssoap_msg_soap_rpc}:
+\begin{itemize}
+\item Uma URI deve identificar o endereço de destino onde o método sera chamado, que pode ser identificado na declaração da tag \textless Envelope\textgreater, ``xmlns:m="http://www.plastics_supply.com/product-prices''.
+\item Deve ser passado o nome do método, \textless m:GetProductPriceResponse\textgreater) e, seus parâmetros (nome e valor) na ordem correta que aparece no método a ser chamado, como exemplificado na figura em \textless product-id\textgreater 450R6OP \textless/product-id \textgreater.
+\item Uma mensagem de resposta RPC deve conter um valor de retorno e quaisquer parametros de sáida ou um erro. Esta é modelada como um estrutura única com um campo para cada parâmetro na assinatura do método, exemplificado em \textless product-price\textgreater 134.32 \textless/product-price\textgreater. 
+\end{itemize}
+
+\begin{figure}[!htb] \centering
+  \centering
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/soap_rpc_style} 
+  \caption{a)Estilo SOAP RPC \textless Body\textgreater. b) Estilo SOAP RPC \textless Body\textgreater - resposta\cite{Papazoglou:2008}} 
+  \label{fig:wssoap_msg_soap_rpc}
+\end{figure}
+
+Em uma comunicação no estilo documento, SOAP é utilizado para trocar documentos contendo qualquer tipo de dados XML no \textless Body\textgreater, com o XML não codificado. No estilo de mensagem \textit{Document/Literal}, o \textless Body\textgreater contém um um elemento XML bem formado com dados da aplicação de qualquer tipo. O ambiente de execução SOAP aceita o elemento \textless Body\textgreater da maneira com que chegou e trata-o sobre a aplicação a qual foi destinado. Pode ou não ter uma resposta associado com a mensagem. A Figura \ref{fig:wssoap_msg_soap_document} é um exemplo de mensagem neste estilo, a qual exemplifica os dados de um pedido de compra. Observa-se que este tipo de envio de dados não é muito bem conduzido para o estilo RPC, como o demonstrado na Figura \ref{fig:wssoap_msg_soap_rpc}. Em vez disso, a aplicação almeja transferir os dados da aplicação de uma única vez a um serviço para processamento futuro.\cite{Papazoglou:2008}
+
+\begin{figure}[!htb] \centering
+  \centering
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/soap_document_style} 
+  \caption Exemplo de um \textless Body\textgreater no estilo documento SOAP.\cite{Papazoglou:2008}} 
+  \label{fig:wssoap_msg_soap_document}
+\end{figure}
+
+SOAP over HTTP**
 \subsection{Serviços web RESTFul}
 \label{subsec:restful}
 ...ver \cite{Belqasmi:2011}**
