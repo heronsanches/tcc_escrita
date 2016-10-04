@@ -77,9 +77,7 @@ Existe também outro tipo de abordagem de serviços web, baseada nos princípios
 
 \subsection{SOAP}
 \label{subsec:soap}
-SOAP é um protocolo leve que foi desenvolvido com a intenção de prover troca de mensagens estruturadas em um ambiente descentralizado e distribuído. Este usa a tecnologia XML para definir um framework extensível de mensagens, o qual permite a construção de mensagens que podem ser trocadas através de uma variedade de protocolos subjacentes. O framework foi desenvolvido para ser independente de modelo de linguagem de programação ou qualquer outra implementação semântica\cite{w3c:soap}. Diz-se que é um protocolo leve pelo fato de somente receber e enviar pacotes de protocolos de transportes (por exemplo, HTTP) e, processar as mensagens XML\cite{Papazoglou_slides:2008}. A figura \ref{fig:wsmodelsoap_expanded} seguinte mostra como o SOAP atua no modelo Modelo de serviço web baseado em SOAP (ver Figura \ref{fig:wsmodelsoap}). Nesta, o \textit{SOAP-based middleware} converte as chamadas de procedimento de/para mensagens XML que são enviadas através do HTTP ou outro protocolo.
-
-**ver livro e slides do livro
+SOAP é um protocolo leve que foi desenvolvido com a intenção de prover troca de mensagens estruturadas em um ambiente descentralizado e distribuído. Este usa a tecnologia XML para definir um framework extensível de mensagens, o qual permite a construção de mensagens que podem ser trocadas através de uma variedade de protocolos subjacentes. O framework foi desenvolvido para ser independente de modelo de linguagem de programação ou qualquer outra implementação semântica\cite{w3c:soap}. Diz-se que é um protocolo leve pelo fato de somente receber e enviar pacotes de protocolos de transportes (por exemplo, HTTP) e, processar as mensagens XML, quando constratados com os protocolos ORPC**\cite{Papazoglou_slides:2008}. A figura \ref{fig:wsmodelsoap_expanded} seguinte mostra como o SOAP atua no modelo Modelo de serviço web baseado em SOAP (ver Figura \ref{fig:wsmodelsoap}). Nesta, o \textit{SOAP-based middleware} converte as chamadas de procedimento de/para mensagens XML que são enviadas através do HTTP ou outro protocolo.
 
 \begin{figure}[!htb] \centering 
   \centering
@@ -88,6 +86,45 @@ SOAP é um protocolo leve que foi desenvolvido com a intenção de prover troca 
   \label{fig:wsmodelsoap_expanded}
 \end{figure}
 
+Em outras palavras, SOAP é um protocolo de rede de aplicação utilizado para tansferir mensagens entre instâncias de serviços descritas por interfaces WSDL (ver Figura \ref{fig:wsmodelsoap_communication_msg}).
+
+Um documento XML SOAP é chamado de SOAP mensagem (ou SOAP envelope) e é usualmente tranportado sobre outros protocolos de aplicação, mais frequentemente o HTTP. Mas existem outros protocolos de aplicação que podem ser utilizados: SMTP**, FTP**, RMI**. A mensagem SOAP, representada na Figura \ref{fig:wsmodelsoap_communication_msg} é colocada no corpo da mensagem HTTP e então é encaminhada para seu destino. Na próxima camada, da hierarquia ilustrada na figura e no modelo OSI** (camada de transporte), a mensagem HTTP torna-se segmentos de bytes a serem enviados através do stream do TCP. Do outro lado (destinatário) um \textit{HTTP listener}(fica a espera de novas mensagens) passa o corpo da mensagem HTTP para um processador de mensagens SOAP, o qual entende a sintaxe das mensagens e então é capaz de processá-las.\cite{Papazoglou:2008}
+ 
+\begin{figure}[!htb] \centering 
+  \centering
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_message_communication} 
+  \caption{Comunicação dos serviços web e mensagem SOAP.\cite{Papazoglou:2008}} 
+  \label{fig:wsmodelsoap_communication_msg}
+\end{figure}
+
+Uma mensagem SOAP (ver Figura \ref{fig:wssoap_msg}) é composta de um elemento \textless Envelope\textgreater (elemento raiz), o qual contém um \textless Header\textgreater (opcional) e um obrigatório \textless Body\textgreater. Caso um \textless Header\textgreater seja utilizado, este deve ser um filho imediato de \textless Envelope\textgreater, e preceder o \textless Body\textgreater. \textless Body\textgreater contém os dados principais da aplicação. Uma mensagem SOAP pode ter uma declaração XML, \textless ?xml version=``1.0'' encoding=``UTF-8''?\textgreater, a qual inidica a versão do XML usado e o formato da codificação. Para que a tag \textless env:Header ou Body ou Envelope\textgreater seja identificada como pertencente ao SOAP \textit{namespace}, esta deve ser referenciada ao SOAP \textit{namespace} URI, xmlns:env=``http://www.w3.org/2003/05/soap-envelope''. Se uma aplicação SOAP recebe uma mensagem que é baseada em outro \textit{namespace}, isto gerará um erro.\cite{Papazoglou:2008}
+
+\begin{figure}[!htb] \centering
+  \centering
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_message_structure} 
+  \caption{Estrutura da mensagem SOAP.\cite{Papazoglou:2008}} 
+  \label{fig:wssoap_msg}
+\end{figure}
+
+O envelope SOAP pode especificar um conjunto de regras que serelializam os dados XML da aplicação. Assim, tanto o Provedor quanto o Consumidor devem concordar com as regras de codificação (normalmente baixando o mesmo esquema XML que define eles). Para tal finalidade ambos podem utilizar-se do atributo global(pode ser declarado em qualquer nível do documento XML) \textit{encodingStyle}, este define qual estilo de codificação deve ser utilizado no elemento no qual foi definido e em seus filhos (ver Figura \ref{fig:wssoap_msg_ecodingStyle}). Com o intuito de favorecer a flexibilidade SOAP permite que as aplicações definam seu próprio estilo de codificação, mas na maioria dos casos as regras de codificação padrão são indicadas.\cite{Papazoglou:2008}
+
+\begin{figure}[!htb] \centering
+  \centering
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_message_structure_ecodingStyle} 
+  \caption{Estrutura da mensagem SOAP com declaração do atributo encodingStyle.\cite{Papazoglou:2008}} 
+  \label{fig:wssoap_msg_ecodingStyle}
+\end{figure}
+
+O envelope SOAP pode conter no máximo um \textless Header\textgreater elemento, o qual contém todas as dicas que são relevantes para seus destinatários finais ou pontos de transporte intermediários. Também pode conter informação de onde o documento deve ser encaminhado, origem, e pode conter assinaturas digitais. O propósito do \textless Header\textgreater é encapsular extensões ao formato da mensagem sem combiná-las aos dados principais de carga da aplicação ou modificar a estrutura fundamental SOAP. Isto permite adição de especificações de características e funcionalidades, tais como segurança, transporte, referências a objetos, atributos QoS**, dentre outros, sem quebra das especificações da mensagem SOAP. Cada bloco dentro do \textless Header\textgreater deve ter seu próprio \textit{namespace}, assim como já explanado anteriormente, o \textit{namespace} permite que as aplicações SOAP identifiquem o bloco e os processe (ver Figura \ref{fig:wssoap_msg_header}).\cite{Papazoglou:2008}
+
+\begin{figure}[!htb] \centering
+  \centering
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_message_structure_header} 
+  \caption{Estrutura da mensagem SOAP, Header.\cite{Papazoglou:2008}} 
+  \label{fig:wssoap_msg_header}
+\end{figure}
+
+4.3.2.1**
 \subsection{Serviços web RESTFul}
 \label{subsec:restful}
 ...ver \cite{Belqasmi:2011}**
@@ -109,7 +146,7 @@ Adotando esse padrão, os dispositivos podem ter suas propriedades disponíveis 
 
 Nem todos os dispositivos (coisas ou objetos) possuem... TODO RESTxSOAP...
 
-\subsection{Home network system}
+\section{Home network system}
 \label{sec:hns}
 TODO....
 
