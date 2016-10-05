@@ -149,10 +149,29 @@ Em uma comunicação no estilo documento, SOAP é utilizado para trocar document
   \label{fig:wssoap_msg_soap_document}
 \end{figure}
 
-SOAP over HTTP**
+As requisições SOAP normalmente utilizam o protocolo de transporte HTTP. Quando utilizado as requisições SOAP são transportadas dentro do corpo do método POST do HTTP e suas respostas são retornadas nas respostas do HTTP (ver Figuras \ref{fig:wssoap_soap_http_request_rpc} e \ref{fig:wssoap_soap_http_response_rpc}).
+
+\begin{figure}[!htb] \centering
+  \centering
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/soap_http_request_rpc} 
+  \caption Requisição SOAP no estilo RPC dentro do corpo da requisição HTTP.\cite{Papazoglou:2008}} 
+  \label{fig:wssoap_soap_http_request_rpc}
+\end{figure}
+
+\begin{figure}[!htb] \centering
+  \centering
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/soap_http_response_rpc} 
+  \caption Resposta SOAP no estilo RPC dentro do corpo da resposta HTTP.\cite{Papazoglou:2008}} 
+  \label{fig:wssoap_soap_http_response_rpc}
+\end{figure}
+
 \subsection{Serviços web RESTFul}
 \label{subsec:restful}
 ...ver \cite{Belqasmi:2011}**
+\cite{Pautasso:2014}
+
+\subsection{Serviços RESTFul ao invés de serviços baseados em SOAP}
+\cite{Belqasmi:2012}** bem legal tem uma tabela comparativa show!
 
 \subsection{Dispositivos como serviços web} 
 \label{subsec:dispositivosweb}
@@ -169,8 +188,6 @@ Adotando esse padrão, os dispositivos podem ter suas propriedades disponíveis 
 \end{figure}
 
 
-Nem todos os dispositivos (coisas ou objetos) possuem... TODO RESTxSOAP...
-
 \section{Home network system}
 \label{sec:hns}
 TODO....
@@ -180,7 +197,7 @@ TODO....
 \subsection{Redes neurais}
 
 \subsection{Métodos avaliativos}
-pag 183 - livro data mining - parte escrita - 
+\cite{Witten:2005} pag 183 - livro data mining - parte escrita - 
 
 \section{Interação de características}
 TODO....origem...causas...etc...
