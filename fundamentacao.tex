@@ -23,17 +23,18 @@ Diante deste cenário da IoT, pode-se citar exemplos de aplicações em diversos
 \item Rastreabilidade de produtos alimentícios ajudam os usuários a verificar a origem de um produto, assim como informações de composição química, dentre outros. Mas também previne de doenças não desejadas. Por exemplo, avisos atuais sobre a mercadoria em questão podem ser disponibilizados à medida que o produto sai da origem e vai passando para os outros níveis de consumo, desta forma os consumidores podem evitar o contágio de doenças como gripe aviária e,  encefalopatia espongiforme bovina (EEB), mais conhecida como doença da vaca louca.\cite{Weber:2010}
 \end{itemize}
 
-Apesar da grande potencialidade da visão da Internet das Coisas, a qual gerou em 2015 um faturamento em torno de 130,33 bilhões de dolares americanos e tem prospeção de chegar até 883.55 bilhões em 2020\footnotemark \footnotetext{http://www.marketsandmarkets.com/Market-Reports/iot-application-technology-market-258239167.html}, ainda existem muitos desafios a serem vencidos, tais como segurança da informação, armazenamento e processamento de grande quantidade de dados, dentre outros. Adentrando um pouco em um dos desafios da IoT, o da disponibilidade de uma interface de comunicação (acesso aos serviços e informações dos dispositivos) e programação comum aos objetos, pode-se dizer que a falta desta padronização faz com que se torne oneroso o desenvolvimento de aplicações para o objeto, pois cada coisa possui suas próprias interfaces, logo para cada dispositivo um desenvolvimento a parte. Mais difícil ainda é prover uma única funcionalidade ou serviço com a composição dos diversos objetos. Para diminuir a dificuldade deste cenário, pode-se disponibilizar os dispositivos como serviços WEB (seção \ref{subsec:dispositivosweb}), assim sendo pode-se utilizar os protocolos WEB como linguagem comum de integração dos dispositivos a Internet.\cite{Franca:2011}
+Apesar da grande potencialidade da visão da Internet das Coisas, a qual gerou em 2015 um faturamento em torno de 130,33 bilhões de dolares americanos e tem prospeção de chegar até 883.55 bilhões em 2020\footnotemark \footnotetext{http://www.marketsandmarkets.com/Market-Reports/iot-application-technology-market-258239167.html}, ainda existem muitos desafios a serem vencidos, tais como segurança da informação, armazenamento e processamento de grande quantidade de dados, dentre outros. Adentrando um pouco em um dos desafios da IoT, o da disponibilidade de uma interface de comunicação (acesso aos serviços e informações dos dispositivos) e programação comum aos objetos, pode-se dizer que a falta desta padronização faz com que se torne oneroso o desenvolvimento de aplicações para o objeto, pois cada coisa possui suas próprias interfaces, logo para cada dispositivo um desenvolvimento a parte. Mais difícil ainda é prover uma única funcionalidade ou serviço com a composição dos diversos objetos. Para diminuir a dificuldade deste cenário, pode-se disponibilizar os dispositivos como serviços WEB (seção \ref{subsec:dispositivosWeb}), assim sendo pode-se utilizar os protocolos WEB como linguagem comum de integração dos dispositivos a Internet.\cite{Franca:2011}
 
-\subsection{Serviços web}
-Segundo\cite{Dustdar:2005}, um serviço web é um sistema identificado por uma URL\footnotemark \footnotetext{Acrônimo para Uniform Resource Locator e é uma referência (um endereço) para um recurso na Internet.\cite{oracle:url}}, no qual suas interfaces públicas são definidas e descritas usando XML\footnotemark \footnotetext{Extensible Markup Language (XML) é uma simples e flexível linguagem de marcação utilizada para codificar documentos através de regras produzidas por humanos, as quais podem ser manipulados (compreendidas) por máquinas \cite{w3c:xml}\cite{w3c:xmlschema}} e, suas definições podem ser descobertas por outros sistemas. Sistemas então podem interagir com os serviços web utilizando suas definições e descrições. Através destas utiliza-se mensagens XML que são trasmitidas seguindo os protocolos padrão (definidos por W3C\footnotemark \footnotetext{\url{https://www.w3.org/}}) da Internet para que haja tal interação.
+\subsection{Serviços Web}
+\label{ws:webservices}
+Segundo\cite{Dustdar:2005}, um serviço Web é um sistema identificado por uma URL\footnotemark \footnotetext{Acrônimo para Uniform Resource Locator e é uma referência (um endereço) para um recurso na Internet.\cite{oracle:url}}, no qual suas interfaces públicas são definidas e descritas usando XML\footnotemark \footnotetext{Extensible Markup Language (XML) é uma simples e flexível linguagem de marcação utilizada para codificar documentos através de regras produzidas por humanos, as quais podem ser manipulados (compreendidas) por máquinas \cite{w3c:xml}\cite{w3c:xmlschema}} e, suas definições podem ser descobertas por outros sistemas. Sistemas então podem interagir com os serviços Web utilizando suas definições e descrições. Através destas utiliza-se mensagens XML que são trasmitidas seguindo os protocolos padrão (definidos por W3C\footnotemark \footnotetext{\url{https://www.w3.org/}}) da Internet para que haja tal interação.
 
-Serviços web surgiram tendo como principal foco o reuso de aplicações existentes (dentre as quais incluiam código fonte legado) para que pudessem se integrar de forma leve com outras aplicações, geralmente essa integração tinha como referência o desejo de  novas formas de compartilhamento dos serviços ao longo das diversas linhas do negócio ou entre parceiros. Para melhor enteder o proposito dos serviços web, considere, como exemplo, uma companhia de seguros que decidiu oferecer um serviço de cotação on-line. Então ao invés de desenvolver toda a aplicação do inicio, a empresa utiliza-se do serviço web de outra empresa(epecializada em cálculos de seguro). Este serviço pode, por exemplo, oferecer um formulário de cotação e, após o cliente informar os dados necessários, o serviço web apresentará uma cotação baseado nos dados informados. Além disso, caso o cliente escolher comprar tal seguro, pode-se ainda utilizar de outro serviço web, oferecido por uma outra empresa, o qual irá processar o pagamento de acordo com os dados passados para ele e então retorna o resultado do processamento para o cliente e para a empresa original(que desejou construir o serviço de cotação on-line)\cite{Papazoglou:2008}. O cenário da Figura \ref{fig:ws_purchase_order} demonstra um outro exemplo de uso de diferentes serviços para prover um único serviço, o de um pedido de uma ou mais mercadorias, ambiente comum do E-Commerce. 
+Serviços Web surgiram tendo como principal foco o reuso de aplicações existentes (dentre as quais incluiam código fonte legado) para que pudessem se integrar de forma leve com outras aplicações, geralmente essa integração tinha como referência o desejo de  novas formas de compartilhamento dos serviços ao longo das diversas linhas do negócio ou entre parceiros. Para melhor enteder o proposito dos serviços Web, considere, como exemplo, uma companhia de seguros que decidiu oferecer um serviço de cotação on-line. Então ao invés de desenvolver toda a aplicação do inicio, a empresa utiliza-se do serviço Web de outra empresa(epecializada em cálculos de seguro). Este serviço pode, por exemplo, oferecer um formulário de cotação e, após o cliente informar os dados necessários, o serviço Web apresentará uma cotação baseado nos dados informados. Além disso, caso o cliente escolher comprar tal seguro, pode-se ainda utilizar de outro serviço Web, oferecido por uma outra empresa, o qual irá processar o pagamento de acordo com os dados passados para ele e então retorna o resultado do processamento para o cliente e para a empresa original(que desejou construir o serviço de cotação on-line)\cite{Papazoglou:2008}. O cenário da Figura \ref{fig:ws_purchase_order} demonstra um outro exemplo de uso de diferentes serviços para prover um único serviço, o de um pedido de uma ou mais mercadorias, ambiente comum do E-Commerce.
 
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_purchase_order} 
-  \caption{Utilização de diferentes serviços web para prover o serviço de pedido de um E-Commerce.\cite{Papazoglou:2008}} 
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/Webservice_purchase_order} 
+  \caption{Utilização de diferentes serviços Web para prover o serviço de pedido de um E-Commerce.\cite{Papazoglou:2008}} 
   \label{fig:ws_purchase_order}
 \end{figure}
 
@@ -47,42 +48,42 @@ O cenário do serviço(Figura \ref{fig:ws_purchase_order}) pode ser descrito da 
 \item Gerenciador recebe a resposta \textit{Shipment acknowledgement} e informa ao cliente (\textit{Invoice}) a data prevista para entrega do(s) produto(s) do cliente.
 \end{enumerate}
 
-No cenário apresentado anteriormente há uma ressalva que deve ser feita, a qual dita uma das características de um serviço web (serviço assícrono ou sícrono, descrito logo a seguir), no item 5, por exemplo, o pagamento pode demorar mais de um dia para concluir seu processamento, então o cliente poderia receber um retorno do sistema do tipo, pagamento aguardando processamento, ou seja, a resposta do processamento do pagamento(realizado ou não realizado), poderia vir através de um envio de email ou SMS, somente depois de muito tempo.
+No cenário apresentado anteriormente há uma ressalva que deve ser feita, a qual dita uma das características de um serviço Web (serviço assícrono ou sícrono, descrito logo a seguir), no item 5, por exemplo, o pagamento pode demorar mais de um dia para concluir seu processamento, então o cliente poderia receber um retorno do sistema do tipo, pagamento aguardando processamento, ou seja, a resposta do processamento do pagamento(realizado ou não realizado), poderia vir através de um envio de email ou SMS, somente depois de muito tempo.
 
-Serviços web possuem algumas características que se fazem importantes saber:
+Serviços Web possuem algumas características que se fazem importantes saber:
 \begin{enumerate}
 \item Podem ser ditos \textit{stateless} (sem estado) ou \textit{stateful} (com estado). Se um serviço pode ser invocado repetidamente sem ter que manter um contexto ou estado este é denominado textit{stateless}. Como exemplo de serviço textit{stateless} pode-se citar a recuperação de informação de um sensor de temperatura, pois não precisa de nenhum tipo de memória para manter o que aconteceu durante as requisições ao serviço. Já os serviços que precisam manter seus contextos preservados de uma invocação para a próxima requisição, estes são \textit{stateful}. Por exemplo, um usuário quando chama um serviço (Levar compras) de um textit{Home Network Service} (ver seção \ref{sec:hns}), este então começa sua execução: um veículo( um serviço) leva a carga até uma determinada área próxima ao elevador(um serviço) e, uma garra mecânica (um serviço) pega a carga e coloca dentro do elevador. Observe que o serviço Levar compras é a composição de diferentes serviços e não pode ser chamado e executado diversas vezes continuamente sem a necessidade de manter seu contexto entre os diferentes serviços envolvidos, pois o ambiente não tem mais de um carro, mais de uma garra e elevador. Então a menos que este já tenha terminado toda a sua execução, poderia ser chamado e executado novamente. Por tal motivo este serviço mantêm um estado (em execução ou sem trabalho) o qual depende dos estados dos serviços envolvidos.\cite{Papazoglou:2008}
 \item Podem ser ditos com baixo nível de acoplamento (textit{loose coupling}) quando os serviços interagem uns com os outros e utilizam-se as tecnologias padrões da Internet, permitindo dessa forma construir pontes entre sistemas que de outra forma exigiriam grandes esforços de desenvolvimento de software. O termo acoplamento indica o nível de dependência entre serviços.\cite{Papazoglou:2008}
 \item Podem ser ditos síncronos e assícronos. Quando síncrono, clientes realizam suas requisições e ficam sempre aguardando uma resposta. O cliente é dependente de tal resposta para continuar sua computação. Se uma operação for incapaz de ser completada, todo o resto da computação é impedida de continuar. Enquanto que nos assícronos o cliente não necessita aguardar uma resposta para continuar a execução de sua aplicação. Quando um cliente invoca um serviço assíncrono, o cliente normalmente envia um documento inteiro, como uma ordem de pagamento ou, uma lista de itens de um carrinho de compra juntamente com o tipo de pagamento e endereço de entrega. O serviço aceita o documento inteiro e processa-o, podendo retornar ou não uma mensagem de resultado. A respota do serviço, se existir alguma, pode acontecer horas ou talvez dias depois.\cite{Papazoglou:2008}
 \end{enumerate}
 
-Serviços web possuem baixo nível de acoplamento e utilizam padrões para oferecer suas funcionalidades, pois tais serviços tem a intenção de prover comunicação a diferentes tipos de aplicações, que possivelmente são executadas em diferentes plataformas. A \textit{Web Service Description Language}(WSDL) usa o formato XML para descrever os métodos oferecidos por um serviço web, incluindo parâmetros de entrada e saída, tipos de dados e, protocolo de transporte utilizado (normalmente o HTTP). Além de informações referente ao provedor do serviço, tais como, endereço e contato da empresa desenvolvedora do serviço. O \textit{Simple Object Access Protocol}(SOAP, seção \ref{subsec:soap}) é utilizado para as trocas de mensagens (formatadas em XML) entre as entidades envolvidas no modelo de serviço web citado\cite{Dustdar:2005}, como pode ser visto na Figura \ref{fig:wsmodelsoap} e explicado logo abaixo. Esse tipo de serviço web é chamado de serviço web baseado em SOAP\cite{Belqasmi:2011}.
+Serviços Web possuem baixo nível de acoplamento e utilizam padrões para oferecer suas funcionalidades, pois tais serviços tem a intenção de prover comunicação a diferentes tipos de aplicações, que possivelmente são executadas em diferentes plataformas. A \textit{Web Service Description Language}(WSDL) usa o formato XML para descrever os métodos oferecidos por um serviço Web, incluindo parâmetros de entrada e saída, tipos de dados e, protocolo de transporte utilizado (normalmente o HTTP). Além de informações referente ao provedor do serviço, tais como, endereço e contato da empresa desenvolvedora do serviço. O \textit{Simple Object Access Protocol}(SOAP, seção \ref{subsec:soap}) é utilizado para as trocas de mensagens (formatadas em XML) entre as entidades envolvidas no modelo de serviço Web citado\cite{Dustdar:2005}, como pode ser visto na Figura \ref{fig:wsmodelsoap} e explicado logo abaixo. Esse tipo de serviço Web é chamado de serviço Web baseado em SOAP\cite{Belqasmi:2011}.
 
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_model} 
-  \caption{Modelo de serviço web baseado em SOAP.\cite{Belqasmi:2011}} 
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/Webservice_soap_model} 
+  \caption{Modelo de serviço Web baseado em SOAP.\cite{Belqasmi:2011}} 
   \label{fig:wsmodelsoap}
 \end{figure}
 
 \begin{itemize}
-\item Provedor (Service Provider) - cria e oferece o serviço web, este precisa descrever o serviço em um formato padrão, neste caso WSDL e, publica-o (\textit{Publish}) no Registro de serviço.
+\item Provedor (Service Provider) - cria e oferece o serviço Web, este precisa descrever o serviço em um formato padrão, neste caso WSDL e, publica-o (\textit{Publish}) no Registro de serviço.
 \item Registro de serviço (Service Registry) - contém a descrição publicada pelo Provedor. O registro de serviço mais utilizado é o \textit{Universal Description, Discovery and Integration} (UDDI), este em suas especificações define um conjunto de \textit{Application Program Interfaces}(APIs) tanto para publicação, quanto para descoberta\cite{Belqasmi:2011}.
-\item Consumidor (Service Requestor) - obtem informações do registro, \textit{Find}, e utiliza a descrição do serviço capturada para invocar (\textit{Bind}) o serviço web.
+\item Consumidor (Service Requestor) - obtem informações do registro, \textit{Find}, e utiliza a descrição do serviço capturada para invocar (\textit{Bind}) o serviço Web.
 \end{itemize}
 
 A descrição realizada da Figura \ref{fig:wsmodelsoap} foi na verdade a descrição das 3 regras fundamentais do Service Oriented Architecture (SOA), que é um caminho lógico para projetar sistemas de software, os quais podem prover serviços tanto para o usuário final de aplicações quanto para outros serviços distribuídos na rede, através de interfaces que possam ser publicadas e descobertas.\cite{Papazoglou:2008}
 
-Existe também outro tipo de abordagem de serviços web, baseada nos princípios arquiteturais REST (ver seção \ref{subsec:restful}), esta é a abordagem de serviço web que é adotada neste trabalho.
+Existe também outro tipo de abordagem de serviços Web, baseada nos princípios arquiteturais REST (ver seção \ref{subsec:restful}), esta é a abordagem de serviço Web que é adotada neste trabalho.
 
 \subsection{SOAP}
 \label{subsec:soap}
-SOAP é um protocolo leve que foi desenvolvido com a intenção de prover troca de mensagens estruturadas em um ambiente descentralizado e distribuído. Este usa a tecnologia XML para definir um framework extensível de mensagens, o qual permite a construção de mensagens que podem ser trocadas através de uma variedade de protocolos subjacentes. O framework foi desenvolvido para ser independente de modelo de linguagem de programação ou qualquer outra implementação semântica\cite{w3c:soap}. Diz-se que é um protocolo leve pelo fato de somente receber e enviar pacotes de protocolos de transportes (por exemplo, HTTP) e, processar as mensagens XML, quando constratados com os protocolos ORPC**\cite{Papazoglou_slides:2008}. A figura \ref{fig:wsmodelsoap_expanded} seguinte mostra como o SOAP atua no modelo Modelo de serviço web baseado em SOAP (ver Figura \ref{fig:wsmodelsoap}). Nesta, o \textit{SOAP-based middleware} converte as chamadas de procedimento de/para mensagens XML que são enviadas através do HTTP ou outro protocolo.
+SOAP é um protocolo leve que foi desenvolvido com a intenção de prover troca de mensagens estruturadas em um ambiente descentralizado e distribuído. Este usa a tecnologia XML para definir um framework extensível de mensagens, o qual permite a construção de mensagens que podem ser trocadas através de uma variedade de protocolos subjacentes. O framework foi desenvolvido para ser independente de modelo de linguagem de programação ou qualquer outra implementação semântica\cite{w3c:soap}. Diz-se que é um protocolo leve pelo fato de somente receber e enviar pacotes de protocolos de transportes (por exemplo, HTTP) e, processar as mensagens XML, quando constratados com os protocolos ORPC**\cite{Papazoglou_slides:2008}. A figura \ref{fig:wsmodelsoap_expanded} seguinte mostra como o SOAP atua no modelo Modelo de serviço Web baseado em SOAP (ver Figura \ref{fig:wsmodelsoap}). Nesta, o \textit{SOAP-based middleware} converte as chamadas de procedimento de/para mensagens XML que são enviadas através do HTTP ou outro protocolo.
 
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_model_expanded} 
-  \caption{SOAP no modelo Modelo de serviço web baseado em SOAP.\cite{Papazoglou_slides:2008}} 
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/Webservice_soap_model_expanded} 
+  \caption{SOAP no modelo Modelo de serviço Web baseado em SOAP.\cite{Papazoglou_slides:2008}} 
   \label{fig:wsmodelsoap_expanded}
 \end{figure}
 
@@ -92,8 +93,8 @@ Um documento XML SOAP é chamado de SOAP mensagem (ou SOAP envelope) e é usualm
  
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_message_communication} 
-  \caption{Comunicação dos serviços web e mensagem SOAP.\cite{Papazoglou:2008}} 
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/Webservice_soap_message_communication} 
+  \caption{Comunicação dos serviços Web e mensagem SOAP.\cite{Papazoglou:2008}} 
   \label{fig:wsmodelsoap_communication_msg}
 \end{figure}
 
@@ -101,7 +102,7 @@ Uma mensagem SOAP (ver Figura \ref{fig:wssoap_msg}) é composta de um elemento \
 
 \begin{figure}[!htb] \centering
   \centering
-  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_message_structure} 
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/Webservice_soap_message_structure} 
   \caption{Estrutura da mensagem SOAP.\cite{Papazoglou:2008}} 
   \label{fig:wssoap_msg}
 \end{figure}
@@ -110,7 +111,7 @@ O envelope SOAP pode especificar um conjunto de regras que serelializam os dados
 
 \begin{figure}[!htb] \centering
   \centering
-  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_message_structure_ecodingStyle} 
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/Webservice_soap_message_structure_ecodingStyle} 
   \caption{Estrutura da mensagem SOAP com declaração do atributo encodingStyle.\cite{Papazoglou:2008}} 
   \label{fig:wssoap_msg_ecodingStyle}
 \end{figure}
@@ -119,7 +120,7 @@ O envelope SOAP pode conter no máximo um elemento \textless Header\textgreater,
 
 \begin{figure}[!htb] \centering
   \centering
-  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_message_structure_header} 
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/Webservice_soap_message_structure_header} 
   \caption{Estrutura da mensagem SOAP, Header.\cite{Papazoglou:2008}} 
   \label{fig:wssoap_msg_header}
 \end{figure}
@@ -165,18 +166,29 @@ As requisições SOAP normalmente utilizam o protocolo de transporte HTTP. Quand
   \label{fig:wssoap_soap_http_response_rpc}
 \end{figure}
 
-\subsection{Serviços web RESTFul}
+\subsection{Serviços Web RESTFul}
 \label{subsec:restful}
-...ver \cite{Belqasmi:2011}**
-\cite{Pautasso:2014}
+Segundo \cite{Heffelfinger:2014}, Representational State Transfer (REST) é um estilo de arquitetura no qual serviços Web são vistos como recursos e podem ser identificados por Uniform Resources Identifiers (URIs). Serviços Web que são desenvolvidos usando REST são conhecidos como RESTful web services. 
+
+Os principais princípios do estilo arquitetural REST são: endereçamento global através de identificação dos recursos, interface uniforme compartilhada por todos os recursos, interações \textit{stateless} entre os serviços, mensagens auto-descritivas e \textit{hypermedia} como um mecanismo para descoberta descentralizada de recursos por referência\cite{Pautasso:2014}. Na lista abaixo têm-se uma explanação à respeito dos princípios citados.
+
+\begin{enumerate}
+\item Identificação dos recursos - todos os recursos que são publicados por um serviço Web deveriam ser disponibilizados por um único e estável identificador global\cite{Pautasso:2014}. A exemplo das URIs\cite{Franca:2011}.
+\item Interface uniforme - todos os recursos interagem através de uma interface uniforme, a qual prover um conjunto de métodos pequeno, genérico e funcionalmente suficiente para suportar todas as possíveis interações entre os serviços. Cada método tem um semântica bem definida em relação aos efeitos que causará no estado do recurso. No contexto da Web e do protocolo HTTP que é utilizado, ``Interface uniforme'' pode ser alcançado com os seus  métodos(GET, PUT, DELETE, POST, HEAD, OPTIONS, dentre outros) os quais podem ser aplicados para todos os identificadores dos recursos Web (URIs).\cite{Pautasso:2014}
+\item Interações \textit{stateless} - os serviços não podem estabelecer sessões permanentes entre eles. Isto assegura que as requisições para um recurso sejam independentes entre si. No final de cada interação, não há estados compartilhados entre clientes e servidores. Requisições podem resultar em uma mudança de estado do recurso, mas o novo estado é imediatamente visível para todos clientes.\cite{Pautasso:2014}
+\item Mensagens auto-descritivas - Serviços interagem através de requisição e mensagem de resposta, que contem tanto os dados (representações dos recursos) e correspondente \textit{meta-data}. As representações podem variar de acordo com o contexto do cliente, interesses e habilidades. Por exemplo, um cliente \textit{mobile} pode obter uma representação do recurso que exige pouco consumo de banda de dados. Da mesma forma, um navegador pode requisitar a representação de uma página Web em uma linguagem específica, de acordo com suas preferências. Esta característica aumenta de maneira significativa o grau de interoperabilidade, pois um cliente pode dinamicamente negociar o mais apropriado formato de representação com o recurso (também conhecido como media type), ao invés de ser forçado a sempre trabalhar com uma determinada representação do recurso. As requisições e mensagens de respostas também devem conter explicitamente \texit{meta-data} sobre sua representação, desta maneira os serviços não precisam assumir algum tipo de acordo de sobrecarga no sentido de como tal representação seria analisada, processada e entendida.\cite{Pautasso:2014}
+\item \textit{Hypermedia} - Recursos podem ser relacionados entre si. \textit{Hypermedia} embute referências a outros recursos relacionados ou dentro de suas representações ou em sua correspondente \texit{metadata}. Clientes então podem descobrir os \textit{hyper-links} dos recursos relacionados ao processar suas representações e escoher seguir o link. Como exemplificado em \cite{Franca:2011}, um sistema de uma instituição que possui um recurso ``lista_cursos'' (lista todos os cursos da instituição), este pode oferecer os \textit{hyper-links} que representam cada recurso que representa um determinado curso. \textit{Hypermedia} auxilia na descoberta descentralizada de recursos e também pode ser utilizada para descoberta e descrição de protocolos de interação entre os serviços. Pelo fato deste ser o princípio menos utilizado pelas APIs que se dizem ser RESTFul, algumas vezes as APIs disponibilizadas por serviços Web que além das outras restrições contemplam esta, são também chamadas de \textit{Hypermedia APIs}.\cite{Pautasso:2014}
+\end{enumerate}
+
+**matury model - da uma resumida!!
 
 \subsection{Serviços RESTFul ao invés de serviços baseados em SOAP}
 \cite{Belqasmi:2012}** bem legal tem uma tabela comparativa show!
 
-\subsection{Dispositivos como serviços web} 
-\label{subsec:dispositivosweb}
+\subsection{Dispositivos como serviços Web} 
+\label{subsec:dispositivosWeb}
 //TODO ver resumo tcc odt**
-Como abordado em \ref{sec:iot} um dos desafios referente a visão da IoT é sua interoperabilidade e, como possível solução se pode utilizar dos existentes protocolos web. Desta maneira os dispositivos podem interagir entre si e com outros sistemas na web.
+Como abordado em \ref{sec:iot} um dos desafios referente a visão da IoT é sua interoperabilidade e, como possível solução se pode utilizar dos existentes protocolos Web. Desta maneira os dispositivos podem interagir entre si e com outros sistemas na Web.
 
 Adotando esse padrão, os dispositivos podem ter suas propriedades disponíveis através de qualquer navegador, sem a necessidade de instalação de nenhum programa ou driver adicional, como pode ser exemplificado na Figura \ref{fig:dispnavegador}. Além disto, mashups físicos\footnotemark \footnotetext{Aplicativos criados a partir da composição de dados e serviços de dispositivos físicos com outros recursos Web.} podem ser construídos com muito menos esforço do que as existentes abordagens, quebrando drasticamente a barreira para o desenvolvimento de aplicações com dispositivos, assim então promovendo a visão da Internet das Coisas.\cite{Guinard:2009}
 
