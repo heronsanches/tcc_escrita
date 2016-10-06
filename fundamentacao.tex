@@ -33,7 +33,7 @@ Serviços Web surgiram tendo como principal foco o reuso de aplicações existen
 
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=0.8\columnwidth]{fundamentacao/Webservice_purchase_order} 
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_purchase_order} 
   \caption{Utilização de diferentes serviços Web para prover o serviço de pedido de um E-Commerce.\cite{Papazoglou:2008}} 
   \label{fig:ws_purchase_order}
 \end{figure}
@@ -61,7 +61,7 @@ Serviços Web possuem baixo nível de acoplamento e utilizam padrões para ofere
 
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=0.8\columnwidth]{fundamentacao/Webservice_soap_model} 
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_model} 
   \caption{Modelo de serviço Web baseado em SOAP.\cite{Belqasmi:2011}} 
   \label{fig:wsmodelsoap}
 \end{figure}
@@ -82,7 +82,7 @@ SOAP é um protocolo leve que foi desenvolvido com a intenção de prover troca 
 
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=0.8\columnwidth]{fundamentacao/Webservice_soap_model_expanded} 
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_model_expanded} 
   \caption{SOAP no modelo Modelo de serviço Web baseado em SOAP.\cite{Papazoglou_slides:2008}} 
   \label{fig:wsmodelsoap_expanded}
 \end{figure}
@@ -93,7 +93,7 @@ Um documento XML SOAP é chamado de SOAP mensagem (ou SOAP envelope) e é usualm
  
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=0.8\columnwidth]{fundamentacao/Webservice_soap_message_communication} 
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_message_communication} 
   \caption{Comunicação dos serviços Web e mensagem SOAP.\cite{Papazoglou:2008}} 
   \label{fig:wsmodelsoap_communication_msg}
 \end{figure}
@@ -102,7 +102,7 @@ Uma mensagem SOAP (ver Figura \ref{fig:wssoap_msg}) é composta de um elemento \
 
 \begin{figure}[!htb] \centering
   \centering
-  \includegraphics[width=0.8\columnwidth]{fundamentacao/Webservice_soap_message_structure} 
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_message_structure} 
   \caption{Estrutura da mensagem SOAP.\cite{Papazoglou:2008}} 
   \label{fig:wssoap_msg}
 \end{figure}
@@ -111,7 +111,7 @@ O envelope SOAP pode especificar um conjunto de regras que serelializam os dados
 
 \begin{figure}[!htb] \centering
   \centering
-  \includegraphics[width=0.8\columnwidth]{fundamentacao/Webservice_soap_message_structure_ecodingStyle} 
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_message_structure_ecodingStyle} 
   \caption{Estrutura da mensagem SOAP com declaração do atributo encodingStyle.\cite{Papazoglou:2008}} 
   \label{fig:wssoap_msg_ecodingStyle}
 \end{figure}
@@ -120,7 +120,7 @@ O envelope SOAP pode conter no máximo um elemento \textless Header\textgreater,
 
 \begin{figure}[!htb] \centering
   \centering
-  \includegraphics[width=0.8\columnwidth]{fundamentacao/Webservice_soap_message_structure_header} 
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/webservice_soap_message_structure_header} 
   \caption{Estrutura da mensagem SOAP, Header.\cite{Papazoglou:2008}} 
   \label{fig:wssoap_msg_header}
 \end{figure}
@@ -129,9 +129,9 @@ O \textless Body\textgreater pode ter um número arbitrário de filhos (chamados
 
 SOAP suporta dois tipos de estilo de comunicação, RPC (Remote Procedure Call) e documento (ou mensagem). Numa comunicação no estilo RPC/Literal, o cliente expressa sua requisição como uma chamada de método passando um conjunto de parâmetros. O método então retorna uma resposta. Algumas regras devem ser seguidas e são exemplificadas na Figura \ref{fig:wssoap_msg_soap_rpc}:
 \begin{itemize}
-\item Uma URI deve identificar o endereço de destino onde o método sera chamado, que pode ser identificado na declaração da tag \textless Envelope\textgreater, ``xmlns:m="http://www.plastics_supply.com/product-prices''.
-\item Deve ser passado o nome do método, \textless m:GetProductPriceResponse\textgreater) e, seus parâmetros (nome e valor) na ordem correta que aparece no método a ser chamado, como exemplificado na figura em \textless product-id\textgreater 450R6OP \textless/product-id \textgreater.
-\item Uma mensagem de resposta RPC deve conter um valor de retorno e quaisquer parametros de sáida ou um erro. Esta é modelada como um estrutura única com um campo para cada parâmetro na assinatura do método, exemplificado em \textless product-price\textgreater 134.32 \textless/product-price\textgreater. 
+\item \begin{verbatim}Uma URI deve identificar o endereço de destino onde o método sera chamado, que pode ser identificado na declaração da tag \textless Envelope\textgreater, xmlns:m=``http://www.plastics_supply.com/product-prices''.\end{verbatim}
+\item \begin{verbatim}Deve ser passado o nome do método, \textless m:GetProductPriceResponse\textgreater e, seus parâmetros (nome e valor) na ordem correta que aparece no método a ser chamado, como exemplificado na figura em \textless product-id\textgreater 450R6OP \textless product-id \textgreater.\end{verbatim}
+\item \begin{verbatim}Uma mensagem de resposta RPC deve conter um valor de retorno e quaisquer parametros de sáida ou um erro. Esta é modelada como um estrutura única com um campo para cada parâmetro na assinatura do método, exemplificado em \textless product-price\textgreater 134.32 \textless product-price\textgreater.\end{verbatim} 
 \end{itemize}
 
 \begin{figure}[!htb] \centering
@@ -146,7 +146,7 @@ Em uma comunicação no estilo documento, SOAP é utilizado para trocar document
 \begin{figure}[!htb] \centering
   \centering
   \includegraphics[width=0.8\columnwidth]{fundamentacao/soap_document_style} 
-  \caption Exemplo de um \textless Body\textgreater no estilo documento SOAP.\cite{Papazoglou:2008}} 
+  \caption{Exemplo de um \textless Body\textgreater no estilo documento SOAP.\cite{Papazoglou:2008}} 
   \label{fig:wssoap_msg_soap_document}
 \end{figure}
 
@@ -155,14 +155,14 @@ As requisições SOAP normalmente utilizam o protocolo de transporte HTTP. Quand
 \begin{figure}[!htb] \centering
   \centering
   \includegraphics[width=0.8\columnwidth]{fundamentacao/soap_http_request_rpc} 
-  \caption Requisição SOAP no estilo RPC dentro do corpo da requisição HTTP.\cite{Papazoglou:2008}} 
+  \caption{Requisição SOAP no estilo RPC dentro do corpo da requisição HTTP.\cite{Papazoglou:2008}} 
   \label{fig:wssoap_soap_http_request_rpc}
 \end{figure}
 
 \begin{figure}[!htb] \centering
   \centering
   \includegraphics[width=0.8\columnwidth]{fundamentacao/soap_http_response_rpc} 
-  \caption Resposta SOAP no estilo RPC dentro do corpo da resposta HTTP.\cite{Papazoglou:2008}} 
+  \caption{Resposta SOAP no estilo RPC dentro do corpo da resposta HTTP.\cite{Papazoglou:2008}} 
   \label{fig:wssoap_soap_http_response_rpc}
 \end{figure}
 
@@ -176,15 +176,15 @@ Os principais princípios do estilo arquitetural REST são: endereçamento globa
 \item Identificação dos recursos - todos os recursos que são publicados por um serviço Web deveriam ser disponibilizados por um único e estável identificador global\cite{Pautasso:2014}. A exemplo das URIs\cite{Franca:2011}.
 \item Interface uniforme - todos os recursos interagem através de uma interface uniforme, a qual prover um conjunto de métodos pequeno, genérico e funcionalmente suficiente para suportar todas as possíveis interações entre os serviços. Cada método tem um semântica bem definida em relação aos efeitos que causará no estado do recurso. No contexto da Web e do protocolo HTTP que é utilizado, ``Interface uniforme'' pode ser alcançado com os seus  métodos(GET, PUT, DELETE, POST, HEAD, OPTIONS, dentre outros) os quais podem ser aplicados para todos os identificadores dos recursos Web (URIs).\cite{Pautasso:2014}
 \item Interações \textit{stateless} - os serviços não podem estabelecer sessões permanentes entre eles. Isto assegura que as requisições para um recurso sejam independentes entre si. No final de cada interação, não há estados compartilhados entre clientes e servidores. Requisições podem resultar em uma mudança de estado do recurso, mas o novo estado é imediatamente visível para todos clientes.\cite{Pautasso:2014}
-\item Mensagens auto-descritivas - Serviços interagem através de requisição e mensagem de resposta, que contem tanto os dados (representações dos recursos) e correspondente \textit{meta-data}. As representações podem variar de acordo com o contexto do cliente, interesses e habilidades. Por exemplo, um cliente \textit{mobile} pode obter uma representação do recurso que exige pouco consumo de banda de dados. Da mesma forma, um navegador pode requisitar a representação de uma página Web em uma linguagem específica, de acordo com suas preferências. Esta característica aumenta de maneira significativa o grau de interoperabilidade, pois um cliente pode dinamicamente negociar o mais apropriado formato de representação com o recurso (também conhecido como media type), ao invés de ser forçado a sempre trabalhar com uma determinada representação do recurso. As requisições e mensagens de respostas também devem conter explicitamente \texit{meta-data} sobre sua representação, desta maneira os serviços não precisam assumir algum tipo de acordo de sobrecarga no sentido de como tal representação seria analisada, processada e entendida.\cite{Pautasso:2014}
-\item \textit{Hypermedia} - Recursos podem ser relacionados entre si. \textit{Hypermedia} embute referências a outros recursos relacionados ou dentro de suas representações ou em sua correspondente \texit{metadata}. Clientes então podem descobrir os \textit{hyper-links} dos recursos relacionados ao processar suas representações e escoher seguir o link. Como exemplificado em \cite{Franca:2011}, um sistema de uma instituição que possui um recurso ``lista_cursos'' (lista todos os cursos da instituição), este pode oferecer os \textit{hyper-links} que representam cada recurso que representa um determinado curso. \textit{Hypermedia} auxilia na descoberta descentralizada de recursos e também pode ser utilizada para descoberta e descrição de protocolos de interação entre os serviços. Pelo fato deste ser o princípio menos utilizado pelas APIs que se dizem ser RESTFul, algumas vezes as APIs disponibilizadas por serviços Web que além das outras restrições contemplam esta, são também chamadas de \textit{Hypermedia APIs}.\cite{Pautasso:2014}
+\item Mensagens auto-descritivas - Serviços interagem através de requisição e mensagem de resposta, que contem tanto os dados (representações dos recursos) e correspondente \textit{meta-data}. As representações podem variar de acordo com o contexto do cliente, interesses e habilidades. Por exemplo, um cliente \textit{mobile} pode obter uma representação do recurso que exige pouco consumo de banda de dados. Da mesma forma, um navegador pode requisitar a representação de uma página Web em uma linguagem específica, de acordo com suas preferências. Esta característica aumenta de maneira significativa o grau de interoperabilidade, pois um cliente pode dinamicamente negociar o mais apropriado formato de representação com o recurso (também conhecido como media type), ao invés de ser forçado a sempre trabalhar com uma determinada representação do recurso. As requisições e mensagens de respostas também devem conter explicitamente \textit{meta-data} sobre sua representação, desta maneira os serviços não precisam assumir algum tipo de acordo de sobrecarga no sentido de como tal representação seria analisada, processada e entendida.\cite{Pautasso:2014}
+\item \textit{Hypermedia} - Recursos podem ser relacionados entre si. \textit{Hypermedia} embute referências a outros recursos relacionados ou dentro de suas representações ou em sua correspondente \textit{metadata}. Clientes então podem descobrir os \textit{hyper-links} dos recursos relacionados ao processar suas representações e escoher seguir o link. Como exemplificado em \cite{Franca:2011}, um sistema de uma instituição que possui um recurso ``lista_cursos'' (lista todos os cursos da instituição), este pode oferecer os \textit{hyper-links} que representam cada recurso que representa um determinado curso. \textit{Hypermedia} auxilia na descoberta descentralizada de recursos e também pode ser utilizada para descoberta e descrição de protocolos de interação entre os serviços. Pelo fato deste ser o princípio menos utilizado pelas APIs que se dizem ser RESTFul, algumas vezes as APIs disponibilizadas por serviços Web que além das outras restrições contemplam esta, são também chamadas de \textit{Hypermedia APIs}.\cite{Pautasso:2014}
 \end{enumerate}
 
 \subsection{Dispositivos como serviços Web RESTFul} 
 \label{subsec:dispositivosWeb}
 Como abordado em \ref{sec:iot} um dos desafios referente a visão da IoT é sua interoperabilidade e, como possível solução se pode disponibilizar os dispositivos como serviços Web RESTFul. Desta maneira os dispositivos podem interagir entre si e com outros sistemas na Web.
 
-Adotando esse padrão, os dispositivos podem ter suas propriedades disponíveis através de qualquer navegador, sem a necessidade de instalação de nenhum programa ou driver adicional, como pode ser exemplificado na Figura \ref{fig:dispnavegador}. Além disto, mashups físicos\footnotemark \footnotetext{Aplicativos criados a partir da composição de dados e serviços de dispositivos físicos com outros recursos Web.} podem ser construídos com muito menos esforço do que as existentes abordagens, quebrando drasticamente a barreira para o desenvolvimento de aplicações com dispositivos, assim então promovendo a visão da Internet das Coisas.\cite{Guinard:2009}
+Adotando esse padrão, os dispositivos podem ter suas propriedades disponíveis através de qualquer navegador, sem a necessidade de instalação de nenhum programa ou driver adicional, como pode ser exemplificado na Figura \ref{fig:dispnavegador}. Além disto, mashups físicos\footnotemark \footnotetext{Aplicativos criados a partir da composição de dados e serviços de dispositivos físicos com outros recursos Web.} podem ser construídos com muito menos esforço do que as existentes abordagens, quebrando drasticamente a barreira para o desenvolvimento de aplicações com dispositivos\cite{Guinard:2009}. Pelo fato das coisas serem disponibilizadas como serviços Web, ainda pode-se utilizar-se dos outros recursos disponíveis na Web, a exemplo de sistemas de cache, balanceamento de carga, indexação e, pesquisa\cite{Franca:2011}. Assim então promovendo a visão da Internet das Coisas.
 
 \begin{figure}[!htb] \centering 
   \centering
@@ -197,18 +197,25 @@ No cenário da IoT os princípios REST têm sido amplamente aplicados na integra
 
 Uma das diferenças entre o REST e WS-* SOAP está na forma como o protocolo HTTP é empregado. Com REST, o HTTP é utilizado para prover interfaces uniformes onde cada método (GET, PUT, DELETE, POST, HEAD, OPTIONS, dentre outros) tem um semântica bem definida em relação aos efeitos que causará no estado do recurso\cite{Franca:2011}, enquanto que nos WS-* SOAP cada serviço tem seu próprio conjunto de operações explicitamente declarados dentro de um documento WSDL\cite{Pautasso:2014}. O SOAP utiliza o HTTP como um protocolo de transporte (HTTP é um protocolo da camada de aplicação de rede). As mensagens SOAP são adicionadas ao corpo do HTTP. Nos WS-* SOAP o método POST do HTTP é utilizado na troca de mensagens entre cliente e servidor e, a informação sobre qual funcionalidade deve ser executada está presente na mensagem SOAP e não na requisição HTTP. Os serviços Web baseados em SOAP utilizam a Web como meio de troca de mensagens, enquanto os serviços Web RESTFul são parte da Web, ou seja, é visto como um terreno comum para as aplicações\cite{Franca:2011}.
 
-O formato da mensagem SOAP ocasiona um maior consumo de banda devido ao tamanho da mensagem SOAP, um dos motivos para utilizar dispositivos como serviços Web RESTFul, pois muitos dispositivos na IoT possuem baixa capacidade de processamento e de banda de rede. Além disso, este formato pré-definido de mensagem força o cliente a tratar sempre este tipo de mensagem, enquanto utilizando REST é possível oferecer diferentes tipos de representações (JSON, XML, dentre outros).\cite{Franca:2011}
+O formato da mensagem SOAP ocasiona um maior consumo de banda devido ao tamanho da mensagem SOAP (ver Figura \ref{fig:msg_soapXrest}), um dos principais motivos para utilizar dispositivos como serviços Web RESTFul, pois muitos dispositivos na IoT possuem baixa capacidade de processamento e de banda de rede. Além disso, este formato pré-definido de mensagem força o cliente a tratar sempre este tipo de mensagem, enquanto utilizando REST é possível oferecer diferentes tipos de representações (JSON, XML, dentre outros).\cite{Franca:2011}
+
+\begin{figure}[!htb] \centering 
+  \centering
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/messages_restXsoap} 
+  \caption{a)Mensagem SOAP sobre HTTP. b)Mensagem utilizando REST sobre HTTP. Figura baseada em \cite{Pautasso:2014}} 
+  \label{fig:msg_soapXrest}
+\end{figure}
 
 Tratando o termo ``fraco acoplamento'' somente como a capacidade de fazer modificações no provedor de serviço sem afetar o cliente, os serviços Web RESTFul são menos acoplados, pois as operações sobre os recursos não mudam, já que tais operações são sobre os métodos do HTTP. Uma ressalva é que se as alterações forem feitas nos parâmetros passados nas mensagens, tanto o SOAP quanto o REST estarão no mesmo nível de acoplamento.\cite{Franca:2011}
 
-Continuar...
-**Prosseguindo com as comparações entre os serviços Web SOAP e as aplicações**
+Por fim, na Figura \ref{fig:comparative_services_soap_rest} é apresentado uma análise comparativa entre duas aplicações que oferecem as mesmas funcionalidades, sendo que uma foi construída utilizando serviços Web SOAP e a outra utilizando serviços Web baseado nos princípios arquiteturais REST. A aplicação em questão é de conferência multimídia e pode ser usada para criar uma nova conferência, adicionar ou remover um participante de uma conferência que esteja em progresso, atualizar o tipo de mídia (mudar de audio para vídeo) e deletar uma conferência. Ambas as aplicações foram desenvolvidas em um mesmo ambiente e foram publicadas em um mesmo servidor de aplicação. Vários cenários foram executados e perfomances foram medidas. Todas as medidas são de tempo (milisegundos) e cada resultado é a média de 10 experimentos. Observe que tanto na mesma máquina quanto em um ambiente distribuído a perfomance do REST é sempre melhor, sendo superior de 3 até 5 vezes em relação ao SOAP quando em ambiente distribuído.
 
-
-\cite{Belqasmi:2012}** bem legal tem uma tabela comparativa show!
-
-
-
+\begin{figure}[!htb] \centering 
+  \centering
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/comparative_services_soap_rest} 
+  \caption{Resultados de perfomance entre duas aplicações com mesmas funcionalidades, mas um baseada em SOAP e outra em REST. Figura adaptada de \cite{Belqasmi:2012}} 
+  \label{fig:comparative_services_soap_rest}
+\end{figure}
 
 \section{Home network system}
 \label{sec:hns}
