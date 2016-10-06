@@ -74,7 +74,7 @@ Serviços Web possuem baixo nível de acoplamento e utilizam padrões para ofere
 
 A descrição realizada da Figura \ref{fig:wsmodelsoap} foi na verdade a descrição das 3 regras fundamentais do Service Oriented Architecture (SOA), que é um caminho lógico para projetar sistemas de software, os quais podem prover serviços tanto para o usuário final de aplicações quanto para outros serviços distribuídos na rede, através de interfaces que possam ser publicadas e descobertas.\cite{Papazoglou:2008}
 
-Existe também outro tipo de abordagem de serviços Web, baseada nos princípios arquiteturais REST (ver seção \ref{subsec:restful}), esta é a abordagem de serviço Web que é adotada neste trabalho.
+Existe também outro tipo de abordagem de serviços Web, baseada nos princípios arquiteturais REST (ver seção \ref{subsec:restful}).
 
 \subsection{SOAP}
 \label{subsec:soap}
@@ -180,15 +180,9 @@ Os principais princípios do estilo arquitetural REST são: endereçamento globa
 \item \textit{Hypermedia} - Recursos podem ser relacionados entre si. \textit{Hypermedia} embute referências a outros recursos relacionados ou dentro de suas representações ou em sua correspondente \texit{metadata}. Clientes então podem descobrir os \textit{hyper-links} dos recursos relacionados ao processar suas representações e escoher seguir o link. Como exemplificado em \cite{Franca:2011}, um sistema de uma instituição que possui um recurso ``lista_cursos'' (lista todos os cursos da instituição), este pode oferecer os \textit{hyper-links} que representam cada recurso que representa um determinado curso. \textit{Hypermedia} auxilia na descoberta descentralizada de recursos e também pode ser utilizada para descoberta e descrição de protocolos de interação entre os serviços. Pelo fato deste ser o princípio menos utilizado pelas APIs que se dizem ser RESTFul, algumas vezes as APIs disponibilizadas por serviços Web que além das outras restrições contemplam esta, são também chamadas de \textit{Hypermedia APIs}.\cite{Pautasso:2014}
 \end{enumerate}
 
-**matury model - da uma resumida!!
-
-\subsection{Serviços RESTFul ao invés de serviços baseados em SOAP}
-\cite{Belqasmi:2012}** bem legal tem uma tabela comparativa show!
-
-\subsection{Dispositivos como serviços Web} 
+\subsection{Dispositivos como serviços Web RESTFul} 
 \label{subsec:dispositivosWeb}
-//TODO ver resumo tcc odt**
-Como abordado em \ref{sec:iot} um dos desafios referente a visão da IoT é sua interoperabilidade e, como possível solução se pode utilizar dos existentes protocolos Web. Desta maneira os dispositivos podem interagir entre si e com outros sistemas na Web.
+Como abordado em \ref{sec:iot} um dos desafios referente a visão da IoT é sua interoperabilidade e, como possível solução se pode disponibilizar os dispositivos como serviços Web RESTFul. Desta maneira os dispositivos podem interagir entre si e com outros sistemas na Web.
 
 Adotando esse padrão, os dispositivos podem ter suas propriedades disponíveis através de qualquer navegador, sem a necessidade de instalação de nenhum programa ou driver adicional, como pode ser exemplificado na Figura \ref{fig:dispnavegador}. Além disto, mashups físicos\footnotemark \footnotetext{Aplicativos criados a partir da composição de dados e serviços de dispositivos físicos com outros recursos Web.} podem ser construídos com muito menos esforço do que as existentes abordagens, quebrando drasticamente a barreira para o desenvolvimento de aplicações com dispositivos, assim então promovendo a visão da Internet das Coisas.\cite{Guinard:2009}
 
@@ -198,6 +192,22 @@ Adotando esse padrão, os dispositivos podem ter suas propriedades disponíveis 
   \caption{Dispositivo sensor de obstaculo do elevador disponibilizado como serviço. Faixa de detecção compatível com a largura do elevador utilizado na maquete do experimento    \ref{ch:experimento}} 
   \label{fig:dispnavegador}
 \end{figure}
+
+No cenário da IoT os princípios REST têm sido amplamente aplicados na integração dos dispositivos inteligentes a Web, pois esses princípios parecem ser mais adequados para dispositivos com poucos recursos de hardware\cite{Franca:2011}. Para deixar claro os motivos da adoção do REST para disponibilização de dispositivos como serviços Web ao invés dos serviços Web baseados em SOAP, será realizada uma comparação a seguir.
+
+Uma das diferenças entre o REST e WS-* SOAP está na forma como o protocolo HTTP é empregado. Com REST, o HTTP é utilizado para prover interfaces uniformes onde cada método (GET, PUT, DELETE, POST, HEAD, OPTIONS, dentre outros) tem um semântica bem definida em relação aos efeitos que causará no estado do recurso\cite{Franca:2011}, enquanto que nos WS-* SOAP cada serviço tem seu próprio conjunto de operações explicitamente declarados dentro de um documento WSDL\cite{Pautasso:2014}. O SOAP utiliza o HTTP como um protocolo de transporte (HTTP é um protocolo da camada de aplicação de rede). As mensagens SOAP são adicionadas ao corpo do HTTP. Nos WS-* SOAP o método POST do HTTP é utilizado na troca de mensagens entre cliente e servidor e, a informação sobre qual funcionalidade deve ser executada está presente na mensagem SOAP e não na requisição HTTP. Os serviços Web baseados em SOAP utilizam a Web como meio de troca de mensagens, enquanto os serviços Web RESTFul são parte da Web, ou seja, é visto como um terreno comum para as aplicações\cite{Franca:2011}.
+
+O formato da mensagem SOAP ocasiona um maior consumo de banda devido ao tamanho da mensagem SOAP, um dos motivos para utilizar dispositivos como serviços Web RESTFul, pois muitos dispositivos na IoT possuem baixa capacidade de processamento e de banda de rede. Além disso, este formato pré-definido de mensagem força o cliente a tratar sempre este tipo de mensagem, enquanto utilizando REST é possível oferecer diferentes tipos de representações (JSON, XML, dentre outros).\cite{Franca:2011}
+
+Tratando o termo ``fraco acoplamento'' somente como a capacidade de fazer modificações no provedor de serviço sem afetar o cliente, os serviços Web RESTFul são menos acoplados, pois as operações sobre os recursos não mudam, já que tais operações são sobre os métodos do HTTP. Uma ressalva é que se as alterações forem feitas nos parâmetros passados nas mensagens, tanto o SOAP quanto o REST estarão no mesmo nível de acoplamento.\cite{Franca:2011}
+
+Continuar...
+**Prosseguindo com as comparações entre os serviços Web SOAP e as aplicações**
+
+
+\cite{Belqasmi:2012}** bem legal tem uma tabela comparativa show!
+
+
 
 
 \section{Home network system}
