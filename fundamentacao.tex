@@ -223,11 +223,63 @@ Por fim, na Figura \ref{fig:comparative_services_soap_rest} é apresentado uma a
 \label{sec:hns}
 Como explanado anteriormente IoT pode ser descrita como a presença pervasiva de objetos do cotidiano, como \textit{smartphones}, televisores, sensores, dentre outros, que juntos são interligados para prover novas formas de comunicação entre as pessoas e entre os próprios objetos. Observe que tal visão também pode ser empregada dentro do ambiente de uma casa, tornando possível o desenvolvimento de um espaço inteligente, confortável e que promove uma melhor qualidade de vida as pessoas. Diferentes sensores e aparelhos domésticos a exemplo de lâmpadas, ar-condicionadores, sistema de segurança e entretenimento, além de interagirem dentro do ambiente doméstico, podem ser conectados a Internet e controlados por um \textit{smartphone} ou qualquer outro dispositivo da IoT. Desta forma pode-se não só controlar os dispositivos como também monitorar o ambiente doméstico (temperatura, consumo de energia, dentre outros). Uma casa com essas características é comumente chamada de \textit{Smart Home} e é normalmente implementada como um \textit{Home Network System}.\cite{Piyare:2013}
 
-Um \textit{Home Network System} (HNS) é uma rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de conectividade de rede e, interface de controle e monitoramento. Nesse tipo de sistema os aparelhos e sensores podem juntos prover novas funcionalidades, as quais atendam as expectativas do usuário, como por exemplo, ``Levar compras'' (ver seção \ref{**}). Os aparelhos e sensores dessa rede podem ser disponibilizados como serviços Web RESTFul (ver seção \ref{**}). O HNS tem um componente denominado de \textit{Home Server}, este acessa os dispositivos através de APIs e disponibiliza as funcionalidades ao usuário final. O HS também pode atuar de outra forma, detectando e resolvendo efeitos colaterais indesejáveis (ver sessão\ref{**}), os quais acontecem quando a interação dos dispositivos provoca um estado não esperado no resultado final de uma operação. O HS com essas características pode ser chamado de \textit{Feature Interaction Manager}. O FIM ou HS, neste caso, ainda pode servir de mediador para redes externas, ou seja, este pode disponibilizar cada serviço de forma única na Internet, para isto, basta o FIM ter um endereço IP público estático e oferecer seus serviços através de uma API, por exemplo, uma API que segue os princípios REST. Desta forma, cada dispositivo do HNS pode ser identificado unicamente na chamada Internet das Coisas. \cite{Nakamura:2009}\cite{Ikegami:2013}
+Um \textit{Home Network System} (HNS) é uma rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de conectividade de rede e, interface de controle e monitoramento. Nesse tipo de sistema os aparelhos e sensores podem juntos prover novas funcionalidades, as quais atendam as expectativas do usuário, como por exemplo, ``Levar compras'' (ver seção \ref{**}). Os aparelhos e sensores dessa rede podem ser disponibilizados como serviços Web RESTFul. O HNS tem um componente denominado de \textit{Home Server}, este acessa os dispositivos através de APIs e disponibiliza as funcionalidades ao usuário final. O HS também pode atuar de outra forma, detectando e resolvendo efeitos colaterais indesejáveis (ver sessão\ref{**}), os quais acontecem quando a interação dos dispositivos provoca um estado não esperado no resultado final de uma operação. O HS com essas características pode ser chamado de \textit{Feature Interaction Manager}. O FIM ou HS, neste caso, ainda pode servir de mediador para redes externas, ou seja, este pode disponibilizar cada serviço de forma única na Internet, para isto, basta o FIM ter um endereço IP público estático e oferecer seus serviços através de uma API, por exemplo, uma API que segue os princípios REST. Desta forma, cada dispositivo do HNS pode ser identificado unicamente na chamada Internet das Coisas. \cite{Nakamura:2009}\cite{Ikegami:2013}
 
-\section{Aprendizado supervisionado}
+\section{Classificação - Aprendizado Supervisionado}
+Em seu sentido mais geral, o termo classificação poderia cobrir qualquer contexto no qual alguma decisão ou predição é realizada baseada nas informações presentes. Classificação então pode ser caracaterizada como um método formal que realiza julgamentos repetidos a cada nova situação. No caso deste trabalho, o termo classificação será restrigindo a situação de se construir um procedimento classificatório com base em um conjunto de dados no qual as classes são conhecidas, comumente chamado de aprendizado supervisionado\cite{Michie:1994}. O objetivo final de se construir esse procedimento classificatório é que este possa generalizar para conjuntos de dados que não participaram da sua construção, ou seja, o classificador tem que ser capaz de classificar corretamente novos dados\cite{Kotsiantis:2007}. O conjunto de dados aqui citado é composto de objetos (instâncias), sendo cada instância representada por um conjunto de atributos e, cada uma é pertencente a uma classe específica (ver Tabela \ref{table:dsex1}).
 
-\subsection{Redes neurais}
+\begin{table}[!htp]
+  \centering
+  \begin{tabular}{ |l|c c c c |c|}
+    \hline
+       {\bf Objeto} & {\bf atributo 1} & {\bf atributo 2} & {\bf ..} & {\bf atributo n} & {\bf classe} \\
+    \hline
+       1 & 10 & 3 &  & 4 & A \\
+    \hline
+       2 & 11 & 11 &  & 9 & A \\
+    \hline
+       3 & 14 & 26 &  & 6 & B \\
+    \hline
+       .. &  &  &  & .. & \\
+    \hline
+  \end{tabular}
+  \caption{Conjunto de objetos: seus atributos e classe pertencente. Adaptado de \cite{Kotsiantis:2007}}
+  \label{table:dsex1}
+\end{table}
+
+De modo geral e simplificado, a metodologia aplicada para construção de um classificador é como segue e pode ser visualizado na Figura \ref{fig:slclassification}.
+**TROCAR ESTA FIGURA, ESTÁ MUITO RUIM PARA COM SEU TRABALHO**
+\begin{figure}[!htb] \centering 
+  \centering
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/supervisedClassification} 
+  \caption{Processo de construção de um classificador em aprendizado supervisionado.\cite{Kotsiantis:2007}} 
+  \label{fig:slclassification}
+\end{figure}
+
+\begin{enumerate}
+\item \textit{Problem}\: primeiramente se deve saber qual problema quer resolver.
+\item \textit{Identification of required data}\: coleta do conjunto de dados (\textit{dataset}). Se existir uma pessoa com alto conhecimento sobre os atributos, este pode sugestionar quais atributos são mais significativos para o problema. Caso contrário o mais simples método é mensurar todos os atributos na esperança que as características corretas possam ser isoladas.
+\item \textit{Data pre-processing}\: tem o objetivo de reduzir o dataset, retirando características redudantes e irrelevantes. Isto pode melhorar a qualidade do classificador e contribui para o entendimento do que o classificador aprendeu.
+\item \textit{Definition of training set}\: define os dados a serem utilizados na fase de treino do classificador (\textit{training}), pode-se utilizar todo o conjunto de dados da etapa anterior.
+\end{enumerate}
+
+
+//redes neurais são melhor para uso em probelmas não lineares!**
+Muitos problemas nas areas da ciência, indústria e medicina podem ser tratados como problemas de classificação. A exemplo de diagnósticos médicos, controle de qualidade, e reconhecimento de fala\cite{Zhang:2000}. **da exemplos destas calssificações**
+Classificar tumores como benigno ou maligno.
+Classificar transações de cartão de 
+crédito como legítima ou fraudulenta.
+Classificar estruturas secundárias de 
+proteínas como alpha-helix, beta-sheet ou random coil.
+Avaliar riscos de empréstimos, 
+previsão de tempo, etc.
+
+**verificar se isto pode ser um trabalho futuro
+Semi-Supervised Learning
+\subsection{Redes neurais - multilayer perceptron}
+pág 3;
+ver definição da implementação do weka;
+pág 84-93;
 
 \subsection{Métodos avaliativos}
 \cite{Witten:2005} pag 183 - livro data mining - parte escrita - 
