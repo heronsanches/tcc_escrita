@@ -127,11 +127,11 @@ O envelope SOAP pode conter no máximo um elemento \textless Header\textgreater,
 
 O \textless Body\textgreater pode ter um número arbitrário de filhos (chamados de entradas do \textless Body\textgreater), como também pode conter nenhum. Todas as entradas do \textless Body\textgreater que são filhos imediatos devem ter o \textit{namespace}. Por padrão, o conteúdo do \textless Body\textgreater pode ser um XML qualquer sem especificação de regras. \textless Body\textgreater ou contém os dados principais da aplicação ou uma mensagem de erro, mas não os dois. Ou ainda pode ser vazio.\cite{Papazoglou:2008}
 
-SOAP suporta dois tipos de estilo de comunicação, RPC (Remote Procedure Call) e documento (ou mensagem). Numa comunicação no estilo RPC/Literal, o cliente expressa sua requisição como uma chamada de método passando um conjunto de parâmetros. O método então retorna uma resposta. Algumas regras devem ser seguidas e são exemplificadas na Figura \ref{fig:wssoap_msg_soap_rpc}:
+SOAP suporta dois tipos de estilo de comunicação, RPC (Remote Procedure Call) e documento (ou mensagem). Numa comunicação no estilo RPC/Literal, o cliente expressa sua requisição como uma chamada de método passando um conjunto de parâmetros. O método então retorna uma resposta. Algumas regras nesse estilo de comunicação devem ser seguidas e são explanadas abaixo e exemplificadas na Figura \ref{fig:wssoap_msg_soap_rpc}.
 \begin{itemize}
-\item \begin{verbatim}Uma URI deve identificar o endereço de destino onde o método será chamado, que pode ser identificado na declaração da tag \textless Envelope\textgreater, xmlns:m=``http://www.plastics_supply.com/product-prices''.\end{verbatim}
-\item \begin{verbatim}Deve ser passado o nome do método, \textless m:GetProductPriceResponse\textgreater e, seus parâmetros (nome e valor) na ordem correta que aparece no método a ser chamado, como exemplificado na figura em \textless product-id\textgreater 450R6OP \textless product-id \textgreater.\end{verbatim}
-\item \begin{verbatim}Uma mensagem de resposta RPC deve conter um valor de retorno e quaisquer parâmetros de saída ou um erro. Esta é modelada como uma estrutura única com um campo para cada parâmetro na assinatura do método, exemplificado em \textless product-price\textgreater 134.32 \textless product-price\textgreater.\end{verbatim} 
+\item Uma URI deve identificar o endereço de destino onde o método será chamado, que pode ser identificado na declaração da tag \textless Envelope\textgreater, xmlns:m=``http://www.plastics_supply.com/product-prices''.
+\item Deve ser passado o nome do método, \textless m:GetProductPriceResponse\textgreater e, seus parâmetros (nome e valor) na ordem correta que aparece no método a ser chamado, como exemplificado na figura em \textless product-id\textgreater 450R6OP \textless product-id \textgreater.
+\item Uma mensagem de resposta RPC deve conter um valor de retorno e quaisquer parâmetros de saída ou um erro. Esta é modelada como uma estrutura única com um campo para cada parâmetro na assinatura do método, exemplificado em \textless product-price\textgreater 134.32 \textless product-price\textgreater.
 \end{itemize}
 
 \begin{figure}[!htb] \centering
@@ -247,42 +247,78 @@ Em seu sentido mais geral, o termo classificação poderia cobrir qualquer conte
   \label{table:dsex1}
 \end{table}
 
-De modo geral e simplificado, a metodologia aplicada para construção de um classificador é como segue e pode ser visualizado na Figura \ref{fig:slclassification}.
-**TROCAR ESTA FIGURA, ESTÁ MUITO RUIM PARA COM SEU TRABALHO**
+Muitos problemas nas areas da ciência, indústria, medicina, dentre outros, podem ser tratados como problemas de classificação. A exemplo de diagnósticos médicos (classificar tumores como benigno ou maligno), classificação de transações de cartão de crédito como legítima ou fraudulenta, controle de qualidade, reconhecimento de fala.\cite{Zhang:2000} 
+
+De modo geral, a metodologia adotada para construção de um classificador é como segue e pode ser visualizado na Figura \ref{fig:slclassification}.
+
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=0.8\columnwidth]{fundamentacao/supervisedClassification} 
-  \caption{Processo de construção de um classificador em aprendizado supervisionado.\cite{Kotsiantis:2007}} 
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/workflow_predictedLearning} 
+  \caption{Processo de construção de um classificador em aprendizado supervisionado. Baseado em \cite{Kotsiantis:2007} e \footnotemark{proft}\footnotetext{http://en.proft.me/2015/12/24/types-machine-learning-algorithms/}.} 
   \label{fig:slclassification}
 \end{figure}
 
 \begin{enumerate}
-\item \textit{Problem}\: primeiramente se deve saber qual problema quer resolver.
-\item \textit{Identification of required data}\: coleta do conjunto de dados (\textit{dataset}). Se existir uma pessoa com alto conhecimento sobre os atributos, este pode sugestionar quais atributos são mais significativos para o problema. Caso contrário o mais simples método é mensurar todos os atributos na esperança que as características corretas possam ser isoladas.
-\item \textit{Data pre-processing}\: tem o objetivo de reduzir o dataset, retirando características redudantes e irrelevantes. Isto pode melhorar a qualidade do classificador e contribui para o entendimento do que o classificador aprendeu.
-\item \textit{Definition of training set}\: define os dados a serem utilizados na fase de treino do classificador (\textit{training}), pode-se utilizar todo o conjunto de dados da etapa anterior.
+\item Problema: primeiramente se deve saber qual problema quer resolver.
+\item Seleção dos dados: coleta do conjunto de dados (\textit{dataset}). Se existir uma pessoa com alto conhecimento sobre os atributos, este pode sugestionar quais atributos são mais significativos para o problema. Caso contrário o mais simples método é mensurar todos os atributos na esperança que as características corretas possam ser isoladas.\cite{Kotsiantis:2007}
+\item Treinamento do modelo: treina-se o dataset da etapa anterior sobre um algoritmo de classificação (árvores de decisão, \textit{Fisher’s linear discriminants},\cite{Michie:1994}, redes neurais (seção \ref{subsec:neuralnetwork}). Então obtêm-se um modelo, que é o algoritmo de classificação treinado com o dataset.
+\item Avaliação do Modelo: é baseada em métodos avaliativos (ver seção \ref{subsec:evaluationMethods}), os quais têm o propósito de verificar a generalização do modelo, ou seja, verificar o quão bom é o modelo do classificador quando submetido a instâncias desconhecidas (que não fazem parte do modelo). Uma das medidas utilizadas por tais métodos é a taxa de acurácia (percentagem das predições feitas corretamente dividida pelo número total de predições realizadas).\cite{Kotsiantis:2007}
+\item Classificador: se o modelo foi validado na etapa anterior, este generaliza o suficiente para o problema proposto, então este modelo pode ser utilizado como o classificador final (pode ser implantado em um sistema), caso contrário reinicia-se o processo a partir da ``seleção de dados'' reavaliando as decisões de cada etapa.
 \end{enumerate}
 
+Dentre os algoritmos citados na etapa de treinamento da Figura \ref{fig:slclassification}, as redes neurais são modelos que atendem bem tanto problemas de classificação que não são linearmente separáveis (problemas que se adequam mais a realidade), quanto problemas que são linearmente seperáveis, entretanto, utilizar-se das redes neurais para problemas linearmente separáveis é totalmente desaconselhável, já que pode ser muito mais custoso computacionalmente.\cite{Zhang:2000}\cite{Elizondo:2006} A Figura \ref{fig:slseparablenonseparable}, ilustra problema linearmente separável e problema não separável linearmente.
 
-//redes neurais são melhor para uso em probelmas não lineares!**
-Muitos problemas nas areas da ciência, indústria e medicina podem ser tratados como problemas de classificação. A exemplo de diagnósticos médicos, controle de qualidade, e reconhecimento de fala\cite{Zhang:2000}. **da exemplos destas calssificações**
-Classificar tumores como benigno ou maligno.
-Classificar transações de cartão de 
-crédito como legítima ou fraudulenta.
-Classificar estruturas secundárias de 
-proteínas como alpha-helix, beta-sheet ou random coil.
-Avaliar riscos de empréstimos, 
-previsão de tempo, etc.
+\begin{figure}[!htb] \centering 
+  \centering
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/linear_and_nonLinear} 
+  \caption{(a) Problema linearmente separável. (b) Problema não separável linearmente.\cite{Elizondo:2006}} 
+  \label{fig:slseparablenonseparable}
+\end{figure}
 
-**verificar se isto pode ser um trabalho futuro
-Semi-Supervised Learning
 \subsection{Redes neurais - multilayer perceptron}
+\label{subsec:neuralnetwork}
+A area de conhecimento das redes neurais surgiu de diversas fontes, variando da fascinção da humanidade de compreender e emular o cérebro humano, para questões de copiar habilidades humanas como a fala e uso da linguagem, para prática comercial, científica, disciplinas de engenharia de reconhecimento de padrões, modelagem e predição. 
+
 pág 3;
 ver definição da implementação do weka;
 pág 84-93;
 
 \subsection{Métodos avaliativos}
-\cite{Witten:2005} pag 183 - livro data mining - parte escrita - 
+\label{subsec:evaluationMethods}
+Métodos avaliativos têm o propósito de verificar a generalização do modelo, ou seja, verificar o quão bom é o modelo do classificador quando submetido a instâncias desconhecidas (que não fazem parte do modelo). Para isto, utiliza-se de medidas estatísticas para auxiliar na tarefa. Como por exemplo, acurácia, \textit{precision}, \textit{recall}, dentre outras. As medidas estatísticas citadas são baseadas em quatro componentes: verdadeiro positivo (\textit{True Positive - TP}), verdadeiro negativo (\textit{True Negative - TN}), falso positivo (\textit{False Positive- FP}) e falso negativo (\textit{False Negative- FN}).
+
+\begin{itemize}
+\item Verdadeiro positivo (TP): instância que pertence a classe positiva e que foi classificada como positiva.
+\item Verdadeiro negativo (TN): instância que pertence a classe negativa e que foi classificada como negativa.
+\item Falso positivo (FP): instância que pertence a classe negativa e que foi classificada como positiva.
+\item Falso negativo (FN): instância que pertence a classe positiva e que foi classificada como negativa.
+\end{itemize}
+
+**[1] Powers, D.M.W., 2011. Evaluation: from Precision, Recall and F-measure to ROC, Informedness, Markedness and Correlation. Journal of Machine Learning Technologies, 2(1), 37-63.
+
+**[2] Christopher, D. M.; Prabhakar, R.; Hinrich, S., 2009. An introduction to information retrieval. Cambridge University Press. Cambridge, England.
+
+**[3] Manning, C.. Natural Language Processing Lecture: Precision, Recall, and the F measure.
+Disponível em: https://class.coursera.org/nlp/lecture/142. Acessado maio de 2015.
+
+\begin{itemize}
+\item Precision: É mensurada da seguinte forma, TP/(TP+FP), indica ...  
+\item Recall: É mensurada da seguinte forma, TP/(TP+FN), indica ...
+\item Accuracy: É mensurada da seguinte forma, TP+TN/(TP+TN+FP+FN), indica ...
+\end{itemize}
+                    
+Um método bastante simples para avaliar um modelo é dividir o dateset em dois grandes conjuntos (um para a construção do modelo - treino, e ou outro para testar o modelo - teste). Então dividi-se o dataset de treino em N partes e faz pelo menos uma medição estatística (por exemplo, acurácia) de cada N sobre o\textit{dataset} de teste. Assim, pode-se utilizar o mesmo procedimento com outro modelo e realizar comparações. Mas esta técnica só é aceitável quando se tem um conjunto de dados grande o suficiente para realizar este tipo de repartição.\cite{Kotsiantis:2007} Quando não se tem um dataset de tamanho avantajado, recorre-se a outros tipos de métodos para verificar a generalização do modelo, tais como, \textit{randomized-holdout} e \textit{stratified-k-fold-cross-validation}.\cite{Witten:2005}
+
+No método \textit{randomized-holdout} uma parte do dataset é escolhida randomicamente para treino e o restante é utilizado para teste, supomos numa proporção de dois terço (treino) e o restante para teste. Este processo então é repetido diversas vezes e é computada a média das medidas estátisticas de cada repetição. Em cada repetição deve-se randomizar o dataset de maneira distinta.\cite{Witten:2005} 
+**mostrar um pseudo-código
+**mostrar imagem
+
+No método \textit{stratified-k-fold-cross-validation} é escolhido um número fixo k de \textit{folds} (compartimentos ou pastas). O \textit{dataset} é dividido randomicamente em aproximadamente k pastas iguais, nas quais cada classe é representada aproximadamente na mesma proporção (estratificação - preserva a representatividade dos dados). 
+Um compartimento é então utilizado para teste e, os k-1 restante são utilizado para treino. Computa-se uma medida estatística. Então o procedimento é executado k vezes em diferentes datasets de treino (observer que eles têm muito em comum). Por fim têm-se uma media das medidas estatísticas das k repetições. Assim como no \textit{randomized-holdout} é recomendável que se repita o \textit{stratified-k-fold-cross-validation} diversas vezes, com randomizações diferentes para cada repetição.\cite{Witten:2005}
+**mostrar um pseudo-código
+**mostrar imagem
+
+Normalmente para o valor de k, no método descrito anteriormente, utiliza-se k=10. Este número de k tornou-se padrão após uma quantidade enorme de testes em datasets utilizando diferentes técnicas de classificação, os quais demonstraram k=10 como sendo aproximadamente a melhor escolha.\cite{Witten:2005}
 
 \section{Interação de características}
 TODO....origem...causas...etc...
