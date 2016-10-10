@@ -219,7 +219,29 @@ Por fim, na Figura \ref{fig:comparative_services_soap_rest} é apresentado uma a
   \label{fig:comparative_services_soap_rest}
 \end{figure}
 
-\subsection{Home network system}
+\section{Interação de características}
+Em desenvolvimento de \textit{software}, uma \textit{feature} (característica) é um componente de adicional funcionalidade ao \textit{software}\cite{Calder:2003}, consistindo de um conjunto de requisitos logicamente relacionados e suas especificações, o qual se destina a fornecer um determinado efeito comportamental\cite{NHLABATSI:2008}.
+
+Poucas \textit{features} atendem aos requisitos do usuário final quando estão isoladas. Para resolver este problema, características são combinadas para fornecer um novo componente de funcionalidade ao software. Entretanto, quando a composição de \textit{features} leva a algum comportamento não esperado - interação de características, esta pode resultar em efeitos colaterais indesejáveis\cite{NHLABATSI:2008} ou em efeitos colaterais desejáveis\cite{Weiss:2005}.
+
+Efeito colateral indesejável é quando há interação de características e esta resulta em um estado inconsistente do sistema, um sistema instável ou dados imprecisos. Já efeito colateral desejado é quando a interação de características resulta num comportamento que ajudará de alguma modo a funcionalidade em questão.\cite{Weiss:2005}
+
+**exemplos de efeitos colaterais desejados e indesejados
+**desejados
+Interference Free Integration of Pervasive Applications
+**indesejados
+-procura nos do homesystem que tu acha
+
+Interação de características ocorre devido a diversas causas, as quais podem ser resumidas a seguir.
+\begin{itemize}\cite{NHLABATSI:2008}
+\item \textit{Non-determinism}
+\item \textit{Negative impact}
+\item \textit{Invocation Order}
+\item \textit{Bypass}
+\item \textit{Infinite Looping}
+\end{itemize}
+
+\section{Home network system}
 \label{sec:hns}
 Como explanado anteriormente IoT pode ser descrita como a presença pervasiva de objetos do cotidiano, como \textit{smartphones}, televisores, sensores, dentre outros, que juntos são interligados para prover novas formas de comunicação entre as pessoas e entre os próprios objetos. Observe que tal visão também pode ser empregada dentro do ambiente de uma casa, tornando possível o desenvolvimento de um espaço inteligente, confortável e que promove uma melhor qualidade de vida as pessoas. Diferentes sensores e aparelhos domésticos a exemplo de lâmpadas, ar-condicionadores, sistema de segurança e entretenimento, além de interagirem dentro do ambiente doméstico, podem ser conectados a Internet e controlados por um \textit{smartphone} ou qualquer outro dispositivo da IoT. Desta forma pode-se não só controlar os dispositivos como também monitorar o ambiente doméstico (temperatura, consumo de energia, dentre outros). Uma casa com essas características é comumente chamada de \textit{Smart Home} e é normalmente implementada como um \textit{Home Network System}.\cite{Piyare:2013}
 
@@ -311,30 +333,16 @@ Um método bastante simples para avaliar um modelo é dividir o dateset em dois 
 
 No método \textit{randomized-holdout} uma parte do dataset é escolhida randomicamente para treino e o restante é utilizado para teste, supomos numa proporção de dois terço (treino) e o restante para teste. Este processo então é repetido diversas vezes e é computada a média das medidas estátisticas de cada repetição. Em cada repetição deve-se randomizar o dataset de maneira distinta.\cite{Witten:2005} 
 **mostrar um pseudo-código
-**mostrar imagem
 
-No método \textit{stratified-k-fold-cross-validation} é escolhido um número fixo k de \textit{folds} (compartimentos ou pastas). O \textit{dataset} é dividido randomicamente em aproximadamente k pastas iguais, nas quais cada classe é representada aproximadamente na mesma proporção (estratificação - preserva a representatividade dos dados). 
-Um compartimento é então utilizado para teste e, os k-1 restante são utilizado para treino. Computa-se uma medida estatística. Então o procedimento é executado k vezes em diferentes datasets de treino (observer que eles têm muito em comum). Por fim têm-se uma media das medidas estatísticas das k repetições. Assim como no \textit{randomized-holdout} é recomendável que se repita o \textit{stratified-k-fold-cross-validation} diversas vezes, com randomizações diferentes para cada repetição.\cite{Witten:2005}
+No método \textit{stratified-k-fold-cross-validation} é escolhido um número fixo k de \textit{folds} (compartimentos ou pastas). O \textit{dataset} é dividido randomicamente em k pastas iguais (ou aproximadamente), nas quais cada classe é representada aproximadamente na mesma proporção (estratificação - preserva a representatividade dos dados). 
+Um compartimento é então utilizado para teste e, os k-1 restante são utilizado para treino, como pode-se observar na Figura \ref{fig:kfoldcrossvalidation}. Daí computa-se uma medida estatística. Então o procedimento é executado k vezes em diferentes datasets de treino (observer que eles têm muito em comum). Por fim têm-se uma media das medidas estatísticas das k repetições. Assim como no \textit{randomized-holdout} é recomendável que se repita o \textit{stratified-k-fold-cross-validation} diversas vezes, com randomizações diferentes para cada repetição.\cite{Witten:2005}
+
+\begin{figure}[!htb] \centering 
+  \centering
+  \includegraphics[width=0.8\columnwidth]{fundamentacao/k-fold-crossvalidation} 
+  \caption{k-fold-cross-validation. Adaptado de\cite{Keller}} 
+  \label{fig:kfoldcrossvalidation}
+\end{figure}
 **mostrar um pseudo-código
-**mostrar imagem
 
 Normalmente para o valor de k, no método descrito anteriormente, utiliza-se k=10. Este número de k tornou-se padrão após uma quantidade enorme de testes em datasets utilizando diferentes técnicas de classificação, os quais demonstraram k=10 como sendo aproximadamente a melhor escolha.\cite{Witten:2005}
-
-\section{Interação de características}
-TODO....origem...causas...etc...
---Semantic Web-based policy interaction detec method with rules in smart home for detecti interactions among user policies
-**interaction among user policies of smart home.
-
---Feature Interactions in Integrated Services of Networked Home Appliances
---Considering impacts and requirements for better understanding of environment interactions in home network services
-**appliance interactions
-**environment interactions
-
-
-Como nesse tipo de sistema, serviços podem ser executados ao mesmo tempo, interação entre Unidades de Funcionalidade de Software (UFS) podem ocorrer e ocasionar efeitos colaterais (ver sessão 6).\cite{Ikegami:2013}
-\subsection{Efeitos colaterais desejáveis}
-TODO....
-\subsection{Efeitos colaterais indesejáveis}
-Segundo \cite{Weiss:2007}o problema de efeitos colaterais indesejáveis vem sendo tratado como \textit{the feature interaction problem}.
-
-Em \cite{Weiss}???talvez seja bom mudar esta referencia??? \textit{feature interaction} é definido como a interação entre independentes características***, as quais podem ser intencionais ou não intencionais, podendo levar a efeitos colaterais indesejáveis. Segundo \cite{Weiss:2007 } tais efeitos colaterais indesejáveis podem ser um estado inconsistente do sistema ou inconsistência de dados, tais como, um comportamento não esperado (não desejado), uma quebra de requisito de segurança, dentre outros.
