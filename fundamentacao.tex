@@ -224,7 +224,7 @@ Em desenvolvimento de \textit{software}, uma \textit{feature} (característica) 
 
 Poucas \textit{features} atendem aos requisitos do usuário final quando estão isoladas. Para resolver este problema, características são combinadas para fornecer um novo componente de funcionalidade ao software. Entretanto, quando a composição de \textit{features} leva a algum comportamento não esperado - interação de características, esta pode resultar em efeitos colaterais indesejáveis\cite{NHLABATSI:2008} ou em efeitos colaterais desejáveis\cite{Weiss:2005}.
 
-Efeito colateral indesejável é quando há interação de características e esta resulta em um estado inconsistente do sistema, um sistema instável ou dados imprecisos. Já efeito colateral desejado é quando a interação de características resulta num comportamento que ajudará de alguma modo a funcionalidade em questão.\cite{Weiss:2005}
+Efeito colateral indesejável é quando há interação de características e esta resulta em um estado inconsistente do sistema, um sistema instável, dados imprecisos. Já efeito colateral desejado é quando a interação de características resulta num comportamento que ajudará de alguma modo a funcionalidade em questão.\cite{Weiss:2005}\cite{NHLABATSI:2008}
 
 **exemplos de efeitos colaterais desejados e indesejados
 **desejados
@@ -232,14 +232,70 @@ Interference Free Integration of Pervasive Applications
 **indesejados
 -procura nos do homesystem que tu acha
 
-Interação de características ocorre devido a diversas causas, as quais podem ser resumidas a seguir.
-\begin{itemize}\cite{NHLABATSI:2008}
-\item \textit{Non-determinism}
-\item \textit{Negative impact}
-\item \textit{Invocation Order}
-\item \textit{Bypass}
-\item \textit{Infinite Looping}
+Diversas taxonomias foram propostas para descrever os tipos de interação de características. Algumas destas propostas foram produzidas por Cameron e Velthuijsen (domínio das telecomunicações), Kolberg (domínio das \textit{smarthomes}), e Shehata. Este último fez uma sítese das duas taxonomias citadas para uma taxonomia genérica a qual consiste de nove tipos de interação de características. Esta taxonomia tem a pretensão de ser aplicável na maioria dos domínios.\cite{NHLABATSI:2008}
+
+A seguir é apresentada e explicada os tipos de interação de características propostos por Shehata em uma versão reduzida da sua taxonomia. As tabelas \ref{table:taxshehata} e \ref{table:taxshehatared} mostram os tipos de interação de características das duas taxonomias. Na Tabela \ref{table:taxshehatared}, \cite{NHLABATSI:2008} une S3, S5 e S8 para \textit{bypass}. S4 é unido com S6 para formar somente um \textit{negative impact}. S2 foi eliminado. \cite{NHLABATSI:2008} não considera \textit{dependence} como uma causa de interação de características, pois este diz que \textit{dependence} passa um fraca noção de interação de características, já que esta implica que uma característica não funcione corretamente isoladamente e, segundo o autor, uma importante propriedade é que a \textit{feature} deva satisfazer seus requisitos quando isolada, mas quando em composição pode acontecer a quebra desses requisitos. 
+
+Para as explicações a seguir considere pré-condições como sendo as condições necessárias para que uma característica inicie sua execução e, como pós-condições as ações ou saídas experadas após o término da execução da característica.
+
+**DESisto bota isso aqui como imagem!!
+\begin{table}[!htp] \centering
+  \begin{tabular}{|l|c|}
+    \hline
+       {\bf Tipo de interação}\\
+    \hline
+       [S1]\textit{Non-determinism}\\
+    \hline
+       [S2]\textit{Dependence}\\
+    \hline
+       [S3]\textit{Override} (Mesmas pré-condições)\\
+    \hline
+       [S4]\textit{Negative Impact} (Mesmas pré-condições)\\
+    \hline
+       [S5]\textit{Override} (disparo de eventos ligados)\\
+    \hline
+       [S6]\textit{Negative Impact} (disparo de eventos ligados)\\
+    \hline
+       [S7]\textit{Order}\\
+    \hline
+       [S8]\textit{Bypass} \\
+    \hline
+       [S9]\textit{Infinite loop}\\
+    \hline
+  \end{tabular}
+  \caption{Taxonomia de Shehata. Adaptado de \cite{NHLABATSI:2008}}
+  \label{table:taxshehata}
+\end{table}
+\begin{table}[!htp] \centering
+  \begin{tabular}{|l|c|}
+    \hline
+       {\bf Tipo de interação} & {\bf Breve descrição}\\
+    \hline
+       \textit{Non-determinism} & Igual a [S1]\\
+    \hline
+       \textit{Invocation order} & Igual a [S7]\\
+    \hline
+       \textit{Bypass} & Unido com S3, S5 e S8 \\
+    \hline
+       \textit{Negative Impact} & Unido [S4] e [S6]\\
+    \hline
+       \textit{Infinite loop} & Igual a [S9]\\
+    \hline
+  \end{tabular}
+  \caption{Taxonomia de Shehata reduzida. \cite{NHLABATSI:2008}}
+  \label{table:taxshehatared}
+\end{table}
+
+\begin{itemize}
+\item \textit{Non-determinism}: Ocorre quando duas características têm as mesmas pre-condições, mas pós-condições diferentes. **exemplo!
+\item \textit{Negative impact}: 
+\item \textit{Invocation Order}: O comportamento da execução das características em uma determinada sequência é diferente do comportamentos destas quando há mudança na sequência. **exemplo!
+\item \textit{Bypass} Uma característica F1 \textit{bypasses} a execução de outra característica F2 se F1 muda o estado do ambiente compartilhado de tal forma que o novo estado não atende as pré-condições da outra característica F2. **exemplo!
+\item \textit{Infinite Looping}: Ocorre quando duas\textit{features} são reciprocamente ligadas em suas pós-condições e disparos de eventos. As características F1 e F2 são reciprocamente ligadas se as pós-condições de F1 cria um disparo de evento para F2 e vice e versa. Suponha que F1 é disparada e inicia sua execução criando um disparo de evento para F2. F2 inicia sua execução e cria um disparo para F1. Este processo então repete-se indefinidamente, criando um loop infinito.  
 \end{itemize}
+
+TODO falar das causas \cite{Weiss:2005}
+TODO falar dos tipos de detecção online e offline \cite{Calder:2003}
 
 \section{Home network system}
 \label{sec:hns}
@@ -332,7 +388,6 @@ Disponível em: https://class.coursera.org/nlp/lecture/142. Acessado maio de 201
 Um método bastante simples para avaliar um modelo é dividir o dateset em dois grandes conjuntos (um para a construção do modelo - treino, e ou outro para testar o modelo - teste). Então dividi-se o dataset de treino em N partes e faz pelo menos uma medição estatística (por exemplo, acurácia) de cada N sobre o\textit{dataset} de teste. Assim, pode-se utilizar o mesmo procedimento com outro modelo e realizar comparações. Mas esta técnica só é aceitável quando se tem um conjunto de dados grande o suficiente para realizar este tipo de repartição.\cite{Kotsiantis:2007} Quando não se tem um dataset de tamanho avantajado, recorre-se a outros tipos de métodos para verificar a generalização do modelo, tais como, \textit{randomized-holdout} e \textit{stratified-k-fold-cross-validation}.\cite{Witten:2005}
 
 No método \textit{randomized-holdout} uma parte do dataset é escolhida randomicamente para treino e o restante é utilizado para teste, supomos numa proporção de dois terço (treino) e o restante para teste. Este processo então é repetido diversas vezes e é computada a média das medidas estátisticas de cada repetição. Em cada repetição deve-se randomizar o dataset de maneira distinta.\cite{Witten:2005} 
-**mostrar um pseudo-código
 
 No método \textit{stratified-k-fold-cross-validation} é escolhido um número fixo k de \textit{folds} (compartimentos ou pastas). O \textit{dataset} é dividido randomicamente em k pastas iguais (ou aproximadamente), nas quais cada classe é representada aproximadamente na mesma proporção (estratificação - preserva a representatividade dos dados). 
 Um compartimento é então utilizado para teste e, os k-1 restante são utilizado para treino, como pode-se observar na Figura \ref{fig:kfoldcrossvalidation}. Daí computa-se uma medida estatística. Então o procedimento é executado k vezes em diferentes datasets de treino (observer que eles têm muito em comum). Por fim têm-se uma media das medidas estatísticas das k repetições. Assim como no \textit{randomized-holdout} é recomendável que se repita o \textit{stratified-k-fold-cross-validation} diversas vezes, com randomizações diferentes para cada repetição.\cite{Witten:2005}
@@ -343,6 +398,5 @@ Um compartimento é então utilizado para teste e, os k-1 restante são utilizad
   \caption{k-fold-cross-validation. Adaptado de\cite{Keller}} 
   \label{fig:kfoldcrossvalidation}
 \end{figure}
-**mostrar um pseudo-código
 
 Normalmente para o valor de k, no método descrito anteriormente, utiliza-se k=10. Este número de k tornou-se padrão após uma quantidade enorme de testes em datasets utilizando diferentes técnicas de classificação, os quais demonstraram k=10 como sendo aproximadamente a melhor escolha.\cite{Witten:2005}
