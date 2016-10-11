@@ -184,7 +184,7 @@ Os principais princípios do estilo arquitetural REST são: endereçamento globa
 \label{subsec:dispositivosWeb}
 Como abordado em \ref{sec:iot} um dos desafios referentes a visão da IoT é sua interoperabilidade e, como possível solução se pode disponibilizar os dispositivos como serviços Web RESTFul. Desta maneira os dispositivos podem interagir entre si e com outros sistemas na Web.
 
-A disponibilização dos dispositivos como serviços Web RESTFul vêm sendo empregada através de duas abordagens. Na primeira, quando os dispositivos têm recursos suficientes (memória, processamento e largura de banda de rede) servidores Web são embarcados nos próprios dispositivos e estes são disponibilizados como recursos REST. Enquanto que na segunda, quando uma coisa não possui recursos suficientes para tal propósito, utiliza-se de outro dispositivo, por exemplo, um \footnotemark{Raspberry Pi}\footnotetext{**} ou qualquer outro controlador com recursos suficientes para instalação e execução de um servidor Web. Este então atua como um intermediador entre o objeto e a Internet oferecendo a coisa como um recurso REST.\cite{Franca:2011}
+A disponibilização dos dispositivos como serviços Web RESTFul vêm sendo empregada através de duas abordagens. Na primeira, quando os dispositivos têm recursos suficientes (memória, processamento e largura de banda de rede) servidores Web são embarcados nos próprios dispositivos e estes são disponibilizados como recursos REST. Enquanto que na segunda, quando uma coisa não possui recursos suficientes para tal propósito, utiliza-se de outro dispositivo, por exemplo, um \footnotemark{Raspberry Pi}\footnotetext{https://www.raspberrypi.org/products/} ou qualquer outro controlador com recursos suficientes para instalação e execução de um servidor Web. Este então atua como um intermediador entre o objeto e a Internet oferecendo a coisa como um recurso REST.\cite{Franca:2011}
 
 Adotando esse padrão, os dispositivos podem ter suas propriedades disponíveis através de qualquer navegador, sem a necessidade de instalação de nenhum programa ou driver adicional, como pode ser exemplificado na Figura \ref{fig:dispnavegador}. Além disto, mashups físicos\footnotemark \footnotetext{Aplicativos criados a partir da composição de dados e serviços de dispositivos físicos com outros recursos Web.} podem ser construídos com muito menos esforço do que as existentes abordagens, quebrando drasticamente a barreira para o desenvolvimento de aplicações com dispositivos\cite{Guinard:2009}. Pelo fato das coisas serem disponibilizadas como serviços Web, ainda pode-se utilizar-se dos outros recursos disponíveis na Web, a exemplo de sistemas de cache, balanceamento de carga, indexação e, pesquisa\cite{Franca:2011}. Assim então promovendo a visão da Internet das Coisas.
 
@@ -224,78 +224,35 @@ Em desenvolvimento de \textit{software}, uma \textit{feature} (característica) 
 
 Poucas \textit{features} atendem aos requisitos do usuário final quando estão isoladas. Para resolver este problema, características são combinadas para fornecer um novo componente de funcionalidade ao software. Entretanto, quando a composição de \textit{features} leva a algum comportamento não esperado - interação de características, esta pode resultar em efeitos colaterais indesejáveis\cite{NHLABATSI:2008} ou em efeitos colaterais desejáveis\cite{Weiss:2005}.
 
-Efeito colateral indesejável é quando há interação de características e esta resulta em um estado inconsistente do sistema, um sistema instável, dados imprecisos. Já efeito colateral desejado é quando a interação de características resulta num comportamento que ajudará de alguma modo a funcionalidade em questão.\cite{Weiss:2005}\cite{NHLABATSI:2008}
+Efeito colateral indesejável é quando há interação de características e esta resulta em um estado inconsistente do sistema, um sistema instável ou dados imprecisos. Já efeito colateral desejado é quando a interação de características resulta num comportamento que ajudará de alguma modo a funcionalidade em questão.\cite{Weiss:2005}\cite{NHLABATSI:2008}
 
-**exemplos de efeitos colaterais desejados e indesejados
-**desejados
-Interference Free Integration of Pervasive Applications
-**indesejados
--procura nos do homesystem que tu acha
+Existem diversas causas para interação de características, algumas delas são listadas a seguir de forma mais genérica possível.\cite{Weiss:2007}
+
+\begin{itemize}
+\item \textit{Goal Conflit} (Conflito de interesses): Cada característica tem seus próprios objetivos (designadas para fazer algum tipo de processamento, coletar algum dado, dar uma saída específica, dentre outros) a serem alcançados. Entretanto, quando as características são combinadas, os objetivos das duas características podem entrar em conflito e não se pode garantir que todos sejam alcançados. 
+\item \textit{Resource Contention} (Contenção de recurso): \textit{Features} podem estar competindo umas com as outras devido ao acesso a recursos de capacidade limitada, tais como, memória, CPU, largura de banda, acesso a banco de dados, dentre outros. Desta forma, a correta execução de uma característica pode ser compremetida por outra característica que esteja utilizando além da sua cota de um recurso compartilhado.
+\item \textit{Violation of Assumptions} (Violação de suposições): Desenvolvedores das funcionalidades de software precisam fazer algumas suposições de como outras características trabalham. Estes podem fazer suposições incorretas, por exemplo, devido a semântica ambígua (tal como uso do mesmo conceito de diferentes formas), ou devido a presença de diferentes versões da mesma funcionalidade de software. De forma similar, implementação de características podem ser basedas em suposições incorretas sobre o contexto de uso. A caracterização de uma  \textit{Violation of Assumptions} se dá quando a mudança em uma \textit{feature} quebra a suposição correta que a outra característica tinha sobre esta.
+\item \textit{Policy Conflict} (Conflito de políticas): Políticas proveem os meios para especificação e modularização do comportamento de uma característica, na medida em que alinha suas capacidades e restrições com os requisitos de seus usuários. A textit{Policy Conflict} ocorre caso exista políticas (autenticação, ou de privacidade) especificadas em duas \textit{features} que referem-se as suas correspondentes operações, e que as politícas não são compatíveis.
+\end{itemize}
 
 Diversas taxonomias foram propostas para descrever os tipos de interação de características. Algumas destas propostas foram produzidas por Cameron e Velthuijsen (domínio das telecomunicações), Kolberg (domínio das \textit{smarthomes}), e Shehata. Este último fez uma sítese das duas taxonomias citadas para uma taxonomia genérica a qual consiste de nove tipos de interação de características. Esta taxonomia tem a pretensão de ser aplicável na maioria dos domínios.\cite{NHLABATSI:2008}
 
-A seguir é apresentada e explicada os tipos de interação de características propostos por Shehata em uma versão reduzida da sua taxonomia. As tabelas \ref{table:taxshehata} e \ref{table:taxshehatared} mostram os tipos de interação de características das duas taxonomias. Na Tabela \ref{table:taxshehatared}, \cite{NHLABATSI:2008} une S3, S5 e S8 para \textit{bypass}. S4 é unido com S6 para formar somente um \textit{negative impact}. S2 foi eliminado. \cite{NHLABATSI:2008} não considera \textit{dependence} como uma causa de interação de características, pois este diz que \textit{dependence} passa um fraca noção de interação de características, já que esta implica que uma característica não funcione corretamente isoladamente e, segundo o autor, uma importante propriedade é que a \textit{feature} deva satisfazer seus requisitos quando isolada, mas quando em composição pode acontecer a quebra desses requisitos. 
-
-Para as explicações a seguir considere pré-condições como sendo as condições necessárias para que uma característica inicie sua execução e, como pós-condições as ações ou saídas experadas após o término da execução da característica.
-
-**DESisto bota isso aqui como imagem!!
-\begin{table}[!htp] \centering
-  \begin{tabular}{|l|c|}
-    \hline
-       {\bf Tipo de interação}\\
-    \hline
-       [S1]\textit{Non-determinism}\\
-    \hline
-       [S2]\textit{Dependence}\\
-    \hline
-       [S3]\textit{Override} (Mesmas pré-condições)\\
-    \hline
-       [S4]\textit{Negative Impact} (Mesmas pré-condições)\\
-    \hline
-       [S5]\textit{Override} (disparo de eventos ligados)\\
-    \hline
-       [S6]\textit{Negative Impact} (disparo de eventos ligados)\\
-    \hline
-       [S7]\textit{Order}\\
-    \hline
-       [S8]\textit{Bypass} \\
-    \hline
-       [S9]\textit{Infinite loop}\\
-    \hline
-  \end{tabular}
-  \caption{Taxonomia de Shehata. Adaptado de \cite{NHLABATSI:2008}}
-  \label{table:taxshehata}
-\end{table}
-\begin{table}[!htp] \centering
-  \begin{tabular}{|l|c|}
-    \hline
-       {\bf Tipo de interação} & {\bf Breve descrição}\\
-    \hline
-       \textit{Non-determinism} & Igual a [S1]\\
-    \hline
-       \textit{Invocation order} & Igual a [S7]\\
-    \hline
-       \textit{Bypass} & Unido com S3, S5 e S8 \\
-    \hline
-       \textit{Negative Impact} & Unido [S4] e [S6]\\
-    \hline
-       \textit{Infinite loop} & Igual a [S9]\\
-    \hline
-  \end{tabular}
-  \caption{Taxonomia de Shehata reduzida. \cite{NHLABATSI:2008}}
-  \label{table:taxshehatared}
-\end{table}
+A seguir é apresentada e explicada os tipos de interação de características propostos por Shehata em uma versão reduzida da sua taxonomia\cite{NHLABATSI:2008}. Para as explicações considere pré-condições como sendo as condições necessárias para que uma característica inicie sua execução e, como pós-condições as ações ou saídas experadas após o término da execução da característica.
 
 \begin{itemize}
-\item \textit{Non-determinism}: Ocorre quando duas características têm as mesmas pre-condições, mas pós-condições diferentes. **exemplo!
-\item \textit{Negative impact}: 
-\item \textit{Invocation Order}: O comportamento da execução das características em uma determinada sequência é diferente do comportamentos destas quando há mudança na sequência. **exemplo!
-\item \textit{Bypass} Uma característica F1 \textit{bypasses} a execução de outra característica F2 se F1 muda o estado do ambiente compartilhado de tal forma que o novo estado não atende as pré-condições da outra característica F2. **exemplo!
+\item \textit{Dependence}: A execução de uma característica depende da execução correta da outra.
+\item \textit{Non-determinism}: Ocorre quando características têm as mesmas pré-condições, mas pós-condições diferentes, ou seja, duas ou mais especificações de requisitos requerem que um domínio compartilhado tenha comportamentos distintos simultaneamente, quando o domínio pode somente ter um comportamento por vez. Domínio aqui significa uma propriedade do ambiente a qual uma especificação de uma característica utiliza para satisfazer seus requerimentos. 
+\item \textit{Negative impact}: Similar a \textit{Non-determinism}, no sentido que as características sobrepõem pré-condições. Mas diferente no sentido que ambas as\textit{features} são executadas e o resultado das suas pós-condições são inconsistentes. As pós-condições de uma característica diminui o efeito das pós-condições da(s) outra(s).
+\item \textit{Invocation Order}: O comportamento da execução das características em uma determinada sequência é diferente do comportamento destas quando há mudança na sequência.
+\item \textit{Bypass} Uma característica F1 \textit{bypasses} a execução de outra característica F2 se F1 muda o estado do ambiente compartilhado de tal forma que o novo estado não atende as pré-condições da outra característica F2.
 \item \textit{Infinite Looping}: Ocorre quando duas\textit{features} são reciprocamente ligadas em suas pós-condições e disparos de eventos. As características F1 e F2 são reciprocamente ligadas se as pós-condições de F1 cria um disparo de evento para F2 e vice e versa. Suponha que F1 é disparada e inicia sua execução criando um disparo de evento para F2. F2 inicia sua execução e cria um disparo para F1. Este processo então repete-se indefinidamente, criando um loop infinito.  
 \end{itemize}
 
-TODO falar das causas \cite{Weiss:2005}
-TODO falar dos tipos de detecção online e offline \cite{Calder:2003}
+\cite{NHLABATSI:2008} não considera \textit{dependence} como uma causa de interação de características, pois este diz que \textit{dependence} passa um fraca noção de interação de características, já que esta implica que uma característica não funcione corretamente isoladamente e, segundo o autor, uma importante propriedade é que a \textit{feature} deva satisfazer seus requisitos quando isolada, mas quando em composição pode acontecer a quebra desses requisitos.
+
+Dentro deste cenário de interação de características, diversos métodos vêm sendo propostos para detecção e/ou resolução dessas interações. Duas abordagens são adotadas para este fim: \textit{Online techniques} (técnicas online) e \textit{Offline techniques} (técnicas offline). **explicar
+
+Dentro das técnicas online, \textit{Feature Interaction Manager - FIM} vem comumente sendo adotado em \textit{Home Network Systems ou Smart homes}\cite{**}\cite{**}\cite{**}. FIM é um componente do sistema introduzido dentro de uma rede com a capacidade de observar e controlar as chamadas a qualquer \textit{feature}, logo todas as caracteŕiticas do sistema são expostas através do FIM\cite{Calder:2003}.
 
 \section{Home network system}
 \label{sec:hns}
