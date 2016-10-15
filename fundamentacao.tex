@@ -23,7 +23,7 @@ Diante deste cenário da IoT, pode-se citar exemplos de aplicações em diversos
 \item Rastreabilidade de produtos alimentícios ajudam os usuários a verificar a origem de um produto, assim como informações de composição química, dentre outros. Mas também previne de doenças não desejadas. Por exemplo, avisos atuais sobre a mercadoria em questão podem ser disponibilizados à medida que o produto sai da origem e vai passando para os outros níveis de consumo, desta forma os consumidores podem evitar o contágio de doenças como gripe aviária e, encefalopatia espongiforme bovina (EEB), mais conhecida como doença da vaca louca.\cite{Weber:2010}
 \end{itemize}
 
-Apesar da grande potencialidade da visão da Internet das Coisas, a qual gerou em 2015 um faturamento em torno de 130,33 bilhões de dólares americanos e tem prospecção de chegar até 883.55 bilhões em 2020\footnotemark \footnotetext{http://www.marketsandmarkets.com/Market-Reports/iot-application-technology-market-258239167.html}, ainda existem muitos desafios a serem vencidos, tais como segurança da informação, armazenamento e processamento de grande quantidade de dados, dentre outros. Adentrando um pouco em um dos desafios da IoT, o da disponibilidade de uma interface de comunicação (acesso aos serviços e informações dos dispositivos) e programação comum aos objetos, pode-se dizer que a falta desta padronização faz com que se torne oneroso o desenvolvimento de aplicações para o objeto, pois cada coisa possui suas próprias interfaces, logo para cada dispositivo um desenvolvimento a parte. Mais difícil ainda é prover uma única funcionalidade ou serviço com a composição dos diversos objetos. Para diminuir a dificuldade deste cenário, pode-se disponibilizar os dispositivos como serviços WEB (seção \ref{subsec:dispositivosWeb}), assim sendo se pode utilizar os protocolos WEB como linguagem comum de integração dos dispositivos a Internet.\cite{Franca:2011}
+Apesar da grande potencialidade da visão da Internet das Coisas, a qual gerou em 2015 um faturamento em torno de 130,33 bilhões de dólares americanos e tem prospecção de chegar até 883.55 bilhões em 2020\footnotemark \footnotetext{http://www.marketsandmarkets.com/Market-Reports/iot-application-technology-market-258239167.html}, ainda existem muitos desafios a serem vencidos, tais como segurança da informação, armazenamento e processamento de grande quantidade de dados, dentre outros. Adentrando um pouco em um dos desafios da IoT, o da disponibilidade de uma interface de comunicação (acesso aos serviços e informações dos dispositivos) e programação comum aos objetos, pode-se dizer que a falta desta padronização faz com que se torne oneroso o desenvolvimento de aplicações para o objeto, pois cada coisa possui suas próprias interfaces, logo para cada dispositivo um desenvolvimento a parte. Mais difícil ainda é prover uma única funcionalidade ou serviço com a composição dos diversos objetos. Para diminuir a dificuldade deste cenário, pode-se disponibilizar os dispositivos como serviços Web (seção \ref{subsec:dispositivosWeb}), assim sendo se pode utilizar os protocolos Web como linguagem comum de integração dos dispositivos a Internet.\cite{Franca:2011}
 
 \subsection{Serviços Web}
 \label{ws:webservices}
@@ -129,7 +129,7 @@ O \textless Body\textgreater pode ter um número arbitrário de filhos (chamados
 
 SOAP suporta dois tipos de estilo de comunicação, RPC (Remote Procedure Call) e documento (ou mensagem). Numa comunicação no estilo RPC/Literal, o cliente expressa sua requisição como uma chamada de método passando um conjunto de parâmetros. O método então retorna uma resposta. Algumas regras nesse estilo de comunicação devem ser seguidas e são explanadas abaixo e exemplificadas na Figura \ref{fig:wssoap_msg_soap_rpc}.
 \begin{itemize}
-\item Uma URI deve identificar o endereço de destino onde o método será chamado, que pode ser identificado na declaração da tag \textless Envelope\textgreater, xmlns:m=``http://www.plastics_supply.com/product-prices''.
+\item Uma URI deve identificar o endereço de destino onde o método será chamado, que pode ser identificado na declaração da tag \textless Envelope\textgreater, xmlns:m=``http:\/\/...''.
 \item Deve ser passado o nome do método, \textless m:GetProductPriceResponse\textgreater e, seus parâmetros (nome e valor) na ordem correta que aparece no método a ser chamado, como exemplificado na figura em \textless product-id\textgreater 450R6OP \textless product-id \textgreater.
 \item Uma mensagem de resposta RPC deve conter um valor de retorno e quaisquer parâmetros de saída ou um erro. Esta é modelada como uma estrutura única com um campo para cada parâmetro na assinatura do método, exemplificado em \textless product-price\textgreater 134.32 \textless product-price\textgreater.
 \end{itemize}
@@ -177,7 +177,7 @@ Os principais princípios do estilo arquitetural REST são: endereçamento globa
 \item Interface uniforme - todos os recursos interagem através de uma interface uniforme, a qual prover um conjunto de métodos pequeno, genérico e funcionalmente suficiente para suportar todas as possíveis interações entre os serviços. Cada método tem uma semântica bem definida em relação aos efeitos que causará no estado do recurso. No contexto da Web e do protocolo HTTP que é utilizado, ``Interface uniforme'' pode ser alcançado com os seus  métodos(GET, PUT, DELETE, POST, HEAD, OPTIONS, dentre outros) os quais podem ser aplicados para todos os identificadores dos recursos Web (URIs).\cite{Pautasso:2014}
 \item Interações \textit{stateless} - os serviços não podem estabelecer sessões permanentes entre eles. Isto assegura que as requisições para um recurso sejam independentes entre si. No final de cada interação, não há estados compartilhados entre clientes e servidores. Requisições podem resultar em uma mudança de estado do recurso, mas o novo estado é imediatamente visível para todos clientes.\cite{Pautasso:2014}
 \item Mensagens auto-descritivas - Serviços interagem através de requisição e mensagem de resposta, que contem tanto os dados (representações dos recursos) e correspondente \textit{meta-data}. As representações podem variar de acordo com o contexto do cliente, interesses e habilidades. Por exemplo, um cliente \textit{mobile} pode obter uma representação do recurso que exige pouco consumo de banda de dados. Da mesma forma, um navegador pode requisitar a representação de uma página Web em uma linguagem específica, de acordo com suas preferências. Esta característica aumenta de maneira significativa o grau de interoperabilidade, pois um cliente pode dinamicamente negociar o mais apropriado formato de representação com o recurso (também conhecido como media type), em vez de ser forçado a sempre trabalhar com uma determinada representação do recurso. As requisições e mensagens de respostas também devem conter explicitamente \textit{meta-data} sobre sua representação, desta maneira os serviços não precisam assumir algum tipo de acordo de sobrecarga no sentido de como tal representação seria analisada, processada e entendida.\cite{Pautasso:2014}
-\item \begin{verbatim}\textit{Hypermedia} - Recursos podem ser relacionados entre si. \textit{Hypermedia} embute referências a outros recursos relacionados ou dentro de suas representações ou em sua correspondente \textit{metadata}. Clientes então podem descobrir os \textit{hyper-links} dos recursos relacionados ao processar suas representações e escolher seguir o link. Como exemplificado em \cite{Franca:2011}, um sistema de uma instituição que possui um recurso ``lista_cursos'' (lista todos os cursos da instituição), este pode oferecer os \textit{hyper-links} que representam cada recurso que representa um determinado curso. \textit{Hypermedia} auxilia na descoberta descentralizada de recursos e também pode ser utilizada para descoberta e descrição de protocolos de interação entre os serviços. Pelo fato deste ser o princípio menos utilizado pelas APIs que se dizem ser RESTFul, algumas vezes as APIs disponibilizadas por serviços Web que além das outras restrições contemplam esta, são também chamadas de \textit{Hypermedia APIs}.\cite{Pautasso:2014}\end{verbatim}
+\item \textit{Hypermedia} - Recursos podem ser relacionados entre si. \textit{Hypermedia} embute referências a outros recursos relacionados ou dentro de suas representações ou em sua correspondente \textit{metadata}. Clientes então podem descobrir os \textit{hyper-links} dos recursos relacionados ao processar suas representações e escolher seguir o link. Como exemplificado em \cite{Franca:2011}, um sistema de uma instituição que possui um recurso lista_cursos (lista todos os cursos da instituição), este pode oferecer os \textit{hyper-links} que representam cada recurso que representa um determinado curso. \textit{Hypermedia} auxilia na descoberta descentralizada de recursos e também pode ser utilizada para descoberta e descrição de protocolos de interação entre os serviços. Pelo fato deste ser o princípio menos utilizado pelas APIs que se dizem ser RESTFul, algumas vezes as APIs disponibilizadas por serviços Web que além das outras restrições contemplam esta, são também chamadas de \textit{Hypermedia APIs}.\cite{Pautasso:2014}
 \end{enumerate}
 
 \subsection{Dispositivos como serviços Web RESTFul} 
@@ -325,40 +325,89 @@ pág 84-93;
 
 \subsection{Métodos avaliativos}
 \label{subsec:evaluationMethods}
-Métodos avaliativos têm o propósito de verificar a generalização do modelo, ou seja, verificar o quão bom é o modelo do classificador quando submetido a instâncias desconhecidas (que não fazem parte do modelo). Para isto, utiliza-se de medidas estatísticas para auxiliar na tarefa. Como por exemplo, acurácia, \textit{precision}, \textit{recall}, dentre outras. As medidas estatísticas citadas são baseadas em quatro componentes: verdadeiro positivo (\textit{True Positive - TP}), verdadeiro negativo (\textit{True Negative - TN}), falso positivo (\textit{False Positive- FP}) e falso negativo (\textit{False Negative- FN}).
+Métodos avaliativos têm o propósito de verificar a generalização do modelo, ou seja, verificar o quão bom é o modelo do classificador quando submetido a instâncias desconhecidas (que não fazem parte do modelo). Para isto, utiliza-se de medidas estatísticas para auxiliar na tarefa\cite{Witten:2005}. Como por exemplo, acurácia, \textit{precision}, \textit{recall}, dentre outras. As medidas estatísticas citadas são baseadas em quatro componentes: verdadeiro positivo (\textit{True Positive - TP}), verdadeiro negativo (\textit{True Negative - TN}), falso positivo (\textit{False Positive- FP}) e falso negativo (\textit{False Negative- FN})\cite{Davis:2006}.
 
 \begin{itemize}
-\item Verdadeiro positivo (TP): instância que pertence a classe positiva e que foi classificada como positiva.
-\item Verdadeiro negativo (TN): instância que pertence a classe negativa e que foi classificada como negativa.
-\item Falso positivo (FP): instância que pertence a classe negativa e que foi classificada como positiva.
-\item Falso negativo (FN): instância que pertence a classe positiva e que foi classificada como negativa.
-\item **
+\item Verdadeiro positivo (TP): instância que pertence a classe positiva e que foi corretamente classificada como positiva.
+\item Verdadeiro negativo (TN): instância que pertence a classe negativa e que foi classificada corretamente como negativa.
+\item Falso positivo (FP): instância que pertence a classe negativa e que foi classificada  incorretamente como positiva.
+\item Falso negativo (FN): instância que pertence a classe positiva e que foi classificada incorretamente como negativa.
 \end{itemize}
 
-**[1] Powers, D.M.W., 2011. Evaluation: from Precision, Recall and F-measure to ROC, Informedness, Markedness and Correlation. Journal of Machine Learning Technologies, 2(1), 37-63.
-
-**[2] Christopher, D. M.; Prabhakar, R.; Hinrich, S., 2009. An introduction to information retrieval. Cambridge University Press. Cambridge, England.
-
-**[3] Manning, C.. Natural Language Processing Lecture: Precision, Recall, and the F measure.
-Disponível em: https://class.coursera.org/nlp/lecture/142. Acessado maio de 2015.
-
-\begin{itemize}
-\item Precision: É mensurada da seguinte forma, TP/(TP+FP), indica ...  
-\item Recall: É mensurada da seguinte forma, TP/(TP+FN), indica ...
-\item Accuracy: É mensurada da seguinte forma, TP+TN/(TP+TN+FP+FN), indica ...
+\begin{itemize}**
+\item \textit{Precision}: É mensurada da seguinte forma, TP/(TP+FP), indica ...  
+\item \textit{Recall}: É mensurada da seguinte forma, TP/(TP+FN), indica ...
+\item \textit{Accuracy}: É mensurada da seguinte forma, TP+TN/(TP+TN+FP+FN), indica ...
 \end{itemize}
+analysis. Precision, on the other hand, by comparing false positives to true positives rather than true neg- atives, captures the effect of the large number of neg- ative examples on the algorithm’s performance. Sec- tion 2 defines Precision and Recall for the reader un- familiar with these terms.
+**e depois exemplificar com o caso deste trabalho de efeitos colaterais
+
+
+Outra medida utilizada é o desvio padrão, utilizado para verificar a dispersão de um conjunto de dados medido, por exemplo, a variância para cada conjunto das medidas avaliativas citadas anteriormente (\textit{Precision}, \textit{Recall}, \textit{Accuracy}) quando aplicado o \textit{stratified-k-fold-cross-validation}. Um desvio padrão baixo indica que os elementos do conjunto têm valores próximos ao esperado, enquanto que valores altos indicam que os elementos estão dispersos dentro de uma faixa alta de valores.\cite{Kerr:2002}\cite{Bland:1996}
+
+O desvio padrão pode ser medido de acordo com a fórmula \ref{eq:standarddev}, que é a $\sqrt{variância}$. Onde $x_{i}$ é um elemento do conjunto, $\bar{x}$ é a média aritmética dos \textit{i} elementos, e \textit{n} é a quantidade de elementos do conjunto. Usualmente o desvio padrão é também calculado para somente um subconjunto das medidas, desta forma o valor produzido é uma estimativa do desvio padrão para a população dos dados em questão. Para este caso em específico, a fórmula \ref{eq:standarddev} sofre uma pequena alteração (fórmula \ref{eq:standarddevsub}, ao  invés de \textit{n}, tem-se \textit{n-1}), a fim de corrigir os possíveis erros gerados por tal estimativa.\cite{Kerr:2002}
+
+\begin{equation} 
+  Desvio~padrão~(S) = \sqrt{\frac{\sum{(x_{i}-\bar{x})^2}}{n}} 
+  \label{eq:standarddev}
+\end{equation}
+
+\begin{equation} 
+  Desvio~padrão~(S) = \sqrt{\frac{\sum{(x_{i}-\bar{x})^2}}{n-1}} 
+  \label{eq:standarddevsub}
+\end{equation}
+
+Uma exemplificação da mensuração do desvio padrão pode ser realizada com os dados da Tabela \ref{table:datakcrossvalidation} e aplicação da fórmula \ref{eq:standarddev}. Os elementos \textit{$x_{i}$} (\textit{recall}) da população foram gerados utilizando \textit{stratified-10-fold-cross-validation} em cima do \textit{dataset} (\ref{sec:dataset}) e com o classificador \textit{multilayer perceptron}. A soma dos \textit{$x_{i}-\bar{x}$}, na segunda coluna da tabela, gerou um valor diferente de zero devido a aproximação realizada para duas casas decimais, o correto seria 0 (zero). A aplicação da fórmula neste cenário pode ser visualizada em \ref{eq:standarddevapli}.
+
+\begin{equation} 
+  Desvio~padrão~(S) = \sqrt{\frac{\sum{(x_{i}-\bar{x})^2}}{n}}=\sqrt{\frac{4173.42}{10}}=24.43\%
+  \label{eq:standarddevapli}
+\end{equation}
+
+\begin{table}[!htp]
+  \centering
+  \begin{tabular}{|c c c|}
+    \hline
+       {\bf $x_{i}$(\%)} & {\bf $x_{i}-\bar{x}$(\%)} & {\bf $(x_{i}-\bar{x})^2$(\%)$^2$} \\
+    \hline
+       100.00 & 19.17 & 367.49\\
+    \hline
+       66.67 & −14.16 &  200.50\\
+     \hline
+       100.00 & 19.17 & 367.49\\
+    \hline
+       100.00 & 19.17 & 367.49\\
+     \hline
+       75.00 & −5.83 & 33.99\\
+    \hline
+       100.00 & 19.17 & 367.49\\
+     \hline
+       66.67 & −14.16 & 200.50\\
+    \hline
+       50.00 & −30.83 & 950.49\\
+     \hline
+       50.00 & −30.83 &  950.49\\
+    \hline
+       100.00 & 19.17 & 367.49\\
+    \hline\hline
+       $\sum=$808.34 & 0.04 &  4173.42\\
+    \hline
+  \end{tabular}
+  \caption{Medidas \textit{recall} mensuradas a partir da aplicação da técnica \textit{stratified-10-fold-cross-validation} com o classificador \textit{multilayer perceptron} em cima do \textit{dataset} (\ref{sec:dataset}) utilizado nos experimentos deste trabalho. Baseada em \cite{Kerr:2002}}
+  \label{table:datakcrossvalidation}
+\end{table}
                     
 Um método bastante simples para avaliar um modelo é dividir o dateset em dois grandes conjuntos (um para a construção do modelo - treino, e ou outro para testar o modelo - teste). Então dividi-se o dataset de treino em N partes e faz pelo menos uma medição estatística (por exemplo, acurácia) de cada N sobre o\textit{dataset} de teste. Assim, pode-se utilizar o mesmo procedimento com outro modelo e realizar comparações. Mas esta técnica só é aceitável quando se tem um conjunto de dados grande o suficiente para realizar este tipo de repartição.\cite{Kotsiantis:2007} Quando não se tem um dataset de tamanho avantajado, recorre-se a outros tipos de métodos para verificar a generalização do modelo, tais como, \textit{randomized-holdout} e \textit{stratified-k-fold-cross-validation}.\cite{Witten:2005}
 
 No método \textit{randomized-holdout} uma parte do dataset é escolhida randomicamente para treino e o restante é utilizado para teste, supomos numa proporção de dois terço (treino) e o restante para teste. Este processo então é repetido diversas vezes e é computada a média das medidas estátisticas de cada repetição. Em cada repetição deve-se randomizar o dataset de maneira distinta.\cite{Witten:2005} 
 
 No método \textit{stratified-k-fold-cross-validation} é escolhido um número fixo k de \textit{folds} (compartimentos ou pastas). O \textit{dataset} é dividido randomicamente em k pastas iguais (ou aproximadamente), nas quais cada classe é representada aproximadamente na mesma proporção (estratificação - preserva a representatividade dos dados). 
-Um compartimento é então utilizado para teste e, os k-1 restante são utilizado para treino, como pode-se observar na Figura \ref{fig:kfoldcrossvalidation}. Daí computa-se uma medida estatística. Então o procedimento é executado k vezes nos diferentes datasets de treino (observe que eles têm muito em comum). Por fim têm-se uma media das medidas estatísticas das k repetições. Assim como no \textit{randomized-holdout} é recomendável que se repita o \textit{stratified-k-fold-cross-validation} diversas vezes, com randomizações diferentes para cada repetição.\cite{Witten:2005}
+Um compartimento é então utilizado para teste e, os k-1 restante são utilizado para treino, como pode-se observar na Figura \ref{fig:kfoldcrossvalidation}. Daí computa-se uma medida estatística. Então o procedimento é executado k vezes. Por fim têm-se uma media das medidas estatísticas das k repetições. Assim como no \textit{randomized-holdout} é recomendável que se repita o \textit{stratified-k-fold-cross-validation} diversas vezes, com randomizações diferentes para cada repetição.\cite{Witten:2005}
 
 \begin{figure}[!htb] \centering 
   \centering
   \includegraphics[width=0.8\columnwidth]{fundamentacao/k-fold-crossvalidation} 
-  \caption{k-fold-cross-validation. Adaptado de\cite{Keller}} 
+  \caption{k-fold-cross-validation. Adaptado de\cite{Olson:2008}} 
   \label{fig:kfoldcrossvalidation}
 \end{figure}
 
