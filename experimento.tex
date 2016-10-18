@@ -1,6 +1,6 @@
 \section{Cenário}
 \label{sec:cenario}
-O cenário descrito em \ref{subsec:levarcompras} é idealizado no HNS da Figura \ref{fig:hnsworkmodel}. Neste, cada dispositivo da casa (veículo terrestre, elevador, garra mecânica) é disponibilizado como um serviço Web RESTFul (seção \ref{subsec:dispositivosWeb}). O HS deste cenário é um servidor Web RESTFul com um FIM (seção\ref{sec:featureinteraction}) integrado.
+O cenário ``Levar compras'', que será explanado logo a seguir é idealizado no HNS da Figura \ref{fig:hnsworkmodel}. Neste, cada dispositivo da casa (veículo terrestre, elevador, garra mecânica) é disponibilizado como um serviço Web RESTFul. O HS deste cenário é um servidor Web RESTFul com um FIM (seção\ref{sec:featureinteraction}) integrado. A discussão do motivo de se utilizar dispositivos como serviços Web e, RESTFul em vez de SOAP foi realizada na seção \ref{subsec:dispositivosWeb}.
 
 \begin{figure}[!htb] \centering 
   \centering
@@ -9,8 +9,6 @@ O cenário descrito em \ref{subsec:levarcompras} é idealizado no HNS da Figura 
   \label{fig:hnsworkmodel}
 \end{figure}
 
-\subsection{Levar compras}
-\label{subsec:levarcompras}
 O cenário ``Levar compras'' refere-se a funcionalidade (\textit{feature} ou característica)  oferecida pelo HS. Esta característica é provida através da composição dos serviços do elevador, veículo e garra. O cenário em questão pode ser visualizado na Figura \ref{fig:cenario} e é descrito a seguir.
 
 \begin{enumerate}
@@ -78,13 +76,13 @@ Concluindo as observações feitas até agora, o comportamento da garra junto co
 
 Como todas as cestas estavam previamente cadastradas no banco de dados, a estas foram atribuídos valores de ``é efeito colateral'' ou ``não é efeito colateral'', a medida que se observava cada execução do cenário.
 
-\section{Construção dos modelos de rede neural}
+\section{Conjunto de dados - seleção dos atributos}
 \label{sec:construmrn}
 Os dados coletados na etapa de execução do cenário ``Levar carga'', 66 cestas, ainda estão muito brutos, observe que uma cesta deve conter pelo menos um objeto, como também pode conter muitos. Supomos que a cesta tenha 10 objetos, então o total de características da cesta seria $10.5=50$, pois cada objeto possui cinco características. Utilizar as características dos objetos desta forma, além de provavelmente não predizer nada em um modelo de rede neural, terá um custo computacional muito elevado. Para diminuir a quantidade de atributos e melhor qualificá-los gerou-se características a partir de todos os atributos dos objetos da cesta: média das alturas, dos comprimentos, das larguras, dos diâmetros e das massas, assim como o total de cada uma dessas medidas, e o total de itens. De ínicio então têm-se a seleção de 11 parâmetros.
 
 Com a seleção prévia desses atributos, constriu-se um arquivo ``arff'', que é o tipo de arquivo padrão utilizado como \textit{dataset} pelo Weka\cite{Hall:2009}. Este \textit{dataset} é composto de 46 instâncias, cada uma com 11 atributos mais um que identifica a qual classe pertence. As outras 20 instâncias serão deixadas para um possível teste no cenário proposto, já com um classificador satisfatório, caso este seja possível de se construir.
 
-O próximo passo utilizado nesse processo de seleção de atributos foi o de visualizar estes novos parâmetros par a par, e verificar quais pares parecem melhor separar as classes ``é efeito colateral'' ou ``não é efeito colateral''. Nas Figuras \ref{fig:plotall1}, \ref{fig:plotall2}, \ref{fig:plotall3} pode-se ter uma ideia de tal visualização. Dentre essas plotagens foram selecionadas duas plotagens (Figuras \ref{fig:tw_ad} e \ref{fig:tw_tm}), as quais parecem melhor separar as classes, são respectivamente os atributos ** e ** e, ** e **.
+O próximo passo utilizado nesse processo de seleção de atributos foi o de visualizar estes novos parâmetros par a par, e verificar quais pares parecem melhor separar as classes ``é efeito colateral'' ou ``não é efeito colateral''. Nas Figuras \ref{fig:plotall1}, \ref{fig:plotall2}, \ref{fig:plotall3} pode-se ter uma ideia de tal visualização. Dentre essas plotagens foram selecionadas duas plotagens (Figuras \ref{fig:tw_ad} e \ref{fig:tw_tm}), as quais parecem melhor separar as classes, são respectivamente os pares ordenados (mediaDiametro, totalLargura) e (totalMassa, totalLargura). Então, desta fase inicial de seleção dos atributos, estes foram os pares selecionados, e serão utilizados na construção de dois modelos. Observe que após realizado a seleção dos atributos o espaço de \textit{features} foi reduzido a duas características.
 
 \begin{figure}[!htb] \centering 
   \centering
@@ -110,34 +108,31 @@ O próximo passo utilizado nesse processo de seleção de atributos foi o de vis
 \begin{figure}[!htb] \centering 
   \centering
   \includegraphics[width=0.8\columnwidth]{experimento/tw_ad} 
-  \caption{Plotagem dos atributos... } 
+  \caption{Plotagem dos atributos (mediaDiametro, totalLargura). } 
   \label{fig:tw_ad}
 \end{figure}
+
 \begin{figure}[!htb] \centering 
   \centering
   \includegraphics[width=0.8\columnwidth]{experimento/tw_tm} 
-  \caption{Plotagem dos atributos... } 
+  \caption{Plotagem dos atributos (totalMassa, totalLargura). } 
   \label{fig:tw_tm}
 \end{figure}
 
-Procedimentos utilizados - experimento:
--gera uma plotMatriz dos dados do dataset
--verifica quais dados poderiam ser melhor separados por uma curva(par a par)
 
--neste caso, visualmente são esse abaixo:
-t_num_width e t_num_diameter
-(quem não tem width, tem diameter e vice e versa)
-t_num_mass e t_num_width
+\section{Construção e validação do modelo de redes neurais}
+Para esta etapa de validação de modelo (algoritmo multilayer perceptron e \textit{dataset}) escolheu-se o método avaliativo \textit{stratified-k-fold-cross-validation}, pois este é um dos mais recomendados para bases de dados pequenas, como já discutido em \ref{subsec:evaluationMethods}. 
 
--testa com alguma combinação distinta dos parâmetros acima
-t_num_width, t_num_mass, t_num_diameter 
+A justificativa de se utilizar das redes neurais como algoritmo do modelo é que além de ter resultados satisfatórios, esta se encaixa muito bem em espaço de \textit{features} não separáveis linearmente (seção \ref{sec:classificacao}), este espaço não linearmente separável pôde ser demonstrado pelas Figuras \ref{fig:plotall1}, \ref{fig:plotall2}, \ref{fig:plotall3}. A rede neural do modelo contém somente uma camada escondida (Figura \ref{fig:rede_neural_2atr}), pois é o suficiente para aproximação de qualquer função contínua\cite{Pasini:2015}, que pode ser visualizada nas figuras \ref{fig:tw_ad} e \ref{fig:tw_tm}.
 
-\section{Metodologia para validação dos modelos}
+\begin{figure}[!htb] \centering 
+  \centering
+  \includegraphics[width=0.8\columnwidth]{experimento/rede_neural_2atr} 
+  \caption{Rede neural multilayer perceptron com uma camada escondida e dois neurônios de saída. } 
+  \label{fig:rede_neural_2atr}
+\end{figure}
 
-**ver se dar tempo de gerar curva roc(verifdicar o motivo da roc, é viavel para este cenário) e precision e recall dos resultados dos 3 modelos**
-
-MOTIVO:
-escolher os melhores parametros para o modelo em questão, neste caso, rede neural.
+Diante dos pares de atributos selecionados na etapa de seleção anterior (seção \ref{sec:construmrn}), utilizou-se o método \textit{stratified-k-fold-cross-validation} com a finalidade de verificar a generalização dos dois modelos e comparalá-los.
 
  machine learning and statistics, feature selection, also known as variable selection, attribute selection or variable subset selection, is the process of selecting a subset of relevant features (variables, predictors) for use in model construction. Feature selection techniques are used for three reasons:
 
@@ -145,15 +140,7 @@ escolher os melhores parametros para o modelo em questão, neste caso, rede neur
         shorter training times,
         enhanced generalization by reducing overfitting[2](formally, reduction of variance[1])
 
-The limitation to just one layer of hidden neurons is justified by the fact that one hidden layer is enough to approximate any continuous function (6,7).\cite{Pasini:2015}
-
--Verifica a generalização utilizando técnicas estaitisticas, tais como, stratifyed-k-crossvalidation e/ou randomized-holdout
-
--escolhe o melhor modelo baseado no que você quer do modelo, neste caso o que tiver melhor recall, seguido de accuracy. POIS É MELHOR ERRAR DIZENDO QUE É, DO QUE ERRAR DIZENDO QUE NÃO É.
-
--gera um classificador com todo o dataset verificado na etapa anterior.
--testa esse classificador com um dataset distinto do anterior.
--DEMONSTRA OS RESULTADOS E COMPARA COM OS TESTES ANTERIORES.
+Observando um pouco mais as características dos objetos da cesta (Figura \ref{fig:lista_objetos}), percebe-se que existem objetos que não possuem nem largura nem comprimento, estes são os objetos que possuem diâmetro. Talvez somente esses pares de características não seja suficiente para se ter uma excelente generalização para cestas com características que não participaram da execução do cenário. Desta forma, após realizar os procedimentos para testar a generalização do modelo 
 
 \section{Resultados}
 -modelo de clasificado bom para o cenário
