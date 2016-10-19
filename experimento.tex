@@ -82,7 +82,7 @@ Os dados coletados na etapa de execução do cenário ``Levar carga'', 66 cestas
 
 Com a seleção prévia desses atributos, constriu-se um arquivo ``arff'', que é o tipo de arquivo padrão utilizado como \textit{dataset} pelo Weka\cite{Hall:2009}. Este \textit{dataset} é composto de 46 instâncias, cada uma com 11 atributos mais um que identifica a qual classe pertence. As outras 20 instâncias serão deixadas para um possível teste no cenário proposto, já com um classificador satisfatório, caso este seja possível de se construir.
 
-O próximo passo utilizado nesse processo de seleção de atributos foi o de visualizar estes novos parâmetros par a par, e verificar quais pares parecem melhor separar as classes ``é efeito colateral'' ou ``não é efeito colateral''. Nas Figuras \ref{fig:plotall1}, \ref{fig:plotall2}, \ref{fig:plotall3} pode-se ter uma ideia de tal visualização. Dentre essas plotagens foram selecionadas duas plotagens (Figuras \ref{fig:tw_ad} e \ref{fig:tw_tm}), as quais parecem melhor separar as classes, são respectivamente os pares ordenados (mediaDiametro, totalLargura) e (totalMassa, totalLargura). Então, desta fase inicial de seleção dos atributos, estes foram os pares selecionados, e serão utilizados na construção de dois modelos. Observe que após realizado a seleção dos atributos o espaço de \textit{features} foi reduzido a duas características.
+O próximo passo utilizado nesse processo de seleção de atributos foi o de visualizar estes novos parâmetros par a par, e verificar quais pares parecem melhor separar as classes ``é efeito colateral'' ou ``não é efeito colateral''. Nas Figuras \ref{fig:plotall1}, \ref{fig:plotall2}, \ref{fig:plotall3} pode-se ter uma ideia de tal visualização. Dentre essas plotagens foram selecionadas três plotagens (Figuras \ref{fig:sl_sm}, \ref{fig:sd_sl} e \ref{fig:ma_sl}), as quais parecem melhor separar as classes, são respectivamente os pares ordenados (somaLargura, somaMassa), (somaDiâmetro, somaLargura) e (médiaAltura, somaLargura). Então, desta fase inicial de seleção dos atributos, estes foram os pares selecionados, e serão utilizados na construção de três modelos. Observe que após realizado a seleção dos atributos o espaço de \textit{features} foi reduzido a duas características.
 
 \begin{figure}[!htb] \centering 
   \centering
@@ -107,18 +107,24 @@ O próximo passo utilizado nesse processo de seleção de atributos foi o de vis
 
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=0.8\columnwidth]{experimento/tw_ad} 
-  \caption{Plotagem dos atributos (mediaDiametro, totalLargura). } 
-  \label{fig:tw_ad}
+  \includegraphics[width=0.8\columnwidth]{experimento/sl_sm} 
+  \caption{Plotagem dos atributos (somaLargura, somaMassa). } 
+  \label{fig:sl_sm}
 \end{figure}
 
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=0.8\columnwidth]{experimento/tw_tm} 
-  \caption{Plotagem dos atributos (totalMassa, totalLargura). } 
-  \label{fig:tw_tm}
+  \includegraphics[width=0.8\columnwidth]{experimento/sd_sl} 
+  \caption{Plotagem dos atributos (somaDiâmetro, somaLargura). } 
+  \label{fig:sd_sl}
 \end{figure}
 
+\begin{figure}[!htb] \centering 
+  \centering
+  \includegraphics[width=0.8\columnwidth]{experimento/ma_sl} 
+  \caption{Plotagem dos atributos (médiaAltura, somaLargura). } 
+  \label{fig:ma_sl}
+\end{figure}
 
 \section{Construção e validação do modelo de redes neurais}
 Para esta etapa de validação de modelo (algoritmo multilayer perceptron e \textit{dataset}) escolheu-se o método avaliativo \textit{stratified-k-fold-cross-validation}, pois este é um dos mais recomendados para bases de dados pequenas, como já discutido em \ref{subsec:evaluationMethods}. 
@@ -140,9 +146,6 @@ Diante dos pares de atributos selecionados na etapa de seleção anterior (seç�
         shorter training times,
         enhanced generalization by reducing overfitting[2](formally, reduction of variance[1])
 
-Observando um pouco mais as características dos objetos da cesta (Figura \ref{fig:lista_objetos}), percebe-se que existem objetos que não possuem nem largura nem comprimento, estes são os objetos que possuem diâmetro. Talvez somente esses pares de características não seja suficiente para se ter uma excelente generalização para cestas com características que não participaram da execução do cenário. Desta forma, após realizar os procedimentos para testar a generalização do modelo 
+Observando um pouco mais as características dos objetos da cesta (Figura \ref{fig:lista_objetos}), percebe-se que existem objetos que não possuem nem largura nem comprimento, estes são os objetos que possuem diâmetro. Talvez somente esses pares de características não seja suficiente para se ter uma excelente generalização para cestas com características que não participaram da execução do cenário. Desta forma, após realizar os procedimentos para testar a generalização do modelo... 
 
 \section{Resultados}
--modelo de clasificado bom para o cenário
--implantar o classificador no sistema
-Para verificar a vericidade da hipótese...
