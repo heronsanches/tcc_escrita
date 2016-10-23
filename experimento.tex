@@ -127,21 +127,7 @@ O próximo passo utilizado nesse processo de seleção de atributos foi o de vis
 \end{figure}
 
 \section{Construção e validação do modelo de redes neurais}
-Para esta etapa de validação de modelo (algoritmo multilayer perceptron e \textit{dataset}) escolheu-se o método avaliativo \textit{stratified-k-fold-cross-validation}, pois este é um dos mais recomendados para bases de dados pequenas, como já discutido em \ref{subsec:evaluationMethods}. 
-
-A justificativa de se utilizar das redes neurais como algoritmo do modelo é que além de ter resultados satisfatórios, esta se encaixa muito bem em espaço de \textit{features} não separáveis linearmente (seção \ref{sec:classificacao}), este espaço não linearmente separável pôde ser demonstrado pelas Figuras \ref{fig:plotall1}, \ref{fig:plotall2}, \ref{fig:plotall3}. A rede neural do modelo contém somente uma camada escondida (Figura \ref{fig:rede_neural_2atr}), pois é o suficiente para aproximação de qualquer função contínua\cite{Pasini:2015}, que pode ser visualizada nas figuras \ref{fig:tw_ad} e \ref{fig:tw_tm}.
-
-\begin{figure}[!htb] \centering 
-  \centering
-  \includegraphics[width=0.8\columnwidth]{experimento/rede_neural_2atr} 
-  \caption{Rede neural multilayer perceptron com uma camada escondida e dois neurônios de saída. } 
-  \label{fig:rede_neural_2atr}
-\end{figure}
-
-Diante dos pares de atributos selecionados na etapa de seleção anterior (seção \ref{sec:construmrn}), utilizou-se o método \textit{stratified-k-fold-cross-validation} com a finalidade de verificar a generalização dos dois modelos e comparalá-los.
-
-Observando um pouco mais as características dos objetos da cesta (Figura \ref{fig:lista_objetos}), percebe-se que existem objetos que não possuem nem largura nem comprimento, estes são os objetos que possuem diâmetro. Talvez somente esses pares de características não seja suficiente para se ter uma excelente generalização para cestas com características que não participaram da execução do cenário. Desta forma, após realizar os procedimentos para testar a generalização do modelo... 
-
+P
 \section{Resultados}
 
 \begin{figure}[!htb] \centering 
