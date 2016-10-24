@@ -100,7 +100,7 @@ Adotando esse padrão, os dispositivos podem ter suas propriedades disponíveis 
 \begin{figure}[!htb] \centering 
   \centering
   \includegraphics[width=0.8\columnwidth]{fundamentacao/elevator_sensor_example} 
-  \caption{Dispositivo sensor de obstáculo do elevador disponibilizado como serviço. Faixa de detecção compatível com a largura do elevador utilizado na maquete do experimento    \ref{ch:experimento}} 
+  \caption{Dispositivo sensor de obstáculo do elevador disponibilizado como serviço. Faixa de detecção compatível com a largura do elevador utilizado na maquete do cenário (Figura \ref{fig:cenario_real})} 
   \label{fig:dispnavegador}
 \end{figure}
 
@@ -172,7 +172,7 @@ Dentre as técnicas online, \textit{Feature Interaction Manager - FIM} é uma da
 \label{sec:hns}
 Diferentes sensores e aparelhos domésticos a exemplo de lâmpadas, ar-condicionadores, sistema de segurança e entretenimento, além de interagirem dentro do ambiente doméstico, podem ser conectados a Internet e controlados por um \textit{smartphone} ou qualquer outro dispositivo da IoT. Desta forma pode-se não só controlar os dispositivos como também monitorar o ambiente doméstico (temperatura, consumo de energia, dentre outros). Uma casa com essas características é comumente chamada de \textit{Smart Home} e é normalmente implementada como um \textit{Home Network System} \cite{Piyare:2013}.
 
-Um \textit{Home Network System} (HNS) é uma rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de conectividade de rede e, interface de controle e monitoramento. Nesse tipo de sistema os aparelhos e sensores podem juntos prover novas funcionalidades, as quais atendam as expectativas do usuário, como por exemplo, ``Levar compras'' (seção \ref{ch:experimento}). Os aparelhos e sensores dessa rede podem ser disponibilizados como serviços Web RESTFul. O HNS tem um componente denominado de \textit{Home Server}, este acessa os dispositivos através de APIs e disponibiliza as funcionalidades ao usuário final. O HS também pode atuar de outra forma, detectando e resolvendo efeitos colaterais indesejáveis (seção \ref{sec:featureinteraction}), para isto é incorporado ao HS um novo componente de software, o \textit{Feature Interaction Manager} (FIM). O HS ainda pode servir de mediador para redes externas, ou seja, este pode disponibilizar cada serviço de forma única na Internet, para isto, basta ter um endereço IP público estático e oferecer seus serviços através de uma API, por exemplo, uma API que segue os princípios REST. Desta forma, cada dispositivo do HNS pode ser identificado unicamente na chamada Internet das Coisas \cite{Nakamura:2009}, \cite{Ikegami:2013}. Este trabalho replica um cenário de HNS, conforme descrito na seção \ref{**}.
+Um \textit{Home Network System} (HNS) é uma rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de conectividade de rede e, interface de controle e monitoramento. Nesse tipo de sistema os aparelhos e sensores podem juntos prover novas funcionalidades, as quais atendam as expectativas do usuário, como por exemplo, ``Levar compras'' (seção \ref{sec:cenario}). Os aparelhos e sensores dessa rede podem ser disponibilizados como serviços Web RESTFul. O HNS tem um componente denominado de \textit{Home Server}, este acessa os dispositivos através de APIs e disponibiliza as funcionalidades ao usuário final. O HS também pode atuar de outra forma, detectando e resolvendo efeitos colaterais indesejáveis (seção \ref{sec:featureinteraction}), para isto é incorporado ao HS um novo componente de software, o \textit{Feature Interaction Manager} (FIM). O HS ainda pode servir de mediador para redes externas, ou seja, este pode disponibilizar cada serviço de forma única na Internet, para isto, basta ter um endereço IP público estático e oferecer seus serviços através de uma API, por exemplo, uma API que segue os princípios REST. Desta forma, cada dispositivo do HNS pode ser identificado unicamente na chamada Internet das Coisas \cite{Nakamura:2009}, \cite{Ikegami:2013}. Este trabalho replica um cenário de HNS, conforme descrito na seção \ref{sec:cenario}.
 
 Para que o FIM (seção \ref{sec:featureinteraction}) possa prover a detecção de efeitos colaterais indesejáveis será proposto (seção \ref{ch:proposta}) utilizar algum procedimento de classificação, tema abordado na seção \ref{sec:classificacao} seguinte.
 
@@ -296,7 +296,7 @@ O desvio padrão pode ser medido de acordo com a fórmula \ref{eq:standarddev}, 
   \label{eq:standarddevsub}
 \end{equation}
 
-Uma exemplificação da mensuração do desvio padrão pode ser realizada com os dados da Tabela \ref{table:datakcrossvalidation} e aplicação da fórmula \ref{eq:standarddev}. Os elementos \textit{$x_{i}$} (\textit{recall}) da população foram gerados utilizando \textit{stratified-10-fold-cross-validation} em cima de um dos \textit{datasets} gerados através dos experimentos realizados neste trabalho (\ref{sec:**}) e com o classificador \textit{multilayer perceptron}. A soma dos \textit{$x_{i}-\bar{x}$}, na segunda coluna da tabela, gerou um valor diferente de zero devido a aproximação realizada para duas casas decimais, o correto seria 0 (zero). A aplicação da fórmula neste cenário pode ser visualizada em \ref{eq:standarddevapli}.
+Uma exemplificação da mensuração do desvio padrão pode ser realizada com os dados da Tabela \ref{table:datakcrossvalidation} e aplicação da fórmula \ref{eq:standarddev}. Os elementos \textit{$x_{i}$} (\textit{recall}) da população foram gerados utilizando \textit{stratified-10-fold-cross-validation} em cima de um dos \textit{datasets} gerados através de tetes iniciais realizados neste trabalho com o classificador MLP. A soma dos \textit{$x_{i}-\bar{x}$}, na segunda coluna da tabela, gerou um valor diferente de zero devido a aproximação realizada para duas casas decimais, o correto seria 0 (zero). A aplicação da fórmula neste cenário pode ser visualizada em \ref{eq:standarddevapli}.
 
 \begin{equation} 
   Desvio~padrão~(S) = \sqrt{\frac{\sum{(x_{i}-\bar{x})^2}}{n}}=\sqrt{\frac{4173.42}{10}}=24.43\%
@@ -332,7 +332,7 @@ Uma exemplificação da mensuração do desvio padrão pode ser realizada com os
        $\sum=$808.34 & 0.04 &  4173.42\\
     \hline
   \end{tabular}
-  \caption{Medidas \textit{recall} mensuradas a partir da aplicação da técnica \textit{stratified-10-fold-cross-validation} com o classificador \textit{multilayer perceptron} sobre um dos \textit{datasets} gerados nos experimentos deste trabalho (seção \ref{ch:experimento}). Tabela baseada em \cite{Kerr:2002}.}
+  \caption{Medidas \textit{recall} mensuradas a partir da aplicação da técnica \textit{stratified-10-fold-cross-validation} com o classificador MLP sobre um dos \textit{datasets} gerados nos testes iniciais deste trabalho. Tabela baseada em \cite{Kerr:2002}.}
   \label{table:datakcrossvalidation}
 \end{table}
                     

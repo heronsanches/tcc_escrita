@@ -67,11 +67,13 @@ Os próximos passos (3, 4, 5, e 6) do cenário podem ser executados sem mais pro
   \label{fig:garra_pegando_objeto}
 \end{figure}
 
+\subsection{Observação do problema}
+\label{subsec:obsproblema}
 Para a execução deste cenário foram confeccionadas e cadastradas no banco 59 cestas distintas. Antes de registrar as cestas no banco sempre era observado se a cesta cabia dentro do elevador quando colocadas de forma manual, e se também não ultrapassava os limites da porta, o limite de detecção do sensor de obstáculos. Então a cesta só era registrada caso coubesse no elevador e não estivesse em área que pudesse obstruir a porta.
 
 O cenário foi executado 59 vezes, uma para cada cesta, e pode-se observar que em algumas vezes o comportamento da garra provocava um efeito colateral indesejável (seção \ref{sec:featureinteraction}) na funcionalidade ``Levar compras'', pois a garra durante a execução do seu serviço (pegar cesta, mover de uma lado a outro , largar cesta) acabava por vezes não conseguindo que a cesta ficasse disposta dentro do elevador de uma maneira em que este pudesse continuar com o serviço de ``Levar compras'', mesmo que para todos esses casos se esperasse sempre como resultado o elevador levar as compras sem problemas, já que se era sabido que as cestas cabiam no elevador e, nenhuma delas feria as restrições de massa do carro nem do elevador. Tanto o veículo quanto o elevador sempre funcionaram de maneira esperada nestas execuções, pois o veículo sempre levava a carga para o local destinado avisando quando chegasse, e o elevador sempre acionava o serviço da garra, levava a carga  e avisava ao FIM quando não tinha obstáculo na porta, enquanto deixava de levar quando tinha, funcionando de maneira correta quanto as especificações de sua funcionalidade de locomoção, mas indo contra o comportamento esperado da funcionalidade pai ``Levar carga''. 
 
-Concluindo as observações feitas até agora, o comportamento da garra junto com os tipos de objetos presentes na cesta faziam com que algumas vezes ocorressem locomoção destes durante o transporte da garra, e também no momento em que os objetos eram postos no compartimento do elevador. Nesse momento, os objetos as vezes geravam outras dimensões de cesta e/ou deslocamento da mesma, devido a natureza dos objetos e da forma como os objetos eram soltos pela garra. Sendo assim, para tentar detectar esses efeitos colaterais indesejáveis através do DECORATE, utilizou-se dos valores das grandezas físicas dos objetos (altura, massa, largura, comprimento, diâmetro) para gerar características que pudessem ser interessantes para a construção de modelos de classificadores satisfatórios (ver seção \ref{sec:construmrn}). Vale salientar que esta informação da cesta é uma resposta do veículo terrestre referente a requisição ``3'' da Figura \ref{fig:cenario}, ou seja, é uma das informações que os dispositivos e/ou serviços trocam entre si durante a excecução de algum serviço.
+Concluindo as observações feitas até agora, o comportamento da garra junto com os tipos de objetos presentes na cesta faziam com que algumas vezes ocorressem locomoção destes durante o transporte da garra, e também no momento em que os objetos eram postos no compartimento do elevador. Nesse momento, os objetos as vezes geravam outras dimensões de cesta e/ou deslocamento da mesma, devido a natureza dos objetos e da forma como os objetos eram soltos pela garra. Sendo assim, para tentar detectar esses efeitos colaterais indesejáveis através do DECORATE, utilizou-se dos valores das grandezas físicas dos objetos (altura, massa, largura, comprimento, diâmetro) para gerar características que pudessem ser interessantes para a construção de modelos de classificadores satisfatórios (seção \ref{sec:constvalidacao}). Vale salientar que esta informação da cesta é uma resposta do veículo terrestre referente a requisição ``3'' da Figura \ref{fig:cenario}, ou seja, é uma das informações que os dispositivos e/ou serviços trocam entre si durante a excecução de algum serviço.
 
 Como todas as cestas estavam previamente cadastradas no banco de dados, a estas foram atribuídos valores de ``é efeito colateral'' ou ``não é efeito colateral'', a medida que se observava cada execução do cenário. Desta forma, será considerado para detecção de efeitos colaterais indesejáveis as informações das cestas.
 
@@ -81,7 +83,7 @@ Os dados coletados na etapa de execução do cenário ``Levar carga'', 59 cestas
 
 Com a seleção prévia desses atributos, constriu-se um arquivo ``arff'', que é o tipo de arquivo padrão utilizado como \textit{dataset} pelo Weka \cite{Hall:2009}. Este \textit{dataset} é composto de 59 instâncias (referente as 59 cestas), cada uma com 11 atributos mais um que identifica a qual classe pertence. Então têm-se 11 atributos númericos e um nominal (a classe a qual a instância pertence).
 
-O próximo passo utilizado nesse processo de seleção de atributos foi o de visualizar estes novos parâmetros par a par, e verificar quais pares parecem melhor separar as classes ``é efeito colateral'' ou ``não é efeito colateral''. Nas Figuras \ref{fig:plotall1}, \ref{fig:plotall2}, \ref{fig:plotall3} pode-se ter uma ideia de tal visualização. Dentre essas plotagens foram selecionadas três da Figura \ref{fig:eixos_4_atributos}, as quais aparentam melhor separar as classes, são respectivamente os pares ordenados (somaLargura, somaMassa) - ``sl x sm'', (somaDiâmetro, somaLargura) - ``sd x sl'' e, (médiaAltura, somaLargura) - ``ma x sl''. Então, nesta fase de seleção dos atributos, estes foram os pares selecionados para construção e validação do modelo (seção \ref{sec:constvalidacao} seguinte). Observe que o espaço de \textit{features} foi reduzido a duas características.
+O próximo passo utilizado nesse processo de seleção de atributos foi o de visualizar estes novos parâmetros par a par, e verificar quais pares parecem melhor separar as classes ``é efeito colateral'' ou ``não é efeito colateral''. A Figura \ref{fig:plotall1} passa a ideia de tal visualização. Dentre essas plotagens foram selecionadas três da Figura \ref{fig:eixos_4_atributos}, as quais aparentam melhor separar as classes, são respectivamente os pares ordenados (somaLargura, somaMassa) - ``sl x sm'', (somaDiâmetro, somaLargura) - ``sd x sl'' e, (médiaAltura, somaLargura) - ``ma x sl''. Então, nesta fase de seleção dos atributos, estes foram os pares selecionados para construção e validação do modelo (seção \ref{sec:constvalidacao} seguinte). Observe que o espaço de \textit{features} foi reduzido a duas características.
 
 \begin{figure}[!htb] \centering 
   \centering
@@ -97,17 +99,24 @@ O próximo passo utilizado nesse processo de seleção de atributos foi o de vis
   \label{fig:eixos_4_atributos}
 \end{figure}
 
-\section{Construção e Validação do modelo de classificador}
+\section{Validação do modelo de classificador}
 \label{sec:constvalidacao}
 Diante dos pares de atributos selecionados na etapa anterior (seção \ref{sec:selecaodados}), utilizou-se o método \textit{stratified-10-fold-cross-validation} (repetido dez vezes) juntamente com o \textit{ensemble DECORATE} a fim de se construir e verificar se é possível generalizar pelo menos um modelo. 
 
-Em cada validação construi-se um modelo com diferentes frações do dataset, variando de 16 instâncias a 59 instâncias. Os parâmetros do DECORATE escolhidos neste trabalho foram semelhantes a um dos testes avaliativos realizados em \cite{Melville:2004}, nos quais comparam \textit{DECORATE} com outros métodos classificatórios, em diferentes tamanhos de dataset e diferentes parâmetros do DECORATE. Para as avaliações neste trabalho o número de iterações é setado em 50, o número máximo de classificadores participantes no \textit{ensemble} é setado em 14, o classificador base utilizado é o J48 e, a quantidade de exemplos artificiais gerados em cada iteração é setado para 100\% (valores setados de 50\% a 100\% não faz variar muito o resultado \cite{Melville:2004}) do tamanho do dataset de treino. Os resultados das avaliações podem ser vistos na Figura \ref{fig:accuracy_precision_recall}. Nesta percebe-se um domínio quase absoluto da curva pontuada de aprendizado verde (médiaAltura, somaLargura - ``ma x sl''). Por esso motivo essa será a curva analisada para escolher um modelo o mais adequado possível para implantar no FIM. Como o principal motivo da implantação do classificador no FIM é detectar efeitos colaterais indesejáveis, então pretende-se que o modelo tenha um alto índice de \textit{recall}, pois não se deseja que se tenha muitos falso negativos, ou seja, muitos casos classificados como não sendo efeito colateral, mas que na verdade era. Visualizando a curva percebe-se que esta têm um crescimento acentuado e depois torna-se estável a partir do dataset com 30 instâncias. Logo fará-se uma análise a partir deste ponto, os maiores valores de \textit{recall} partindo deste ponto são aqueles quando o \textit{dataset} tem 40 ou mais instâncias. Então a análise final será realizada em cima desses dados. Estes valores podem ser visualizados na Tabela \ref{table:valorescurva}.
+Em cada validação construi-se um modelo com diferentes frações do dataset, variando de 16 instâncias a 59 instâncias. Os parâmetros do DECORATE escolhidos neste trabalho foram semelhantes a um dos testes avaliativos realizados em \cite{Melville:2004}, nos quais comparam \textit{DECORATE} com outros métodos classificatórios, em diferentes tamanhos de dataset e diferentes parâmetros do DECORATE. Para as avaliações neste trabalho o número de iterações é setado em 50, o número máximo de classificadores participantes no \textit{ensemble} é setado em 14, o classificador base utilizado é o J48 e, a quantidade de exemplos artificiais gerados em cada iteração é setado para 100\% (valores setados de 50\% a 100\% não faz variar muito o resultado \cite{Melville:2004}) do tamanho do dataset de treino. Os resultados das avaliações podem ser vistos na Figura \ref{fig:accuracy_precision_recall}. Nesta percebe-se um domínio quase absoluto da curva pontuada de aprendizado verde (médiaAltura, somaLargura - ``ma x sl''). Por esso motivo essa será a curva analisada para escolher um modelo o mais adequado possível para implantar no FIM. Como o principal motivo da implantação do classificador no FIM é detectar efeitos colaterais indesejáveis, então pretende-se que o modelo tenha um alto índice de \textit{recall}, pois não se deseja que se tenha muitos falso negativos, ou seja, muitos casos classificados como não sendo efeito colateral, mas que na verdade era. Visualizando a curva percebe-se que esta têm um crescimento acentuado e depois torna-se estável a partir do dataset com 30 instâncias. Logo fará-se uma análise a partir deste ponto. Os maiores valores de \textit{recall} partindo deste ponto são aqueles quando o \textit{dataset} tem 40 ou mais instâncias, para todos estes pontos considera que se obteve um bom grau de generalização. Estes valores podem ser visualizados na Tabela \ref{table:valorescurva}. 
+
+\begin{figure}[!htb] \centering 
+  \centering
+  \includegraphics[width=1.0\columnwidth]{experimento/accuracy_precision_recall} 
+  \caption{\textit{Accuracy}, \texit{Precision} e \textit{Recall} obtidas utilizando stratified-10-fold-crossvalidation (repetido 10 vezes) e DECORATE sobre diferentes frações do \textit{dataset} com os pares de parâmetros  selecionados na seção \ref{sec:selecaodados}.} 
+  \label{fig:accuracy_precision_recall}
+\end{figure}
 
 \begin{table}[!htp]
   \centering
   \begin{tabular}{ |l|c c c c c|}
     \hline
-       {\bf nº i} & {\bf 40} & {\bf 45} & {\bf 50} & {\bf 55} & {\bf 58} \\
+       {\bf \textbf{$n^o i$}} & {\bf 40} & {\bf 45} & {\bf 50} & {\bf 55} & {\bf 58} \\
     \hline
        \textbf{A, DP} & 92.5, 0 & 92.75, 1.78 & 88.8, 1.6 & 91.13, 1.56 & 92.33, 1.89 \\
     \hline
@@ -120,91 +129,39 @@ Em cada validação construi-se um modelo com diferentes frações do dataset, v
   \label{table:valorescurva}
 \end{table}
 
+Finalizando a análise decidiu-se que o melhor ponto para poder se construir um classificador é o com $n^o i = 45$, pois além de se ter um alto grau de \textit{recall} e \textit{accuracy} têm-se também \textit{precision} quase de 100\%. Então, para se construir um classificador final com base neste modelo escolheu-se randomicamente 45 instâncias do \textit{dataset} de 59 instâncias e aplicou-se \textit{stratified-10-fold-cross-validation} (repetido dez vezes). Este procedimento foi repetido diversas vezes (Figura \ref{fig:apr45_dev}) até que se obtivesse um modelo que satisfizesse a expressão \ref{eq:esxpvalclass}. O modelo que satisfez essa expressão obteve resultados que podem ser vistos na Tabela \ref{table:valmodelfinal} e este será o modelo final de classificador que será implantado no FIM. 
+
+\begin{equation}
+  (\textit{accuracy} \geq (92.75-1.78)) \wedge (\textit{precision} \geq (99.17-1.71)) \wedge (\textit{recall} \geq 90.25)
+  \label{eq:esxpvalclass}
+\end{equation}
+
+\begin{table}[!htp]
+  \centering
+  \begin{tabular}{ |l|c|c|}
+    \hline
+       {\bf } & {\bf } & {\bf DP \%} \\
+    \hline
+       \textbf{Accuracy} \% & 98.05 & 1.81 \\
+    \hline
+       \textbf{Precision} \% & 98.5 & 3.2 \\
+    \hline
+       \textbf{\textit{Recall} \%} & 97.67 & 2 \\
+    \hline
+  \end{tabular}
+  \caption{Valores da validação do modelo final. DP (Desvio Padrão).}
+  \label{table:valmodelfinal}
+\end{table}
+
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=1.0\columnwidth]{experimento/accuracy_precision_recall} 
-  \caption{\textit{Accuracy}, \texit{Precision} e \textit{Recall} obtidas utilizando stratified-10-fold-crossvalidation (repetido 10 vezes) e DECORATE sobre diferentes frações do \textit{dataset} com os pares de parâmetros  selecionados na seção \ref{sec:selecaodados}.} 
-  \label{fig:accuracy_precision_recall}
+  \includegraphics[width=1.0\columnwidth]{experimento/apr45_dev} 
+  \caption{\textit{stratified-10-fold-cross-validation} (repetido dez vezes). 45 instâncias foram escolhidas randomicamente em cima do \textit{dataset} de 59 instâncias. Procedimento repetido até que satisfizesse a expressão \ref{eq:esxpvalclass} } 
+  \label{fig:apr45_dev}
 \end{figure}
 
-\section{Resultado - Implantação do classificador no FIM}
+\section{Resultados}
 \label{sec:resultados}
+Como provado na seção \ref{sec:constvalidacao} é possível construir um modelo de classificador que tenha um alto grau de generalização para o problema observado na seção \ref{subsec:obsproblema}. Sendo assim este foi implantado no FIM do HNS (Figura \ref{fig:hnsworkmodel}) afim de detectar efeitos colaterais indesejáveis no cenário da Figura \ref{fig:cenario}.
 
-%\begin{tikzpicture}
-%\begin{axis}[
- %   xlabel={tamanho \textit{dataset}},
-  %  ylabel={Precision \%},
-   % xmin=10, xmax=63,
-    %ymin=60, ymax=100,
-    %xtick={10,16,20,25,30,35,40,45,50,55,58,62},
-    %ytick={60,70,80,90,100},
-    %legend pos=south east ,
-    %ymajorgrids=true,
-    %grid style=dashed,
-%]
- 
-%\addplot[%sl x sm
- %   color=blue,
-  %  mark=square,
-   % ]
-    %coordinates {
-     %(16,72.86)(20,90)(25,78.57)(30,94)(35,68)(40,100)(45,86)(50,85)(55,87.83)(59,88.83)
-    %};
-
-%\addplot[%sd x sl
- %   color=orange,
-  %  mark=square,
-   % ]
-    %coordinates {
-     % (16,60)(20,83.33)(25,71.25)(30,97.5)(35,85.5)(40,84)(45,71)(50,88)(55,85)(58,88.17)
-    %};
-%\addplot[%ma x sl
- %   color=green,
-  %  mark=square,
-   % ]
-    %coordinates {
-     % (16,88.89)(20,90)(25,91)(30,81)(35,89)(40,93.5)(45,99.17)(50,93.17)(55,92.17)(58,92.5)
-   % };
-
-%\legend{sl x sm, sd x sl, ma x sl}
- 
-%\end{axis}
-%\end{tikzpicture}
-
-%\begin{tikzpicture}
-%\begin{axis}[
- %   xlabel={tamanho \textit{dataset}},
-  %  ylabel={desvio padrão \%},
-   % xmin=10, xmax=63,
-    %ymin=0, ymax=9,
-    %xtick={10,16,20,25,30,35,40,45,50,55,58,62},
-    %ytick={1,2,3,4,5,6,7,8,9},
-    %ymajorgrids=true,
-    %grid style=dashed,
-%]
- 
-%\addplot[%sl x sm
- %   color=blue,
-  %  mark=square,
-   % ]
-    %coordinates {
-%(16,7.69)(20,7.5)(25,7.14)(30,3.74)(35,7.48)(40,0)(45,3)(50,4.47)(55,3.25)(59,2.79)
- %   };
-
-%\addplot[%sd x sl
- %   color=orange,
-  %  mark=square,
-   % ]
-    %coordinates {
-     %(16,8.16)(20,0)(25,9.76)(30,4.03)(35,7.23)(40,4.9)(45,7.35)(50,2.45)(55,2.79)(58,5.13)
-    %};
-%\addplot[%ma x sl
- %   color=green,
-  %  mark=square,
-   % ]
-    %coordinates {
-%(16,0)(20,5)(25,5.83)(30,3.74)(35,4.9)(40,2.29)(45,1.71)(50,2.93)(55,3.25)(58,2.81)
- %   };
- 
-%\end{axis}
-%\end{tikzpicture}
+O classificador atua exatamente no momento em que o serviço veículo responde a requisição do FIM na etapa 3 da Figura (\ref{fig:cenario}). Nesta etapa o veículo primeiramente captura o ``id\_cesta'' (banco de dados) passado a ele pelo FIM. Então o veículo utiliza uma funcionalidade do serviço FIM que captura a cesta correspondente ao ``id\_cesta'', transforma-a em um arquivo ``arff'' contendo somente uma instância com os parâmetros correspondentes a ``somaLargura, mediaAltura, classe'', sendo a classe com valor não rotulado (valor esquecido), ou seja, não sabe-se a qual classe pertence (``é efeito colateral'' ou ``não é efeito colateral''). O FIM então salva este arquivo e retorna o caminho do arquivo como resposta para o dispositivo veículo. O veículo então responde a requisição 3, sendo um dos dados o caminho do arquivo ``arff'' referente a cesta. Neste momento o FIM utiliza o classificador (uma funcionalidade interna) para predizer se ``é efeito colateral'' ou ``não é efeito colateral'' passando como parâmetro ao classificador o caminho do arquivo ``arff''. Caso o classificador classifique como ``é efeito colateral'' o FIM interrompe o serviço e manda uma mensagem para o usuário. Caso contrário o fluxo do cenário (Figura \ref{fig:cenario}) continua.
