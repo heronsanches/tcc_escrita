@@ -76,133 +76,97 @@ Concluindo as observações feitas até agora, o comportamento da garra junto co
 Como todas as cestas estavam previamente cadastradas no banco de dados, a estas foram atribuídos valores de ``é efeito colateral'' ou ``não é efeito colateral'', a medida que se observava cada execução do cenário. Desta forma, será considerado para detecção de efeitos colaterais indesejáveis as informações das cestas.
 
 \section{Seleção dos dados}
+\label{sec:selecaodados}
 Os dados coletados na etapa de execução do cenário ``Levar carga'', 59 cestas, ainda estão muito brutos, observe que uma cesta deve conter pelo menos um objeto, como também pode conter muitos. Supomos que a cesta tenha 10 objetos, então o total de características da cesta seria $10.5=50$, pois cada objeto possui cinco características. Utilizar as características dos objetos desta forma, além de provavelmente não predizer nada em um modelo de classificação, terá um custo computacional muito elevado. Para diminuir a quantidade de atributos e melhor qualificá-los gerou-se características a partir de todos os atributos dos objetos da cesta: média das alturas, dos comprimentos, das larguras, dos diâmetros e das massas, assim como o total de cada uma dessas medidas, e o total de itens. De ínicio então têm-se a seleção de 11 parâmetros.
 
 Com a seleção prévia desses atributos, constriu-se um arquivo ``arff'', que é o tipo de arquivo padrão utilizado como \textit{dataset} pelo Weka \cite{Hall:2009}. Este \textit{dataset} é composto de 59 instâncias (referente as 59 cestas), cada uma com 11 atributos mais um que identifica a qual classe pertence. Então têm-se 11 atributos númericos e um nominal (a classe a qual a instância pertence).
 
-O próximo passo utilizado nesse processo de seleção de atributos foi o de visualizar estes novos parâmetros par a par, e verificar quais pares parecem melhor separar as classes ``é efeito colateral'' ou ``não é efeito colateral''. Nas Figuras \ref{fig:plotall1}, \ref{fig:plotall2}, \ref{fig:plotall3} pode-se ter uma ideia de tal visualização. Dentre essas plotagens foram selecionadas três plotagens (Figuras \ref{fig:sl_sm}, \ref{fig:sd_sl} e \ref{fig:ma_sl}), as quais aparentam melhor separar as classes, são respectivamente os pares ordenados (somaLargura, somaMassa), (somaDiâmetro, somaLargura) e (médiaAltura, somaLargura). Então, desta fase inicial de seleção dos atributos, estes foram os pares selecionados para análise. Observe que o espaço de \textit{features} foi reduzido a duas características.
+O próximo passo utilizado nesse processo de seleção de atributos foi o de visualizar estes novos parâmetros par a par, e verificar quais pares parecem melhor separar as classes ``é efeito colateral'' ou ``não é efeito colateral''. Nas Figuras \ref{fig:plotall1}, \ref{fig:plotall2}, \ref{fig:plotall3} pode-se ter uma ideia de tal visualização. Dentre essas plotagens foram selecionadas três da Figura \ref{fig:eixos_4_atributos}, as quais aparentam melhor separar as classes, são respectivamente os pares ordenados (somaLargura, somaMassa) - ``sl x sm'', (somaDiâmetro, somaLargura) - ``sd x sl'' e, (médiaAltura, somaLargura) - ``ma x sl''. Então, nesta fase de seleção dos atributos, estes foram os pares selecionados para construção e validação do modelo (seção \ref{sec:constvalidacao} seguinte). Observe que o espaço de \textit{features} foi reduzido a duas características.
 
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=1.0\columnwidth]{experimento/all1_plot} 
-  \caption{Plotagem 1 de todas a médias e totais das características dos objetos, conjugadas par a par.} 
+  \includegraphics[width=1.0\columnwidth]{experimento/all_plot} 
+  \caption{Plotagem do espaço de \textit{features} par a par do \texit{dataset} de 59 instâncias.} 
   \label{fig:plotall1}
 \end{figure}
 
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=1.0\columnwidth]{experimento/all2_plot} 
-  \caption{Plotagem 2 de todas a médias e totais das características dos objetos, conjugadas par a par.} 
-  \label{fig:plotall2}
-\end{figure}
-
-\begin{figure}[!htb] \centering 
-  \centering
-  \includegraphics[width=1.0\columnwidth]{experimento/all3_plot} 
-  \caption{Plotagem 3 de todas a médias e totais das características dos objetos, conjugadas par a par.} 
-  \label{fig:plotall3}
-\end{figure}
-
-\begin{figure}[!htb] \centering 
-  \centering
   \includegraphics[width=0.8\columnwidth]{experimento/eixos_4_atributos} 
-  \caption{... } 
-  \label{fig:sl_sm}
+  \caption{Separação das classes entre os atributos (somaLargura, somaMassa) - ``sl x sm'', (somaDiâmetro, somaLargura) - ``sd x sl'' e, (médiaAltura, somaLargura).} 
+  \label{fig:eixos_4_atributos}
 \end{figure}
 
-Analisando cada par de atributos selecionado e a natureza dos objetos que podem compor uma cesta (Figura \ref{fig:lista_objetos}) pôde-se observar que nos três pares pode ocorrer situações em que somente estes dois atributos não consigam descrever suficientemente bem o problema, como é explanado a seguir.
+\section{Construção e Validação do modelo de classificador}
+\label{sec:constvalidacao}
+Diante dos pares de atributos selecionados na etapa anterior (seção \ref{sec:selecaodados}), utilizou-se o método \textit{stratified-10-fold-cross-validation} (repetido dez vezes) juntamente com o \textit{ensemble DECORATE} a fim de se construir e verificar se é possível generalizar pelo menos um modelo. 
 
-\begin{itemize}
-\item (somaLargura, somaMassa): pode ocorrer casos em que a cesta seja composta somente de objetos que possuam diâmetro, estes não possuem largura e, somente a característica massa não é suficiente para descrever o problema como todo. Como pode ser visualizado na Figura \ref{fig:quadro_medidas_sozinhas} ``somaMassa''.
-\item (somaDiâmetro, somaLargura): a cesta pode ser composta somente com objetos que possuem largura, estes não possuem diâmetro e, somente o parâmetro largura não é suficiente para descrever o problema como todo.
-\item (médiaAltura, somaLargura):
-\end{itemize}
+Em cada validação construi-se um modelo com diferentes frações do dataset, variando de 16 instâncias a 59 instâncias. Os parâmetros do DECORATE escolhidos neste trabalho foram semelhantes a um dos testes avaliativos realizados em \cite{Melville:2004}, nos quais comparam \textit{DECORATE} com outros métodos classificatórios, em diferentes tamanhos de dataset e diferentes parâmetros do DECORATE. Para as avaliações neste trabalho o número de iterações é setado em 50, o número máximo de classificadores participantes no \textit{ensemble} é setado em 14, o classificador base utilizado é o J48 e, a quantidade de exemplos artificiais gerados em cada iteração é setado para 100\% (valores setados de 50\% a 100\% não faz variar muito o resultado \cite{Melville:2004}) do tamanho do dataset de treino. Os resultados das avaliações podem ser vistos na Figura \ref{fig:accuracy_precision_recall}. Nesta percebe-se um domínio quase absoluto da curva pontuada de aprendizado verde (médiaAltura, somaLargura - ``ma x sl''). Por esso motivo essa será a curva analisada para escolher um modelo o mais adequado possível para implantar no FIM. Como o principal motivo da implantação do classificador no FIM é detectar efeitos colaterais indesejáveis, então pretende-se que o modelo tenha um alto índice de \textit{recall}, pois não se deseja que se tenha muitos falso negativos, ou seja, muitos casos classificados como não sendo efeito colateral, mas que na verdade era. Visualizando a curva percebe-se que esta têm um crescimento acentuado e depois torna-se estável a partir do dataset com 30 instâncias. Logo fará-se uma análise a partir deste ponto, os maiores valores de \textit{recall} partindo deste ponto são aqueles quando o \textit{dataset} tem 40 ou mais instâncias. Então a análise final será realizada em cima desses dados. Estes valores podem ser visualizados na Tabela \ref{table:valorescurva}.
+
+\begin{table}[!htp]
+  \centering
+  \begin{tabular}{ |l|c c c c c|}
+    \hline
+       {\bf nº i} & {\bf 40} & {\bf 45} & {\bf 50} & {\bf 55} & {\bf 58} \\
+    \hline
+       \textbf{A, DP} & 92.5, 0 & 92.75, 1.78 & 88.8, 1.6 & 91.13, 1.56 & 92.33, 1.89 \\
+    \hline
+       \textbf{P, DP} & 93.5, 2.29 & 99.17, 1.71 & 93.17, 2.93 &  92.17, 3.25 & 92.5, 2.81 \\
+    \hline
+       \textbf{R, DP} & 91.69, 2.56 & 90.25, 2.21 & 86.33, 1.91 & 89.71, 2.97 & 92.05, 3.06 \\
+    \hline
+  \end{tabular}
+  \caption{Valores das curvas ``ma x sl'' da Figura \ref{fig:accuracy_precision_recall} a partir do \textit{dataset} com 40 instâncias. A (\textit{Accuracy}), P (\textit{Precision}, R (\textit{Recall}), DP (Desvio Padrão), i (instâncias). Os valores A, P, R e DV estão em \%.}
+  \label{table:valorescurva}
+\end{table}
 
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=0.8\columnwidth]{experimento/quadro_medidas_sozinhas} 
-  \caption{Quadro de distribuição das classes de acordo com somente uma característica.} 
-  \label{fig:quadro_medidas_sozinhas}
+  \includegraphics[width=1.0\columnwidth]{experimento/accuracy_precision_recall} 
+  \caption{\textit{Accuracy}, \texit{Precision} e \textit{Recall} obtidas utilizando stratified-10-fold-crossvalidation (repetido 10 vezes) e DECORATE sobre diferentes frações do \textit{dataset} com os pares de parâmetros  selecionados na seção \ref{sec:selecaodados}.} 
+  \label{fig:accuracy_precision_recall}
 \end{figure}
 
-\section{Construção e validação do modelo utilizando DECORATE como método de classificação}
-\label{sec:constvalidacao}**rever e atualizar de acordo com o novo método proposto**
-ara esta etapa de validação de modelo (algoritmo multilayer perceptron e \textit{dataset}) escolheu-se o método avaliativo \textit{stratified-k-fold-cross-validation}, pois este é um dos mais recomendados para bases de dados pequenas, como já discutido em \ref{subsec:evaluationMethods}. 
-
-A justificativa de se utilizar das redes neurais como algoritmo do modelo é que além de ter resultados satisfatórios, esta se encaixa muito bem em espaço de \textit{features} não separáveis linearmente (seção \ref{sec:classificacao}), este espaço não linearmente separável pôde ser demonstrado pelas Figuras \ref{fig:plotall1}, \ref{fig:plotall2}, \ref{fig:plotall3}. A rede neural do modelo contém somente uma camada escondida (Figura \ref{fig:rede_neural_2atr}), pois é o suficiente para aproximação de qualquer função contínua\cite{Pasini:2015}, que pode ser visualizada nas figuras \ref{fig:tw_ad} e \ref{fig:tw_tm}.
-
-Diante dos pares de atributos selecionados na etapa de seleção anterior (seção \ref{sec:construmrn}), utilizou-se o método \textit{stratified-k-fold-cross-validation} com a finalidade de verificar a generalização dos dois modelos e comparalá-los.
-
-Observando um pouco mais as características dos objetos da cesta (Figura \ref{fig:lista_objetos}), percebe-se que existem objetos que não possuem nem largura nem comprimento, estes são os objetos que possuem diâmetro. Talvez somente esses pares de características não seja suficiente para se ter uma excelente generalização para cestas com características que não participaram da execução do cenário. Desta forma, após realizar os procedimentos para testar a generalização do modelo... 
-
-\section{Resultados} **atualizar de acordo com as novas aboradagens oficio**
-
-\begin{figure}[!htb] \centering 
-  \centering
-  \includegraphics[width=1.0\columnwidth]{experimento/sm_gra_dev} 
-  \caption{... } 
-  \label{fig:sm_gra_dev}
-\end{figure}
-
-\begin{figure}[!htb] \centering 
-  \centering
-  \includegraphics[width=1.0\columnwidth]{experimento/ma_gra_dev} 
-  \caption{...} 
-  \label{fig:ma_gra_dev}
-\end{figure}
-
-\begin{figure}[!htb] \centering 
-  \centering
-  \includegraphics[width=1.0\columnwidth]{experimento/sm_ma_gra_dev} 
-  \caption{...} 
-  \label{fig:sm_ma_gra_dev}
-\end{figure}
-
-\begin{figure}[!htb] \centering 
-  \centering
-  \includegraphics[width=1.0\columnwidth]{experimento/sm_sl_sd_ma_gra_dev} 
-  \caption{.. } 
-  \label{fig:sm_sl_sd_ma_gra_dev}
-\end{figure}
+\section{Resultado - Implantação do classificador no FIM}
+\label{sec:resultados}
 
 %\begin{tikzpicture}
 %\begin{axis}[
- %   title={\textit{features}: sm, ma},
-  %  xlabel={tamanho \textit{dataset}},
-   % ylabel={Medida estatística \%},
-    %xmin=10, xmax=60,
-    %ymin=45, ymax=100,
-    %xtick={10,16,20,25,30,35,40,45,50,55,59},
-    %ytick={45,10,20,30,40,50,60,70,80,90,100},
+ %   xlabel={tamanho \textit{dataset}},
+  %  ylabel={Precision \%},
+   % xmin=10, xmax=63,
+    %ymin=60, ymax=100,
+    %xtick={10,16,20,25,30,35,40,45,50,55,58,62},
+    %ytick={60,70,80,90,100},
     %legend pos=south east ,
     %ymajorgrids=true,
     %grid style=dashed,
 %]
  
-%\addplot[%precision
+%\addplot[%sl x sm
  %   color=blue,
   %  mark=square,
    % ]
     %coordinates {
-     %(16,85)(20,80)(25,63)(30,78)(35,77)(40,73)(45,70.33)(50,82.17)(55,73.17)(59,71.5)
+     %(16,72.86)(20,90)(25,78.57)(30,94)(35,68)(40,100)(45,86)(50,85)(55,87.83)(59,88.83)
     %};
 
-%\addplot[%recall
- %   color=yellow,
+%\addplot[%sd x sl
+ %   color=orange,
   %  mark=square,
    % ]
     %coordinates {
-     % (16,85.95)(20,86.09)(25,70.09)(30,84.25)(35,74.88)(40,80.07)(45,77.54)(50,86.02)(55,78)(59,78.64)
+     % (16,60)(20,83.33)(25,71.25)(30,97.5)(35,85.5)(40,84)(45,71)(50,88)(55,85)(58,88.17)
     %};
-%\addplot[%accuracy
- %   color=red,
+%\addplot[%ma x sl
+ %   color=green,
   %  mark=square,
    % ]
     %coordinates {
-     % (16,83.5)(20,82.5)(25,65.67)(30,83.33)(35,67.58)(40,79)(45,74.4)(50,83.6)(55,77.07)(59,77.23)
-    %};
+     % (16,88.89)(20,90)(25,91)(30,81)(35,89)(40,93.5)(45,99.17)(50,93.17)(55,92.17)(58,92.5)
+   % };
 
-%\legend{\textit{Precision}, \textit{Recall}, \textit{Accuracy}}
+%\legend{sl x sm, sd x sl, ma x sl}
  
 %\end{axis}
 %\end{tikzpicture}
@@ -211,36 +175,36 @@ Observando um pouco mais as características dos objetos da cesta (Figura \ref{f
 %\begin{axis}[
  %   xlabel={tamanho \textit{dataset}},
   %  ylabel={desvio padrão \%},
-   % xmin=10, xmax=60,
-    %ymin=0, ymax=12,
-    %xtick={10,16,20,25,30,35,40,45,50,55,59},
-    %ytick={1,2,3,4,5,6,7,8,9,10,11,12},
+   % xmin=10, xmax=63,
+    %ymin=0, ymax=9,
+    %xtick={10,16,20,25,30,35,40,45,50,55,58,62},
+    %ytick={1,2,3,4,5,6,7,8,9},
     %ymajorgrids=true,
     %grid style=dashed,
 %]
  
-%\addplot[%precision
+%\addplot[%sl x sm
  %   color=blue,
   %  mark=square,
    % ]
-   % coordinates {
-    % (16,5)(20,4.44)(25,7.48)(30,8.12)(35,5.42)(40,6.78)(45,4.14)(50,5.63)(55,7.24)(59,4.86)
-    %};
+    %coordinates {
+%(16,7.69)(20,7.5)(25,7.14)(30,3.74)(35,7.48)(40,0)(45,3)(50,4.47)(55,3.25)(59,2.79)
+ %   };
 
-%\addplot[%recall
- %   color=yellow,
+%\addplot[%sd x sl
+ %   color=orange,
   %  mark=square,
    % ]
-   % coordinates {
-    %  (16,5.65)(20,5.46)(25,5.74)(30,6.18)(35,3.93)(40,6.5)(45,4.72)(50,1.86)(55,3.93)(59,3.81)
+    %coordinates {
+     %(16,8.16)(20,0)(25,9.76)(30,4.03)(35,7.23)(40,4.9)(45,7.35)(50,2.45)(55,2.79)(58,5.13)
     %};
-%\addplot[%accuracy
- %   color=red,
+%\addplot[%ma x sl
+ %   color=green,
   %  mark=square,
    % ]
-   % coordinates {
-    %  (16,5.02)(20,3.35)(25,5.12)(30,3.94)(35,4.78)(40,3.74)(45,3.34)(50,2.33)(55,3.68)(59,2.14)
-    %};
+    %coordinates {
+%(16,0)(20,5)(25,5.83)(30,3.74)(35,4.9)(40,2.29)(45,1.71)(50,2.93)(55,3.25)(58,2.81)
+ %   };
  
 %\end{axis}
 %\end{tikzpicture}

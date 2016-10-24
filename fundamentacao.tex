@@ -219,9 +219,9 @@ De modo geral, a metodologia adotada para construção de um classificador é co
 \item Classificador: se o modelo foi validado na etapa anterior, este generaliza o suficiente para o problema proposto, então este modelo pode ser utilizado como o classificador final (pode ser implantado em um sistema), caso contrário reinicia-se o processo a partir da ``seleção de dados'' reavaliando as decisões de cada etapa.
 \end{enumerate}
 
-Dentre os algoritmos citados na etapa de treinamento da Figura \ref{fig:slclassification}, as redes neurais são modelos que atendem bem tanto problemas de classificação que não são linearmente separáveis (problemas que se adequam mais a realidade), quanto problemas que são linearmente seperáveis, entretanto, utilizar-se das redes neurais para problemas linearmente separáveis é totalmente desaconselhável, já que pode ser muito mais custoso computacionalmente.\cite{Zhang:2000}\cite{Elizondo:2006} A Figura \ref{fig:slseparablenonseparable} ilustra problema linearmente separável e problema não separável linearmente. Apesar de alguns problemas serem não linearmente separáveis, estes podem ser separados de forma linear sem perdas substânciais (Figuras \ref{**}, \ref{**}, \ref{**}).
+Dentre os algoritmos citados na etapa de treinamento da Figura \ref{fig:slclassification}, as redes neurais são modelos que atendem bem tanto problemas de classificação que não são linearmente separáveis (problemas que se adequam mais a realidade), quanto problemas que são linearmente seperáveis, entretanto, utilizar-se das redes neurais para problemas linearmente separáveis é totalmente desaconselhável, já que pode ser muito mais custoso computacionalmente.\cite{Zhang:2000}\cite{Elizondo:2006} A Figura \ref{fig:slseparablenonseparable} ilustra problema linearmente separável e problema não separável linearmente. Apesar de alguns problemas serem não linearmente separáveis, estes podem ser separados de forma linear sem perdas substânciais (Figura \ref{fig:eixos_4_atributos}).
 
-Algumas comparações \cite{Firdausi:2010, Arora:2012, Karthikeyan:2013} vêm sendo realizadas entre J48 (árvore de decisão, implementação WEKA \cite{Hall:2009}) e MLP (rede neural). Nestas, J48 obteve resultados melhores ou próximos para problemas de classificação binária (entre duas classes) e mostrou-se ser muito menos custoso computacionalmente. Sendo assim, o uso do algoritmo J48 parece ser uma boa escolha e, este será utilizado como base do \textit{DECORATE}, ver seção \ref{subsec:decoration}, o qual será o método de classificação utilizado neste trabalho.
+Algumas comparações \cite{Firdausi:2010, Arora:2012, Karthikeyan:2013} vêm sendo realizadas entre J48 (árvore de decisão, implementação WEKA \cite{Hall:2009}) e MLP (rede neural). Nestas, J48 obteve resultados melhores ou próximos para problemas de classificação binária (entre duas classes) e mostrou-se ser muito menos custoso computacionalmente. Sendo assim, o uso do algoritmo J48 (seção \ref{subsec:j48}) parece ser uma boa escolha e, este será utilizado como base do \textit{DECORATE}, ver seção \ref{subsec:decoration}, o qual será o método de classificação utilizado neste trabalho.
 
 \begin{figure}[!htb] \centering 
   \centering
@@ -229,6 +229,10 @@ Algumas comparações \cite{Firdausi:2010, Arora:2012, Karthikeyan:2013} vêm se
   \caption{(a) Problema linearmente separável. (b) Problema não separável linearmente. \cite{Elizondo:2006}} 
   \label{fig:slseparablenonseparable}
 \end{figure}
+
+\subsection{J48}
+\label{subsec:j48}
+**
 
 \subsection{DECORATE - um método \textit{ensemble}}
 \label{subsec:decoration}
