@@ -1,11 +1,5 @@
 ﻿\section{Internet das coisas}
 \label{sec:iot}
-A Internet nesta última década tem contribuído de forma significativa na economia e sociedade, deixando como legado uma notável infraestrutura de rede de comunicação. O seu maior disseminador nesse período vem sendo \textit{World Wide Web}(WWW), o qual permite o compartilhamento de informação e mídia de forma global \cite{Chandrakanth:2014}.
-
-A Internet está se tornando cada vez mais persistente no cotidiano, devido, por exemplo, ao crescente número de usuários de dispositivos móveis, os quais possuem tecnologias de conexão com a Internet, as quais cada dia tornam-se mais acessíveis \cite{Chandrakanth:2014}.
-
-Em 2010 havia aproximadamente 1,5 bilhão de PCs conectados a Internet e mais que 1 bilhão de telefones móveis \cite{Sundmaeker:2010}. Segundo Gartner\footnotemark \footnotetext{\url{http://www.gartner.com/newsroom/id/3165317}}, 6,4 bilhões de coisas estarão conectadas até o final de 2016 e, em 2020 esse número atingirá cerca de 20,8 bilhões. A previsão de \cite{Sundmaeker:2010}, a qual dizia que a denominada Internet dos PCs seria movida para o que se chama de Internet das Coisas fica então mais evidente neste atual cenário.
-
 A ideia básica da \textit{Internet of things (IoT)}, traduzido para o português como Internet das Coisas é a presença pervasiva de uma variedade de "coisas ou objetos", tais como RFID tags, sensores, telefones móveis, dentre outros. Os quais, através de esquemas de endereçamento único são capazes de interagir com os outros e cooperar com seus vizinhos para alcançar um objetivo em comum \cite{Atzori:2010}. Outros exemplos de "coisas ou objetos" podem ser pessoas, geladeiras, televisores, veículos, roupas, medicações, livros, passaportes, contanto que possam ser identificadas unicamente e possam se comunicar com as outras coisas e/ou possam ser acessados remotamente por humanos.
 
 Dentre as diversas definições de IoT pode-se citar duas, a primeira define de maneira mais geral \cite{iot2020:2008}, enquanto que a segunda especifica melhor como deve ser o cenário ideal da Internet das Coisas \cite{Sundmaeker:2010}.
@@ -20,8 +14,6 @@ Diante deste cenário, pode-se citar exemplos de aplicações na IoT para divers
 \item Dispositivos implantáveis com capacidade de comunicação sem fio podem ser utilizados para armazenar registros sobre a saúde de um paciente em situações de risco e podem ser decisivos para salvar a vida do paciente. A capacidade de ter acesso a essas informações nessas circunstâncias fazem com que hospitais possam saber de imediato como tratar um paciente que esta a caminho. Esta possibilidade é especialmente útil para pessoas com diabetes, câncer, problemas de coração na artéria coronária, doenças do pulmão, assim como as pessoas com implantes médicos complexos, tais como, marcapassos, tubos, transplantes de órgãos e aqueles que podem ficar inconscientes e incapazes de comunicar-se durante uma operação \cite{Weber:2010}.
 \item Rastreabilidade de produtos alimentícios ajudam os usuários a verificar a origem de um produto, assim como informações de composição química, dentre outros. Mas também previne de doenças não desejadas. Por exemplo, avisos atuais sobre a mercadoria em questão podem ser disponibilizados à medida que o produto sai da origem e vai passando para os outros níveis de consumo, desta forma os consumidores podem evitar o contágio de doenças como gripe aviária e, encefalopatia espongiforme bovina (EEB), mais conhecida como doença da vaca louca \cite{Weber:2010}.
 \end{itemize}
-
-Apesar da grande potencialidade da Internet das Coisas, a qual gerou em 2015 um faturamento em torno de 130,33 bilhões de dólares americanos e tem prospecção de chegar até 883.55 bilhões em 2020\footnotemark \footnotetext{http://www.marketsandmarkets.com/Market-Reports/iot-application-technology-market-258239167.html}, ainda existem muitos desafios a serem vencidos, tais como segurança da informação, armazenamento e processamento de grande quantidade de dados, dentre outros. Adentrando um pouco em um dos desafios da IoT, o da disponibilidade de uma interface de comunicação (acesso aos serviços e informações dos dispositivos) e programação comum aos objetos, pode-se dizer que a falta desta padronização faz com que se torne oneroso o desenvolvimento de aplicações para o objeto. Mais difícil ainda é prover uma única funcionalidade ou serviço com a composição dos diversos objetos. Para diminuir a dificuldade deste cenário, pode-se disponibilizar os dispositivos como serviços Web (seção \ref{subsec:dispositivosWeb}), assim sendo se pode utilizar os protocolos Web como linguagem comum de integração dos dispositivos a Internet \cite{Franca:2011}.
 
 \subsection{Serviços Web}
 \label{ws:webservices}
@@ -164,9 +156,9 @@ Autores em \cite{NHLABATSI:2008} não consideram \textit{dependence} como uma ca
 
 Dentro deste cenário de interação de características, diversos métodos vêm sendo propostos para detecção e/ou resolução dessas interações. Duas abordagens são adotadas para este fim: \textit{Online techniques} (técnicas online) e \textit{Offline techniques} (técnicas offline). Técnicas online são métodos aplicados enquanto o sistema está sendo executado dentro de uma rede, ou seja, as \textit{features} já foram desenvolvidas e estão em fase de produção sendo executadas. São uma combinação de mecanismos de detecção e resolução de interação de características. Já as técnicas offline (abordagens da engenharia de software e métodos formais) são aquelas aplicadas durante a fase desenvolvimento das características \cite{Calder:2003}.
 
-Dentre as técnicas offline, a abordagem da engenharia de software vêm propondo diversos caminhos (\cite{Thum:2014}, \cite{Siegmund:2012} e \cite{Siegmund2012}) para auxiliar na remoção de interação de características antes de sua implantação \cite{Calder:2003}. Na abordagem dos métodos formais \cite{Almeida:2011} uma variedade de técnicas também têm sido adotadas, tais como, lógicas clássicas e construtivas, autômatos de estado finito e infinito, autômatos estendidos, \textit{petri-nets}, sistemas de transição e, linguagens como SDL, Promela, Z e LOTOS \cite{Calder:2003}.
+Dentre as técnicas offline, a abordagem da engenharia de software vêm propondo diversos caminhos \cite{Thum:2014, Siegmund:2012, Siegmund2012} para auxiliar na remoção de interação de características antes de sua implantação \cite{Calder:2003}. Na abordagem dos métodos formais \cite{Almeida:2011} uma variedade de técnicas também têm sido adotadas, tais como, lógicas clássicas e construtivas, autômatos de estado finito e infinito, autômatos estendidos, \textit{petri-nets}, sistemas de transição e, linguagens como SDL, Promela, Z e LOTOS \cite{Calder:2003}.
 
-Dentre as técnicas online, \textit{Feature Interaction Manager - FIM} é uma das técnicas que vem sendo adotada em \textit{Home Network Systems ou Smart homes} \cite{Wilson:2005}, \cite{Wilson:2008}, \cite{Nakamura:2009}. FIM \cite{Calder:2003} é um componente do sistema introduzido dentro de uma rede com a capacidade de observar e controlar as chamadas a qualquer \textit{feature}. Este trabalho concentra-se nesta técnica para prover detecção de efeitos colaterais indesejáveis.
+Dentre as técnicas online, \textit{Feature Interaction Manager - FIM} é uma das técnicas que vem sendo adotada em \textit{Home Network Systems ou Smart homes} \cite{Wilson:2005, Wilson:2008, Nakamura:2009}. FIM \cite{Calder:2003} é um componente do sistema introduzido dentro de uma rede com a capacidade de observar e controlar as chamadas a qualquer \textit{feature}. Este trabalho concentra-se nesta técnica para prover detecção de efeitos colaterais indesejáveis.
 
 \section{Home network system}
 \label{sec:hns}
@@ -221,7 +213,7 @@ De modo geral, a metodologia adotada para construção de um classificador é co
 
 Dentre os algoritmos citados na etapa de treinamento da Figura \ref{fig:slclassification}, as redes neurais são modelos que atendem bem tanto problemas de classificação que não são linearmente separáveis (problemas que se adequam mais a realidade), quanto problemas que são linearmente seperáveis, entretanto, utilizar-se das redes neurais para problemas linearmente separáveis é totalmente desaconselhável, já que pode ser muito mais custoso computacionalmente.\cite{Zhang:2000}\cite{Elizondo:2006} A Figura \ref{fig:slseparablenonseparable} ilustra problema linearmente separável e problema não separável linearmente. Apesar de alguns problemas serem não linearmente separáveis, estes podem ser separados de forma linear sem perdas substânciais (Figura \ref{fig:eixos_4_atributos}).
 
-Algumas comparações \cite{Firdausi:2010, Arora:2012, Karthikeyan:2013} vêm sendo realizadas entre J48 (árvore de decisão, implementação WEKA \cite{Hall:2009}) e MLP (rede neural). Nestas, J48 obteve resultados melhores ou próximos para problemas de classificação binária (entre duas classes) e mostrou-se ser muito menos custoso computacionalmente. Sendo assim, o uso do algoritmo J48 (seção \ref{subsec:j48}) parece ser uma boa escolha e, este será utilizado como base do \textit{DECORATE}, ver seção \ref{subsec:decoration}, o qual será o método de classificação utilizado neste trabalho.
+Algumas comparações \cite{Firdausi:2010, Arora:2012, Karthikeyan:2013} vêm sendo realizadas entre J48 (árvore de decisão, implementação WEKA \cite{Hall:2009} do C4.5 \cite{**}) e MLP (rede neural). Nestas, J48 obteve resultados melhores ou próximos para problemas de classificação binária (entre duas classes) e mostrou-se ser muito menos custoso computacionalmente. Sendo assim, o uso do algoritmo J48 parece ser uma boa escolha e, este será utilizado como base do \textit{DECORATE}, ver seção \ref{subsec:decoration}, o qual será o método de classificação utilizado neste trabalho.
 
 \begin{figure}[!htb] \centering 
   \centering
@@ -229,10 +221,6 @@ Algumas comparações \cite{Firdausi:2010, Arora:2012, Karthikeyan:2013} vêm se
   \caption{(a) Problema linearmente separável. (b) Problema não separável linearmente. \cite{Elizondo:2006}} 
   \label{fig:slseparablenonseparable}
 \end{figure}
-
-\subsection{J48}
-\label{subsec:j48}
-**
 
 \subsection{DECORATE - um método \textit{ensemble}}
 \label{subsec:decoration}
@@ -352,4 +340,4 @@ Um compartimento é então utilizado para teste e, os k-1 restante são utilizad
 
 Normalmente para o valor de k, no método descrito anteriormente, utiliza-se k=10. Este número de k tornou-se padrão após uma quantidade enorme de testes em datasets utilizando diferentes técnicas de classificação, os quais demonstraram k=10 como sendo aproximadamente a melhor escolha. A mesma quantidade (dez) têm sido escolhida como padrão para o número de repetições do \textit{stratified-k-fold-cross-validation} \cite{Witten:2005}.
 
-No próximo capítulo será apresentada a proposta...***
+No próximo capítulo (\ref{ch:proposta}) será apresentada a proposta deste trabalho para detectar efeitos colaterais indesejáveis entre dispositivos no cenário descrito na seção \ref{sec:cenario}.
