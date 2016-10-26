@@ -8,14 +8,19 @@ A ideia básica da \textit{Internet of things (IoT)}, traduzido para o portuguê
 
 Apesar da grande potencialidade da Internet das Coisas, a qual gerou em 2015 um faturamento em torno de 130,33 bilhões de dólares americanos e tem prospecção de chegar até 883.55 bilhões em 2020\footnotemark \footnotetext{http://www.marketsandmarkets.com/Market-Reports/iot-application-technology-market-258239167.html}, ainda existem muitos desafios a serem vencidos, tais como segurança da informação, armazenamento e processamento de grande quantidade de dados, dentre outros. Adentrando um pouco em um dos desafios da IoT, o da disponibilidade de uma interface de comunicação (acesso aos serviços e informações dos dispositivos) e programação comum aos objetos, pode-se dizer que a falta desta padronização faz com que se torne oneroso o desenvolvimento de aplicações para o objeto. Mais difícil ainda é prover uma única funcionalidade ou serviço com a composição dos diversos objetos. Para diminuir a dificuldade deste cenário, pode-se disponibilizar os dispositivos como serviços Web, desta forma pode-se utilizar os protocolos Web como linguagem comum de integração dos dispositivos a Internet \cite{Franca:2011}.
 
-Diante deste cenário de crescente adição de dispositivos a IoT, existe outro problema que também merece atenção. Muitos dispositivos quando de forma isolada, não conseguem atender aos requisitos dos usuários finais (humano ou outro dispositivo). Assim, há a necessidade de composição destes com outros dispositivos para prover funcionalidades que atendam a esses requisitos. Quando existe uma composição de dispositivos, o comportamento de pelo menos um destes pode provocar interação de características com efeitos colaterais indesejáveis, que é quando esta composição leva a um estado inconsistente do sistema, um sistema instável ou dados imprecisos. 
+Diante deste cenário de crescente adição de dispositivos a IoT, muitos dispositivos quando de forma isolada, não conseguem atender aos requisitos dos usuários finais (humano ou outro dispositivo). Assim, há a necessidade de composição destes com outros dispositivos para prover funcionalidades que atendam a esses requisitos. Quando existe uma composição de dispositivos, o comportamento de pelo menos um destes pode provocar interação de características com efeitos colaterais indesejáveis, que é quando esta composição leva a um estado inconsistente do sistema, um sistema instável ou dados imprecisos. 
 
-Assim, o presente trabalho propõe detectar efeitos colaterais indesejáveis entre dispositivos utilizando-se do \textit{ensemble} DECORATE. Para isto, é proposto um estudo de caso através de um cenário em um \textit{Home Network System}, onde observou-se o comportamento físico e as mensagens trocadas entre os dispositivos. A partir do conjunto de dados obtidos realizou-se um processo classificatório e implantou um classificador com alto grau de generalização no \textit{Feature Interaction Manager} do \textit{Home Server}, mostrando que é possı́vel detectar efeitos colaterais indesejáveis entre dispositivos.
+Assim, o presente trabalho propõe detectar efeitos colaterais indesejáveis entre dispositivos através da meta-classificação, metodologia que utiliza um conjunto de classificadores para construir diversas hipóteses (modelos). Então, é utilizado o conhecimento de cada modelo afim de se chegar em uma decisão final mais confiável \cite{Melville:2004}.
+
+Os dados de treino foram gerados manualmente a partir de um conjunto de objetos do cenário ``Levar compras'', o qual foi utilizado no estudo de caso do \textit{Home Network System}.
+
+Os resultados obtidos demonstraram que através da meta-classificação foi possível detectar os efeitos colaterais indesejáveis com mais de 90\% de precisão.
 
 O restante deste trabalho está organizado da seguinte maneira:
 
 \begin{itemize}
 \item Capítulo \ref{ch:theory}: Traz todo embasamento teórico necessário para compreender o estudo realizado neste trabalho.
-\item Capítulo \ref{ch:proposta}: Neste capítulo é apresentado o estudo de caso realizado neste TCC, o qual verificou se é possível detectar efeitos colaterais indesejáveis entre dispositivos. 
-\item Capítulo \ref{ch:conclusion}: Sintetiza a investigação e experimentos realizados no estudo de caso deste trabalho, assim como demonstra o resultado alcançado.
+\item Capítulo \ref{**}:  
+\item Capítulo \ref{**}: 
+\item Capítulo \ref{**}:
 \end{itemize}
