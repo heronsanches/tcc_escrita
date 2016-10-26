@@ -1,8 +1,8 @@
-\section{Validação do modelo de classificador}
+\section{Modelo de classificação proposto}
 \label{sec:constvalidacao}
-Diante dos pares de atributos selecionados na etapa anterior (seção \ref{sec:selecaodados}), utilizou-se o método \textit{stratified-10-fold-cross-validation} (repetido dez vezes) juntamente com o \textit{ensemble DECORATE} a fim de se construir e verificar se é possível generalizar pelo menos um modelo. 
+Diante dos pares de atributos selecionados na etapa (seção \ref{sec:selecaodados}), utilizou-se o método \textit{stratified-10-fold-cross-validation} (repetido dez vezes) juntamente com o \textit{ensemble DECORATE} a fim de se construir e verificar se é possível generalizar pelo menos um modelo. 
 
-Em cada validação construi-se um modelo com diferentes frações do dataset, variando de 16 instâncias a 59 instâncias. Os resultados das avaliações podem ser vistos na Figura \ref{fig:accuracy_precision_recall}. Nesta percebe-se um domínio quase absoluto da curva pontuada de aprendizado verde (médiaAltura, somaLargura - ``ma x sl''). Por esso motivo essa será a curva analisada para escolher um modelo o mais adequado possível para implantar no FIM. Como o principal motivo da implantação do classificador no FIM é detectar efeitos colaterais indesejáveis, então pretende-se que o modelo tenha um alto índice de \textit{recall}, pois não se deseja que se tenha muitos falso negativos, ou seja, muitos casos classificados como não sendo efeito colateral, mas que na verdade era. Visualizando a curva percebe-se que esta têm um crescimento acentuado e depois torna-se estável a partir do dataset com 30 instâncias. Logo fará-se uma análise a partir deste ponto. Os maiores valores de \textit{recall} partindo deste ponto são aqueles quando o \textit{dataset} tem 40 ou mais instâncias, para todos estes pontos considera que se obteve um bom grau de generalização. Estes valores podem ser visualizados na Tabela \ref{table:valorescurva}. 
+Em cada verificação construi-se um modelo com diferentes frações do dataset, variando de 16 instâncias a 59 instâncias. Os resultados das avaliações podem ser vistos na Figura \ref{fig:accuracy_precision_recall}. Nesta percebe-se um domínio quase absoluto da curva pontuada de aprendizado verde (médiaAltura, somaLargura - ``ma x sl''). Por esso motivo essa será a curva analisada para escolher um modelo o mais adequado possível para implantar no FIM. Como o principal motivo da implantação do classificador no FIM é detectar efeitos colaterais indesejáveis, então pretende-se que o modelo tenha um alto índice de \textit{recall}, pois não se deseja que se tenha muitos falso negativos, ou seja, muitos casos classificados como não sendo efeito colateral, mas que na verdade era. Visualizando a curva percebe-se que esta têm um crescimento acentuado e depois torna-se estável a partir do dataset com 30 instâncias. Logo será realizada uma análise a partir deste ponto. Os maiores valores de \textit{recall} partindo deste ponto são aqueles quando o \textit{dataset} tem 40 ou mais instâncias, para todos estes pontos considera que se obteve um bom grau de generalização. Estes valores podem ser visualizados na Tabela \ref{table:valorescurva}. 
 
 \begin{figure}[!htb] \centering 
   \centering
@@ -28,7 +28,7 @@ Em cada validação construi-se um modelo com diferentes frações do dataset, v
   \label{table:valorescurva}
 \end{table}
 
-Finalizando a análise decidiu-se que o melhor ponto para poder se construir um classificador é o com $n^o i = 45$, pois além de se ter um alto grau de \textit{recall} e \textit{accuracy} têm-se também \textit{precision} quase de 100\%. Então, para se construir um classificador final com base neste modelo escolheu-se randomicamente 45 instâncias do \textit{dataset} de 59 instâncias e aplicou-se \textit{stratified-10-fold-cross-validation} (repetido dez vezes). Este procedimento foi repetido diversas vezes (Figura \ref{fig:apr45_dev}) até que se obtivesse um modelo que satisfizesse a expressão \ref{eq:esxpvalclass}. O modelo que satisfez essa expressão obteve resultados que podem ser vistos na Tabela \ref{table:valmodelfinal} e este será o modelo final de classificador que será implantado no FIM. 
+Finalizando a análise decidiu-se que o melhor ponto para poder se construir um classificador é o com $n^o i = 45$, pois além de se ter um alto grau de \textit{recall} e \textit{accuracy} têm-se também \textit{precision} quase de 100\%. Então, para se construir um classificador final com base neste modelo escolheu-se randomicamente 45 instâncias do \textit{dataset} de 59 instâncias e aplicou-se \textit{stratified-10-fold-cross-validation} (repetido dez vezes). Este procedimento foi repetido diversas vezes (Figura \ref{fig:apr45_dev}) até que se obtivesse um modelo que satisfizesse a expressão \ref{eq:esxpvalclass}. O modelo que satisfez essa expressão obteve resultados que podem ser vistos na Tabela \ref{table:valmodelfinal} e este será o modelo final de classificador que será implantado no FIM 
 
 \begin{equation}
   (\textit{accuracy} \geq (92.75-1.78)) \wedge (\textit{precision} \geq (99.17-1.71)) \wedge (\textit{recall} \geq 90.25)
@@ -59,6 +59,11 @@ Finalizando a análise decidiu-se que o melhor ponto para poder se construir um 
   \label{fig:apr45_dev}
 \end{figure}
 
-\section{Resultados} **vai para capitulo de resultados
-\label{sec:resultados}
-Como provado na seção \ref{sec:constvalidacao} é possível construir um modelo de classificador que tenha um alto grau de generalização para o problema observado na seção \ref{subsec:obsproblema}. Sendo assim este foi implantado no FIM do HNS (Figura \ref{fig:hnsworkmodel}) afim de detectar efeitos colaterais indesejáveis no cenário da Figura \ref{fig:cenario}.
+\section{Implantação do modelo}
+O modelo foi implantado no sistema de acordo com a proposta (seção \ref{sec:implmetprop}). Na Figura \ref{fig:deteccao_efeito} se tem a visão real do fluxo de execução em relação ao usuário do HNS quanto a funcionalidade ``Levar compras''. A imagem ``a)'' representa a execução quando não há efeitos colaterais indesejáveis. Enquanto que a imagem ``b)'' representa a execução quando se tem efeito colateral indesejável. 
+\begin{figure}[!htb] \centering 
+  \centering
+  \includegraphics[width=1.0\columnwidth]{experimento/deteccao_efeito} 
+  \caption{Modelo classificatório atuando no cenário ``Levar compras'' do FIM. a) Fluxo da aplicação sem efeito colateral indesejável. b) Fluxo da aplicação com efeito colateral indesejável.} 
+  \label{fig:deteccao_efeito}
+\end{figure}
