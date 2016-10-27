@@ -81,14 +81,16 @@ Os dados coletados na etapa de execução do cenário ``Levar compras'', 59 cest
 
 Com a seleção prévia desses atributos, constriu-se um arquivo ``arff'', que é o tipo de arquivo padrão utilizado como \textit{dataset} pelo Weka \cite{Hall:2009}. Este \textit{dataset} é composto de 59 instâncias (referente as 59 cestas), cada uma com 11 atributos mais um que identifica a qual classe pertence (``é efeito colateral'' ou ``não é efeito colateral''). Então têm-se 11 atributos númericos e um nominal (a classe a qual a instância pertence).
 
-O próximo passo utilizado nesse processo de seleção de atributos foi o de visualizar estes novos parâmetros par a par, e verificar quais pares parecem melhor separar as classes ``é efeito colateral'' ou ``não é efeito colateral''. A Figura \ref{fig:plotall1} passa a ideia de tal visualização. Dentre essas plotagens foram selecionadas três da Figura \ref{fig:eixos_4_atributos}, as quais aparentam melhor separar as classes, são respectivamente os pares ordenados (somaLargura, somaMassa) - ``sl x sm'', (somaDiâmetro, somaLargura) - ``sd x sl'' e, (médiaAltura, somaLargura) - ``ma x sl''. Então, nesta fase de seleção dos atributos, estes foram os pares selecionados para construção e validação do modelo (seção \ref{sec:constvalidacao}). Observe que o espaço de \textit{features} foi reduzido a duas características.
+O próximo passo utilizado nesse processo de seleção de atributos foi o de visualizar estes novos parâmetros par a par, e verificar quais pares parecem melhor separar as classes ``é efeito colateral'' ou ``não é efeito colateral''. A Figura \ref{fig:plotall1} passa a ideia de tal visualização. 
 
 \begin{figure}[!htb] \centering 
   \centering
-  \includegraphics[width=1.0\columnwidth]{experimento/all_plot} 
+  \includegraphics[scale=0.3]{experimento/all_plot} 
   \caption{Plotagem do espaço de \textit{features} par a par do \texit{dataset} de 59 instâncias.} 
   \label{fig:plotall1}
 \end{figure}
+
+Dentre essas plotagens foram selecionadas três da Figura \ref{fig:eixos_4_atributos}, as quais aparentam melhor separar as classes, são respectivamente os pares ordenados (somaLargura, somaMassa) - ``sl x sm'', (somaDiâmetro, somaLargura) - ``sd x sl'' e, (médiaAltura, somaLargura) - ``ma x sl''.
 
 \begin{figure}[!htb] \centering 
   \centering
@@ -96,6 +98,8 @@ O próximo passo utilizado nesse processo de seleção de atributos foi o de vis
   \caption{Separação das classes entre os atributos (somaLargura, somaMassa) - ``sl x sm'', (somaDiâmetro, somaLargura) - ``sd x sl'' e, (médiaAltura, somaLargura).} 
   \label{fig:eixos_4_atributos}
 \end{figure}
+
+Então, nesta fase de seleção dos atributos, estes foram os pares selecionados para construção e validação do modelo (seção \ref{sec:constvalidacao}). Observe que o espaço de \textit{features} foi reduzido a duas características.
 
 \subsection{Meta-classificador DECORATE}
 Os parâmetros do DECORATE escolhidos neste trabalho foram semelhantes a um dos testes avaliativos realizados em \cite{Melville:2004}, nos quais comparam \textit{DECORATE} com outros métodos classificatórios, em diferentes tamanhos de dataset e diferentes parâmetros do DECORATE. Para as avaliações neste trabalho o número de iterações é setado em 50, o número máximo de classificadores participantes no \textit{ensemble} é setado em 14, o classificador base utilizado é o J48 e, a quantidade de exemplos artificiais gerados em cada iteração é setado para 100\% (valores setados de 50\% a 100\% não faz variar muito o resultado \cite{Melville:2004}) do tamanho do dataset de treino.
