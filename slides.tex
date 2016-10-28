@@ -120,7 +120,7 @@
 \end{frame}	
 
 \begin{frame}{Internet das Coisas (IoT)}
-Rede mundial de objetos unicamente endereçáveis e interconectados, seguindo os protocolos dos padrões de comunicação \cite{iot2020:2008}.
+Rede mundial de objetos (coisas) unicamente endereçáveis e interconectados, seguindo os protocolos dos padrões de comunicação \cite{iot2020:2008}.
 \begin{figure}[!htb] \centering 
   \centering
   \includegraphics[width=.8\columnwidth]{slide/iot} 
@@ -153,18 +153,19 @@ Disponibilização das coisas como serviços Web RESTFul.
 \begin{frame}{Desafios IoT: interface de comunicação padrão}
 Disponibilização das coisas como serviços Web RESTFul.
   \begin{itemize}
-    \item Mais leve que os serviços Web baseados em SOAP.
+    \item <1 ->Diferentes representações de um mesmo recurso (aumenta a interoperabilidade)
+   \begin{examples}<1 ->
+       JSON, XML, TEXT, TEXT\_HTML.
+   \end{examples}
+    \item <2 - >Interface com semântica bem definida.
+   \begin{examples}<1 ->
+          Utilização dos métodos HTTP (GET, PUT, DELETE, POST, HEAD, OPTIONS, dentre outros).
+   \end{examples}
   \end{itemize}
-\begin{figure}[!htb] \centering 
-  \centering
-  \includegraphics[width=.45\columnwidth]{slide/soapXrest_engracado} 
-  \caption{\footnote[frame]{\url{http://stackoverflow.com/questions/209905/representational-state-transfer-rest-and-simple-object-access-protocol-soap}}}
-  \label{fig:soapXrest_engracado}
-\end{figure}
 \end{frame}
 
 \begin{frame}{Desafios IoT: detecção e resolução de efeitos colaterais indesejáveis}
-Em desenvolvimento de \textit{software}, uma \alert{\textit{feature} (característica)} é um componente de adicional funcionalidade ao \textit{software} \cite{Calder:2003}, consistindo de um conjunto de requisitos logicamente relacionados e suas especificações, o qual se destina a fornecer um determinado efeito comportamental \cite{NHLABATSI:2008}
+Em desenvolvimento de \textit{software}, uma \alert{\textit{feature} (característica)} é um componente de adicional funcionalidade ao \textit{software} \cite{Calder:2003}, consistindo de um conjunto de requisitos logicamente relacionados e suas especificações, o qual se destina a fornecer um determinado efeito comportamental \cite{NHLABATSI:2008}.
 \end{frame}
 
 \begin{frame}{Desafios IoT: detecção e resolução de efeitos colaterais indesejáveis}
@@ -172,10 +173,45 @@ Quando a \alert{composição de \textit{features}} leva a algum \alert{comportam
 \end{frame}
 
 \section{Proposta}
+\begin{frame}{Proposta}
+Detectar efeitos colaterais indesejáveis de uma maneira inteligente (através da meta-classificação) no cenário ``Levar compras'' do \textit{Home Network System} (HNS).
+\end{frame}
 
+\begin{frame}{HNS}
+Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de conectividade de rede e, interface de controle e monitoramento. Os dispositivos da casa são compostos uns com os outros para prover funcionalidades que atendam aos requisitos dos usuários da casa \cite{Ikegami:2013}.
+\end{frame}
+
+\begin{frame}{HNS do Cenário Levar compras}
+\begin{figure}[!htb] \centering 
+  \centering
+  \includegraphics[width=0.7\columnwidth]{slide/cenario} 
+  \caption{Cenário Levar compras.} 
+  \label{fig:hns}
+\end{figure}
+\end{frame}
+
+\subsection{Cenário Levar compras}
+\begin{frame}{Cenário Levar compras}
+\begin{figure}[!htb] \centering 
+  \centering
+  \includegraphics[width=0.9\columnwidth]{slide/cenario_requests} 
+  \caption{Cenário Levar compras.} 
+  \label{fig:cenariolevarcompras}
+\end{figure}
+\end{frame}
+\subsubsection{Execução do cenário Levar compras}
+\subsection{Método de detecção}
+\subsubsection{Geração da massa de dados}
+\subsubsection{Seleção dos atributos}
+\subsubsection{Meta - classificador DECORATE}
+\subsection{Implantação do método proposto}
 
 \section{Validação}
-
+\subsection{Método avaliativo stratified-k-fold-cross-validation}
+\subsection{Experimentos}
+\subsection{Resultados e discussão}
+\subsubsection{Modelos}
+\subsubsection{Implantação}
 \section{Conclusão e trabalhos futuros}
 
 \bibliographystyle{abntex2-alf}
