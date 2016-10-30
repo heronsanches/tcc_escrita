@@ -9,8 +9,11 @@
 %\usepackage{beamerthemesplit}
 %\usepackage{ragged2e}
 %\usepackage{etoolbox}
+\usepackage{amsmath}
 \usepackage{hyphenat}
 \usepackage{babel}
+\usepackage{xfrac}
+\usepackage{ragged2e} %\justifying
 \graphicspath{{assets/}}
 %\hyphenation{mate-mática recu-perar}
 \usepackage[T1]{fontenc}
@@ -79,6 +82,7 @@
 \date{31 de outubro de 2016}
 %\setbeamertemplate{headline}{}
 %\setbeamertemplate{background}{\hspace{.5em}\textcolor{red}{\tiny\bfseries\tdtime}}
+\DeclareMathOperator*{\argmax}{arg\,max}
 
 \begin{document}
 \begin{frame}
@@ -105,7 +109,9 @@
   \begin{itemize}
     \item<1 -> A Internet está se tornando cada vez mais persistente no cotidiano \cite{Chandrakanth:2014}.
     \item<2 -> Em 2010 havia aproximadamente 1,5 bilhão de PCs conectados a Internet e mais que 1 bilhão de telefones móveis \cite{Sundmaeker:2010}.
-    \item<3 ->Segundo Gartner\footnote[frame]{\url{http://www.gartner.com/newsroom/id/3165317}}, 6,4 bilhões de coisas estarão conectadas até o final de 2016 e, em 2020 esse número atingirá cerca de 20,8 bilhões.
+\justifying 
+    \item<3 -> Segundo Gartner\footnote[frame]{\url{http://www.gartner.com/newsroom/id/3165317}}, 6,4 bilhões de coisas estarão conectadas até o final de 2016 e, em 2020 esse número atingirá cerca de 20,8 bilhões.
+\justifying 
   \end{itemize}
 \end{frame}
 
@@ -119,6 +125,7 @@
 \end{frame}	
 
 \begin{frame}{Internet das Coisas (IoT)}
+\justifying
 Rede mundial de objetos (coisas) unicamente endereçáveis e interconectados, seguindo os protocolos dos padrões de comunicação \cite{iot2020:2008}.
 \begin{figure}[!htb] \centering 
   \centering
@@ -129,16 +136,20 @@ Rede mundial de objetos (coisas) unicamente endereçáveis e interconectados, se
 \end{frame}
 
 \begin{frame}{Internet das Coisas (IoT)}
+\justifying
 Devido ao crescente número de coisas sendo conectadas, surgem diversos desafios, a exemplo de:
   \begin{itemize}
+\justifying
     \item<1 -> Disponibilidade de uma interface de comunicação (acesso aos serviços e informações dos dispositivos) comum aos objetos.
     \item<2 -> Detecção e resolução de efeitos colaterais indesejáveis.
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Desafios IoT: interface de comunicação padrão}
+\justifying
 Disponibilização das coisas como serviços Web RESTFul.
   \begin{itemize}
+\justifying
     \item Mais leve que os serviços Web baseados em SOAP.
   \end{itemize}
 \begin{figure}[!htb] \centering 
@@ -150,8 +161,10 @@ Disponibilização das coisas como serviços Web RESTFul.
 \end{frame}
 
 \begin{frame}{Desafios IoT: interface de comunicação padrão}
+\justifying
 Disponibilização das coisas como serviços Web RESTFul.
   \begin{itemize}
+\justifying
     \item <1 ->Diferentes representações de um mesmo recurso (aumenta a interoperabilidade)
    \begin{examples}<1 ->
        JSON, XML, TEXT, TEXT\_HTML.
@@ -164,16 +177,19 @@ Disponibilização das coisas como serviços Web RESTFul.
 \end{frame}
 
 \begin{frame}{Desafios IoT: detecção e resolução de efeitos colaterais indesejáveis}
+\justifying
 Em desenvolvimento de \textit{software}, uma \alert{\textit{feature} (característica)} é um componente de adicional funcionalidade ao \textit{software} \cite{Calder:2003}, consistindo de um conjunto de requisitos logicamente relacionados e suas especificações, o qual se destina a fornecer um determinado efeito comportamental \cite{NHLABATSI:2008}.
 \end{frame}
 
 \begin{frame}{Desafios IoT: detecção e resolução de efeitos colaterais indesejáveis}
+\justifying
 Quando a \alert{composição de \textit{features}} leva a algum \alert{comportamento não esperado} - interação de características, esta pode resultar em \alert{efeitos colaterais indesejáveis}: um estado inconsistente do sistema, um sistema instável ou dados imprecisos \cite{NHLABATSI:2008}.
 \end{frame}
 
 
 \section{Proposta}
 \begin{frame}{Proposta}
+\justifying
 Detectar efeitos colaterais indesejáveis de uma maneira inteligente, utilizando o método \textit{ensemble} DECORATE, no cenário ``Levar compras'' do \textit{Home Network System} (HNS).
 \end{frame}
 
@@ -224,6 +240,7 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
 \subsubsection{Geração da massa de dados}
 \begin{frame}{Geração da massa de dados}
    \begin{itemize}
+\justifying
       \item <1 ->Confeccionadas 59 cestas.
       \item <2 ->Verificado se as cestas cabiam dentro do elevador.
       \item <3 ->Registro no banco de dados relacional na nuvem.
@@ -233,6 +250,7 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
 
 \begin{frame}{Geração da massa de dados}
    \begin{itemize}
+\justifying
       \item <1 ->Algumas vezes o comportamento da garra fazia com que a cesta não ficasse corretamente no compartimento do elevador, impedindo o elevador continuar com a funcionalidade ``Levar compras''. Provocando um \alert{efeito colateral indesejável}.
       \item <2 ->Cada cesta foi rotulada como \alert{``É efeito colateral''} ou \alert{``não é éfeito colateral''} e atualizado valor no banco.
    \end{itemize}
@@ -242,6 +260,7 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
 \subsubsection{Seleção dos atributos}
 \begin{frame}{Seleção dos atributos}
    \begin{itemize}
+\justifying
       \item <1 ->Uma cesta com 10 objetos tem \alert{$10 \times 5=50$ atributos}.
       \item <2 ->Usado os valores das médias e totais da medidas, assim como a quantidade de objetos. Reduzindo a \alert{11 atributos}.
    \end{itemize}
@@ -249,6 +268,7 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
 
 \begin{frame}{Seleção dos atributos}
    \begin{itemize}
+\justifying
       \item <1 ->Construído arquivo ``arff'', padrão WEKA \cite{Hall:2009}, com 59 instâncias.
       \item <2 ->Cada instância representa uma cesta com 11 parâmetros numéricos mais 1 nominal.
       \item <3 -> Gerou-se uma visualização do espaço de atributos em 2D, ou seja, par a par.
@@ -275,12 +295,81 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
 
 
 \subsubsection{Método ensemble DECORATE }
-\begin{frame}{DECORATE \cite{Melville:2004}}
+
+\begin{frame}{DECORATE \cite{Melville:2003, Melville:2004, *}}
+\justifying DECORATE (Diverse Ensemble Creation by Oppositional Relabeling of Artificial Training Examples).
+   \begin{itemize}
+\justifying
+      \item Combina o resultado de diversos classificadores para chegar em uma decisão final.
+   \end{itemize}
+
+\begin{equation}
+  P_{y}(x) = \frac{\sum\limits_{C_{i}\in C^*} P_{C_{i,y}}(x)}{|C^*|}
+  \label{eq:decorate}
+\end{equation}
+
+%\begin{equation}
+ % C^*(x) = \argmax_{y\in Y} P_{y}(x)
+  %\label{eq:decorate}
+%\end{equation}
 
 \end{frame}
 
-\begin{frame}{Parâmetros DECORATE \cite{Melville:2004}}
+\begin{frame}{DECORATE}
+   \begin{itemize}
+\justifying
+      \item Utiliza dados adicionais de treino gerados artificialmente.
+   \end{itemize}
+   \begin{figure}[!htb] \centering 
+     \centering
+     \includegraphics[width=.65\columnwidth]{slide/gaussiana1} 
+     \caption{Curva Gaussiana. \footnote[frame]{\url{http://proooof.blogspot.com.br/2011/12/sigma.html}}} 
+     \label{fig:gaussiana1}
+   \end{figure}
+\end{frame}
 
+\begin{frame}{DECORATE}
+   \begin{itemize}
+\justifying
+      \item Utiliza dados adicionais de treino gerados artificialmente.
+\end{itemize}
+      \begin{itemize}
+\justifying
+      \item <1 ->Primeiramente utiliza a probabilidade do \textit{ensemble} $P_y(x)$.
+      \item <2 ->Por fim utiliza a expressão abaixo para rotular o exemplo artificial.
+\begin{equation}
+     P_{y}^{-1}(x) = \frac{\frac{1}{P_y(x)}}{\sum\limits_y \frac{1}{P_y(x)}}
+     \label{eq:decorate}
+   \end{equation}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}{DECORATE}
+   \begin{figure}[!htb] \centering 
+     \centering
+     \includegraphics[width=.8\columnwidth]{slide/decorate1} 
+     \caption{DECORATE 1ª iteração. \footnote[frame]{\url{http://www.time.mk/trajkovski/teaching/aim/Lecture8.pdf}}} 
+     \label{fig:decorate1}
+   \end{figure}
+\end{frame}
+
+\begin{frame}{DECORATE}
+\begin{figure}[!htb] \centering 
+  \centering
+  \includegraphics[width=.8\columnwidth]{slide/decorate2} 
+  \caption{DECORATE 2ª iteração. \footnote[frame]{\url{http://www.time.mk/trajkovski/teaching/aim/Lecture8.pdf}}} 
+  \label{fig:decorate2}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Parâmetros DECORATE \cite{Melville:2004}}
+   \begin{itemize}
+\justifying
+      \item <1 ->Número máximo de iterações = 50.
+      \item <2 ->Número máximo de classificadores = 14.
+      \item <3 ->Classificador base = J48. 
+      \item <4 ->Quantidade de exemplos artificiais = 100\% do \textit{dataset} de treino.
+   \end{itemize}
 \end{frame}
 
 
@@ -298,14 +387,17 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
 \section{Validação}
 \begin{frame}{TP, TN, FP, FN \cite{Olson:2008}}
    \begin{itemize}
-   \item <1 ->Verdadeiro positivo (TP): instância que pertence a classe positiva e que foi corretamente classificada como positiva.
-   \item <2 ->Verdadeiro negativo (TN): instância que pertence a classe negativa e que foi classificada corretamente como negativa.
-   \item <3 ->Falso positivo (FP): instância que pertence a classe negativa e que foi classificada  incorretamente como positiva.
-   \item <4 ->Falso negativo (FN): instância que pertence a classe positiva e que foi classificada incorretamente como negativa.
+      \item <1 ->Verdadeiro positivo (TP): instância que pertence a classe positiva e que foi corretamente classificada como positiva.
+      \item <2 ->Verdadeiro negativo (TN): instância que pertence a classe negativa e que foi classificada corretamente como negativa.
+      \item <3 ->Falso positivo (FP): instância que pertence a classe negativa e que foi classificada  incorretamente como positiva.
+      \item <4 ->Falso negativo (FN): instância que pertence a classe positiva e que foi classificada incorretamente como negativa.
+\justifying
    \end{itemize}
 \end{frame}
+
 \begin{frame}{Accuracy \cite{Metz:1978}}
    \begin{itemize}
+\justifying
      \item \textit{Accuracy}: taxa correta de classificação em relação a todos os exemplos. 
    \end{itemize}
 \vspace{0.3in}
@@ -317,8 +409,9 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
 
 \begin{frame}{Precision, Recall \cite{Davis:2006}}
    \begin{itemize}
-      \item <1 ->\textit{Precision}: Dentre todos os exemplos classificados como positivos, quais realmente são positivos ? 
 
+      \item <1 ->\textit{Precision}: Dentre todos os exemplos classificados como positivos, quais realmente são positivos ? 
+\justifying
 \begin{equation} 
   Precision = \frac{TP}{TP+FP}
   \label{eq:precision}
@@ -348,8 +441,9 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
 \subsection{Experimentos}
 \begin{frame}{Experimentos}
    \begin{itemize}
+\justifying
       \item <1 ->Para cada par de atributos selecionados utilizou-se \textit{stratified-10-fold-cross-validation} (repetido dez vezes) juntamente com o \textit{ensemble DECORATE} a fim de verificar se é possível generalizar pelo menos um modelo.
-      \item <2 ->Em cada verificação construi-se um modelo com diferentes frações do dataset, variando de 16 instâncias a 59 instâncias e, construi-se uma curva de aprendizado.
+      \item <2 ->Em cada verificação construiu-se um modelo com diferentes frações do dataset, variando de 16 instâncias a 59 instâncias e, construiu-se uma curva de aprendizado.
       \item <3 ->Selecionou-se a curva que mais crescia e se mantia regular e, com melhor taxa de \textit{recall}.
       \item <4 ->Verificou a partir de que ponto esta curva tinha os melhores valores de \textit{recall}, \textit{precision} e \textit{accuracy}.
       \item <5 ->Realizou um procedimento de geração de modelo final a partir desse melhor ponto.
@@ -370,7 +464,8 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
 
 \begin{frame}{Resultados: curva de aprendizado selecionada}
    \begin{table}[!htp]
-     \centering
+      \centering
+      \resizebox{0.75\textwidth}{!}{\begin{minipage}{\textwidth}
      \begin{tabular}{ |l|c c c c c|}
        \hline
           {\bf \textbf{$n^o i$}} & {\bf 40} & {\bf 45} & {\bf 50} & {\bf 55} & {\bf 58} \\
@@ -382,14 +477,17 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
           \textbf{R, DP} & 91.69, 2.56 & 90.25, 2.21 & 86.33, 1.91 & 89.71, 2.97 & 92.05, 3.06 \\
        \hline
      \end{tabular}
-     \caption{Valores das curvas ``ma x sl'' da Figura \ref{fig:accuracy_precision_recall} a partir do \textit{dataset} com 40 instâncias. A (\textit{Accuracy}), P (\textit{Precision}, R (\textit{Recall}), DP (Desvio Padrão), i (instâncias). Os valores A, P, R e DV estão em \%.}
      \label{table:valorescurva}
+   \end{minipage}}
+      \caption{\justifying Valores das curvas ``ma x sl'' da Figura \ref{fig:accuracy_precision_recall} a partir do \textit{dataset} com 40 instâncias. A (\textit{Accuracy}), P (\textit{Precision}, R (\textit{Recall}), DP (Desvio Padrão), i (instâncias). Os valores A, P, R e DV estão em \%.}
    \end{table}
 
+\resizebox{0.85\textwidth}{!}{\begin{minipage}{\textwidth}
    \begin{equation}
      (\textit{accuracy} \geq (92.75-1.78)) \wedge (\textit{precision} \geq (99.17-1.71)) \wedge (\textit{recall} \geq 90.25)
      \label{eq:esxpvalclass}
    \end{equation}
+\end{minipage}}
 
 \end{frame}
 
@@ -397,7 +495,7 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
    \begin{figure}[!htb] \centering 
      \centering
      \includegraphics[width=1.0\columnwidth]{slide/apr45_dev} 
-     \caption{\textit{stratified-10-fold-cross-validation} (repetido dez vezes). 45 instâncias foram escolhidas randomicamente em cima do \textit{dataset} de 59 instâncias. Procedimento repetido até que satisfizesse a expressão \ref{eq:esxpvalclass} } 
+     \caption{\justifying \textit{stratified-10-fold-cross-validation} (repetido dez vezes). 45 instâncias foram escolhidas randomicamente em cima do \textit{dataset} de 59 instâncias. Procedimento repetido até que satisfizesse a expressão \ref{eq:esxpvalclass}. } 
      \label{fig:apr45_dev}
    \end{figure}
 \end{frame}
@@ -427,7 +525,7 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
    \begin{figure}[!htb] \centering 
      \centering
      \includegraphics[width=.75\columnwidth]{slide/deteccao_efeito} 
-     \caption{Modelo classificatório atuando no cenário ``Levar compras'' do FIM. a) Fluxo da aplicação sem efeito colateral indesejável. b) Fluxo da aplicação com efeito colateral indesejável.} 
+     \caption{ \justifying Modelo classificatório atuando no cenário ``Levar compras'' do FIM. a) Fluxo da aplicação sem efeito colateral indesejável. b) Fluxo da aplicação com efeito colateral indesejável.} 
      \label{fig:deteccao_efeito}
    \end{figure}
 \end{frame}
@@ -436,15 +534,31 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
 \section{Conclusão e trabalhos futuros}
 \begin{frame}{Conclusão}
    \begin{itemize}
-      \item <1 ->Foi construído um HNS com o cenário ``Levar compras''.
+\justifying
+      \item <1 ->Foi construído o cenário ``Levar compras'' no HNS.
       \item <2 ->A composição de dispositivos provocou efeitos colaterais indesejáveis no cenário ``Levar compras''.
-      \item <3 ->Obteve-se um modelo baseado no \textit{ensemble} DECORATE com alto grau de generalização em um \textit{dataset} de treino com 45 instâncias com os valores com $\textit{Accuracy}=98.05\%$, $\textit{Precision}=98.5\%$ e $\textit{Recall}=97.67\%$. 
-      \item <4 ->Modelo foi implantando no FIM do HNS, desta forma ficou apto a realizar detecção inteligente de efeitos colaterais indesejáveis.
+      \item <3 ->Obteve-se um modelo baseado no \textit{ensemble} DECORATE com alto grau de generalização em um \textit{dataset} de treino com 45 instâncias com os valores de $\textit{Accuracy}=98.05\%$, $\textit{Precision}=98.5\%$ e $\textit{Recall}=97.67\%$. 
+      \item <4 ->Modelo foi implantado no FIM do HNS, desta forma ficou apto a realizar detecção inteligente de efeitos colaterais indesejáveis.
    \end{itemize}
 \end{frame}
 
 \begin{frame}{Trabalhos futuros}
+   \begin{itemize}
+\justifying
+      \item <1 ->Realizar estudo sobre algoritmos de seleção de atributos e aplicar os algoritmos no cenário ``Levar compras'', realizando comparações dos resultados obtidos com o os resultados deste trabalho.
+      \item <2 ->Criar cenário mais complexo, com pouca ou nenhuma intervenção humana e, realizar os mesmos testes anteriores.
+      \item <3 ->Realizar estudos sobre aprendizado não supervisionado e prover metodologia para realizar classificação de efeitos colaterais indesejáveis e, realizar os mesmos testes e comparações nos dois cenários anteriores.
+   \end{itemize}
+\end{frame}
 
+\begin{frame}{}
+\centering
+\huge{Obrigado Pela Atenção!}
+\end{frame}
+
+\begin{frame}{}
+\centering
+\huge{Perguntas?}
 \end{frame}
 
 \bibliographystyle{abntex2-alf}
