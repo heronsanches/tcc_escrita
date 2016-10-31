@@ -338,7 +338,7 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
       \item <1 ->Primeiramente utiliza a probabilidade do \textit{ensemble} $P_y(x)$.
       \item <2 ->Por fim utiliza a expressão abaixo para rotular o exemplo artificial.
 \begin{equation}
-     P_{y}^{-1}(x) = \frac{\frac{1}{P_y(x)}}{\sum\limits_y \frac{1}{P_y(x)}}
+     P_{y}^{'}(x) = \frac{\frac{1}{P_y(x)}}{\sum\limits_y \frac{1}{P_y(x)}}
      \label{eq:decorate}
    \end{equation}
    \end{itemize}
@@ -360,6 +360,16 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
   \caption{DECORATE 2ª iteração. \footnote[frame]{\url{http://www.time.mk/trajkovski/teaching/aim/Lecture8.pdf}}} 
   \label{fig:decorate2}
 \end{figure}
+\end{frame}
+
+\begin{frame}{DECORATE \cite{Melville:2003, Melville:2004}}
+   \begin{itemize}
+      \item <1 ->Comparações \cite{Firdausi:2010, Arora:2012, Karthikeyan:2013} entre J48 \cite{Hall:2009} e MLP (redes neurais artificiais) mostram que o J48 obteve resultados satisfatórios e mostrou-se ser muito menos custoso computacionalmente.
+\justifying
+      \item <2 ->DECORATE obteve melhores resultados quando comparado ao J48 atuando isoladamente.
+\justifying
+      \item <3 ->DECORATE tendo como base o J48 obteve taxas de \textit{accuracy} satisfatórias quando comparado com outros \textit{ensembles} e melhores em \textit{datasets} pequenos.
+   \end{itemize}
 \end{frame}
 
 \begin{frame}{Parâmetros DECORATE \cite{Melville:2004}}
@@ -551,6 +561,11 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
    \end{itemize}
 \end{frame}
 
+\bibliographystyle{abntex2-alf}
+\begin{frame}[allowframebreaks]{Referências}
+  \bibliography{biblio}
+\end{frame}
+
 \begin{frame}{}
 \centering
 \huge{Obrigado Pela Atenção!}
@@ -559,11 +574,6 @@ Rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de c
 \begin{frame}{}
 \centering
 \huge{Perguntas?}
-\end{frame}
-
-\bibliographystyle{abntex2-alf}
-\begin{frame}[allowframebreaks]{Referências}
-  \bibliography{biblio}
 \end{frame}
 
 \end{document}
