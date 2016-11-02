@@ -44,7 +44,7 @@ Adotando esse padrão os dispositivos podem ter suas propriedades disponíveis a
 
 Além disso, mashups físicos\footnotemark \footnotetext{Aplicativos criados a partir da composição de dados e serviços de dispositivos físicos com outros recursos Web.} podem ser construídos com muito menos esforço do que as existentes abordagens, minimizando a barreira para o desenvolvimento de aplicações com dispositivos \cite{Guinard:2009}. Pelo fato das coisas serem disponibilizadas como serviços Web, ainda pode-se utilizar-se dos outros recursos disponíveis na Web, a exemplo de sistemas de cache, balanceamento de carga, indexação e pesquisa \cite{Franca:2011}. Assim então promovendo a visão da Internet das Coisas.
 
-Diversas comparações \cite{\cite{Mulligan:2009, Castillo:2011, Belqasmi:2012, Wagh:2012} entre serviços Web baseados em SOAP e REST foram realizadas e, devido a natureza de muitos dispositivos da IoT, os quais possuem poucos recursos de hardware, os princípios REST têm sido amplamente aplicados na integração dos dispositivos inteligentes a Web \cite{Franca:2011}.
+Diversas comparações \cite{Mulligan:2009, Castillo:2011, Belqasmi:2012, Wagh:2012} entre serviços Web baseados em SOAP e REST foram realizadas e, devido a natureza de muitos dispositivos da IoT, os quais possuem poucos recursos de hardware, os princípios REST têm sido amplamente aplicados na integração dos dispositivos inteligentes a Web \cite{Franca:2011}.
 
 Diante do cenário da IoT descrito até agora faz-se observar que muitos objetos quando isolados, não têm como prover funcionalidade(s) que atendam ao(s) requisito(s) de um usuário final (outra coisa ou um humano). Então, para atender a tais requisitos, há necessidade de compor estes objetos com outros para oferecer nova(s) funcionalidade(s) que atendam aos usuários finais. Entretanto, a composição das coisas pode levar a uma interação de caracterı́sticas (assunto abordado na próxima Seção \ref{sec:featureinteraction}) a qual pode provocar efeitos colaterais indesejáveis.
 
@@ -139,14 +139,14 @@ De modo geral, a metodologia adotada para construção de um classificador é co
 
 Dentre os algoritmos citados na etapa de treinamento da Figura \ref{fig:slclassification}, as redes neurais são modelos que atendem bem tanto problemas de classificação que não são linearmente separáveis (problemas que se adequam mais a realidade), quanto problemas que são linearmente seperáveis, entretanto, utilizar-se das redes neurais para problemas linearmente separáveis é totalmente desaconselhável, já que pode ser muito mais custoso computacionalmente.\cite{Zhang:2000}\cite{Elizondo:2006} A Figura \ref{fig:slseparablenonseparable} ilustra problema linearmente separável e problema não separável linearmente. Apesar de alguns problemas serem não linearmente separáveis, estes podem ser separados de forma linear sem perdas substânciais (Figura \ref{fig:eixos_4_atributos}).
 
-Algumas comparações \cite{Firdausi:2010, Arora:2012, Karthikeyan:2013} vêm sendo realizadas entre J48 (árvore de decisão, implementação WEKA \cite{Hall:2009} do algoritmo C4.5 \cite{Quinlan:1993}) e MLP (rede neural). Nestas, J48 obteve resultados melhores ou próximos para problemas de classificação binária (entre duas classes) e mostrou-se ser muito menos custoso computacionalmente. Sendo assim, o uso do algoritmo J48 parece ser uma boa escolha e, este será utilizado como base do \textit{DECORATE}, ver Seção \ref{subsec:decoration}, o qual será o método de classificação utilizado neste trabalho.
-
 \begin{figure}[!htb] \centering 
   \centering
   \includegraphics[width=0.8\columnwidth]{fundamentacao/linear_and_nonLinear} 
   \caption{(a) Problema linearmente separável. (b) Problema não separável linearmente. \cite{Elizondo:2006}} 
   \label{fig:slseparablenonseparable}
 \end{figure}
+
+Algumas comparações \cite{Firdausi:2010, Arora:2012, Karthikeyan:2013} vêm sendo realizadas entre J48 (árvore de decisão, implementação WEKA \cite{Hall:2009} do algoritmo C4.5 \cite{Quinlan:1993}) e MLP (rede neural). Nestas, J48 obteve resultados melhores ou próximos para problemas de classificação binária (entre duas classes) e mostrou-se ser muito menos custoso computacionalmente. Sendo assim, o uso do algoritmo J48 parece ser uma boa escolha e, este será utilizado como base do \textit{DECORATE}, ver Seção \ref{subsec:decoration}, o qual será o método de classificação utilizado neste trabalho.
 
 \subsection{DECORATE - um método \textit{ensemble}}
 \label{subsec:decoration}
