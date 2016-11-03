@@ -24,22 +24,15 @@ Dentre as possíveis causas \cite{Weiss:2007} de efeitos colaterais indesejávei
 \item \textit{Policy Conflict} (Conflito de políticas): Políticas proveem os meios para especificação e modularização do comportamento de uma característica, na medida em que alinha suas capacidades e restrições com os requisitos de seus usuários. A \textit{Policy Conflict} ocorre caso exista políticas (autenticação, ou de privacidade) especificadas em duas \textit{features} que se referem as suas correspondentes operações, e que as políticas não são compatíveis.
 \end{itemize}
 
-Assim, o presente trabalho propõe:
+O presente trabalho propõe:
 \begin{itemize}
-\item Criar um cenário (``Levar compras'') que simule efeitos colaterais indesejáveis diante da visão da IoT. Para isto é realizado um estudo de caso em um \textit{Home Network System} (HNS). HNS é uma rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de conectividade de rede e, interface de controle e monitoramento. Nesse tipo de sistema os aparelhos e sensores podem juntos prover novas funcionalidades, as quais atendam as expectativas do usuário da casa. O HNS tem um componente denominado de \textit{Home Server} (HS), este acessa os dispositivos através de APIs e disponibiliza as funcionalidades ao usuário final \cite{Nakamura:2009, Ikegami:2013}. Os dispositivos no cenário ``Levar compras'' são serviços independentes disponibilizados como serviços Web RESTFul.
+\item Criar um cenário (``Levar compras'') que simule efeitos colaterais indesejáveis diante da visão da IoT, os quais são causados por violação de hipótese. Para isto, é realizado um estudo de caso em um \textit{Home Network System} (HNS). HNS é uma rede doméstica de coisas (aparelhos domésticos e sensores) com capacidade de conectividade de rede e, interface de controle e monitoramento. Nesse tipo de sistema os aparelhos e sensores podem juntos prover novas funcionalidades, as quais atendam as expectativas do usuário da casa. O HNS tem um componente denominado de \textit{Home Server} (HS), este acessa os dispositivos através de APIs e disponibiliza as funcionalidades ao usuário final \cite{Nakamura:2009, Ikegami:2013}. Os dispositivos no cenário ``Levar compras'' são serviços independentes disponibilizados como serviços Web RESTFul.
 \item Detectar efeitos colaterais indesejáveis de forma inteligente no cenário ``Levar compras'' utilizando o método \textit{ensemble} DECORATE. Este tipo de método utiliza um conjunto de classificadores para construir diversas hipóteses (modelos). Então é utilizado o conhecimento de cada modelo afim de se chegar em uma decisão final mais confiável \cite{Melville:2004}. Diversas propostas de detecção de efeitos colaterais indesejáveis têm sido abordadas em HNS \cite{Wilson:2008, Nakamura:2009, Ikegami:2013, Maternaghan:2013, Alfakeeh:2016}, nenhuma destas propostas citadas utiliza alguma metodologia de detecção que utilize classificadores para detecção de efeitos colaterais indesejáveis. Na arquitetura de HNS utilizada nestes trabalhos, os dispositivos são utilizados para prover serviços ao usuário da casa, e estes são acessados somente pelo HS através das APIs dos dispositivos. Os dispositivos nesta arquitetura não têm capacidade de se comunicar e oferecer serviços entre eles de forma independente. No trabalho desenvolvido neste TCC, os dispositivos (elevador, garra e veículo terrestre) são disponibilizados como serviços Web RESTFul e estes têm capacidade de se comunicar e oferecer serviços de forma independente, representando desta forma um cenário da IoT.
 \end{itemize}
 
 O cenário ``Levar compras'' é a composição dos três dispositivos independentes citados (elevador, garra e veículo terrestre) os quais juntos compõem a funcionalidade ``Levar compras'', que é disponibilizada ao usuário humano do HNS através do HS (que também é um serviço Web RESTFul).
 
-Os resultados obtidos demonstraram que a execução do cenário ``Levar compras'' produziu efeitos colaterais indesejáveis causados por violação de hipótese em duas situações:
-
-\begin{enumerate}
-   \item O HS supôs que o elevador poderia levar as compras sem problemas, já que se era sabido que as compras cabiam no elevador, mas alguma vezes o elevador não conseguia levar as compras, pois estas ficavam impedindo o elevador de fechar a porta.
-   \item O elevador supôs que o serviço da garra seria apto a colocar as compras dentro do seu compartimento sem problemas, mas algumas vezes os objetos transportados sofriam movimentação na cesta (uma sacola flexível) durante a locomoção e, em especial, no momento em que a garra soltava a cesta no elevador, esta as vezes ganhava novas dimensões ou sofria locomoção para a linha de detecção do sensor de obstáculo da porta do elevador.
-\end{enumerate} 
-
-Através do \textit{ensemble} DECORATE foi possível detectar os efeitos colaterais indesejáveis com mais de 90\% de precisão.
+Através do \textit{ensemble} DECORATE foi possível detectar os efeitos colaterais indesejáveis com mais de 90\% de precisão. 
 
 O restante deste trabalho está organizado da seguinte maneira:
 

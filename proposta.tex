@@ -73,6 +73,12 @@ A geração da massa de dados para o desenvolvimento do método proposto de dete
 
 O cenário foi executado 59 vezes, uma para cada cesta, e pode-se observar que em algumas vezes o comportamento da garra provocava um efeito colateral indesejável (seção \ref{sec:featureinteraction}) à funcionalidade ``Levar compras'', pois para todos esses casos se esperava sempre como resultado o elevador levar as compras sem problemas, já que era sabido que as cestas cabiam no elevador e, nenhuma delas feria as restrições de massa do carro nem do elevador. 
 
+**
+\begin{enumerate}
+   \item O HS supôs que o elevador poderia levar as compras sem problemas, já que se era sabido que as compras cabiam no elevador, mas alguma vezes o elevador não conseguia levar as compras, pois estas ficavam impedindo o elevador de fechar a porta.
+   \item O elevador supôs que o serviço da garra seria apto a colocar as compras dentro do seu compartimento sem problemas, mas algumas vezes os objetos transportados sofriam movimentação na cesta (uma sacola flexível) durante a locomoção e, em especial, no momento em que a garra soltava a cesta no elevador, esta as vezes ganhava novas dimensões ou sofria locomoção para a linha de detecção do sensor de obstáculo da porta do elevador.
+\end{enumerate} 
+**
 A garra durante a execução da sua funcionalidade provocava a locomoção dos objetos. Esta locomoção ocorria em diferentes momentos da execução da funcionalidade: no momento em que a garra pegava o objeto, quando fazia os movimentos (direita, esquerda, cima, baixo, frente trás) ou no momento em que os objetos eram postos no compartimento do elevador. No momento em específico de por os objetos dentro do elevador, além dos objetos as vezes gerarem outras dimensões de cesta, esta também poderia se locomover, devido a natureza dos objetos e da forma como os objetos eram soltos pela garra. Por esse motivo utilizou-se a cesta como informação para construção do modelo.
 
 \subsection{Seleção dos atributos}
