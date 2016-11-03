@@ -1,19 +1,11 @@
-\section{Experimentos}
-\label{sec:constvalidacao}
-Diante dos pares de atributos selecionados na etapa (seção \ref{sec:selecaodados}), utilizou-se o método \textit{stratified-10-fold-cross-validation} (repetido dez vezes) juntamente com o \textit{ensemble DECORATE} a fim de se construir e verificar se é possível generalizar pelo menos um modelo.
+Diante dos pares de atributos selecionados na etapa (Seção \ref{sec:selecaodados}), utilizou-se o método \textit{stratified-10-fold-cross-validation} (repetido dez vezes) juntamente com o \textit{ensemble DECORATE} a fim de se construir e verificar se é possível generalizar pelo menos um modelo.
 
-Em cada verificação construi-se um modelo com diferentes frações do dataset, variando de 16 instâncias a 59 instâncias. Os resultados das avaliações podem ser vistos na Figura \ref{fig:accuracy_precision_recall} e será discutido logo a seguir na seção \ref{subsec:discumodelos}.
-
-\section{Resultados e discussão}
-\subsection{Modelos}
-\label{subsec:discumodelos}
-A Figura \ref{fig:accuracy_precision_recall} demonstra os resultados obtidos
-através dos experimentos realizados (seção \ref{sec:constvalidacao}). Nesta, percebe-se um domínio quase absoluto da curva pontuada de aprendizado verde (médiaAltura, somaLargura - ``ma x sl''). Por esso motivo essa será a curva analisada para escolher um modelo o mais adequado possível para implantar no FIM.
+Em cada verificação construi-se um modelo com diferentes frações do dataset, variando de 16 instâncias a 59 instâncias. Os resultados das avaliações podem ser vistos na Figura \ref{fig:accuracy_precision_recall}. Nesta, percebe-se um domínio quase absoluto da curva pontuada de aprendizado verde (médiaAltura, somaLargura - ``ma x sl''). Por esso motivo essa será a curva analisada para escolher um modelo o mais adequado possível para implantar no FIM.
 
 \begin{figure}[!h] \centering 
   \centering
   \includegraphics[width=0.8\columnwidth]{experimento/accuracy_precision_recall} 
-  \caption{\textit{Accuracy}, \texit{Precision} e \textit{Recall} obtidas utilizando stratified-10-fold-crossvalidation (repetido 10 vezes) e DECORATE sobre diferentes frações do \textit{dataset} com os pares de parâmetros  selecionados na seção \ref{sec:selecaodados}.} 
+  \caption{\textit{Accuracy}, \texit{Precision} e \textit{Recall} obtidas utilizando stratified-10-fold-crossvalidation (repetido 10 vezes) e DECORATE sobre diferentes frações do \textit{dataset} com os pares de parâmetros  selecionados na Seção \ref{sec:selecaodados}.} 
   \label{fig:accuracy_precision_recall}
 \end{figure}
 
@@ -50,7 +42,7 @@ Finalizando a análise decidiu-se que o melhor ponto para poder se construir um 
   \label{fig:apr45_dev}
 \end{figure}
 
-O modelo que satisfez essa expressão obteve resultados que podem ser vistos na Tabela \ref{table:valmodelfinal} e este será o modelo final de classificador que será implantado no FIM. 
+O modelo que satisfez essa expressão obteve resultados satisfatórios que podem ser vistos na Tabela \ref{table:valmodelfinal}, então este será o modelo final de classificador que será implantado no FIM.
 
 \begin{table}[!htp]
   \centering
@@ -69,8 +61,8 @@ O modelo que satisfez essa expressão obteve resultados que podem ser vistos na 
   \label{table:valmodelfinal}
 \end{table}
 
-\subsection{Implantação}
-O modelo final construído foi implantado no sistema de acordo com a proposta da seção \ref{sec:implmetprop}. Na Figura \ref{fig:deteccao_efeito} se tem a visão real do fluxo de execução em relação ao usuário do HNS quanto a funcionalidade ``Levar compras''. A imagem ``a)'' representa a execução quando não há efeitos colaterais indesejáveis. Enquanto que a imagem ``b)'' representa a execução quando se tem efeito colateral indesejável. 
+\section{Cenário com o método proposto implantado}
+O modelo final construído foi implantado no sistema de acordo com a proposta da Seção \ref{sec:implmetprop}. Na Figura \ref{fig:deteccao_efeito} se tem a visão real do fluxo de execução em relação ao usuário do HNS quanto a funcionalidade ``Levar compras''. A imagem ``a)'' representa a execução quando não há efeitos colaterais indesejáveis. Enquanto que a imagem ``b)'' representa a execução quando se tem efeito colateral indesejável. 
 
 \begin{figure}[!htb] \centering 
   \centering
